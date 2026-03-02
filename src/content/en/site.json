@@ -1,0 +1,31 @@
+{
+  "companyName": "PEVALIT",
+  "tagline": "High-performance additives and compounds for modern plastics manufacturing.",
+  "description": "PEVALIT develops and supplies additive concentrates and compounds for converters who need repeatable quality, process efficiency, and technical support.",
+  "primaryCta": {
+    "label": "Explore Products",
+    "href": "/products"
+  },
+  "secondaryCta": {
+    "label": "Request a Quote",
+    "href": "/contact"
+  },
+  "contact": {
+    "email": "sales@pevalit.com",
+    "phone": "+389 00 000 000",
+    "address": "Skopje, North Macedonia"
+  },
+  "navigation": [
+    { "label": "Home", "href": "/" },
+    { "label": "Products", "href": "/products" },
+    { "label": "Catalogs", "href": "/catalogs" },
+    { "label": "Corporate", "href": "/corporate/about" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "footerLinks": [
+    { "label": "About", "href": "/corporate/about" },
+    { "label": "Quality Policy", "href": "/corporate/quality-policy" },
+    { "label": "Products", "href": "/products" },
+    { "label": "Catalogs", "href": "/catalogs" }
+  ]
+}

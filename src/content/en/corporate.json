@@ -1,0 +1,26 @@
+{
+  "about": {
+    "title": "About PEVALIT",
+    "intro": "PEVALIT is focused on additive concentrate and compound solutions for manufacturers that require technical consistency and practical support.",
+    "sections": [
+      {
+        "heading": "What we do",
+        "body": "We formulate and supply masterbatch and additive systems that help customers improve process stability, surface performance, and product functionality."
+      },
+      {
+        "heading": "How we work",
+        "body": "Our approach combines product development, quality control, and application-oriented guidance to reduce trial time and production risk."
+      }
+    ]
+  },
+  "qualityPolicy": {
+    "title": "Quality Policy",
+    "intro": "Quality at PEVALIT is defined by repeatable performance, controlled processes, and responsive customer support.",
+    "points": [
+      "Maintain consistent raw material and production controls.",
+      "Continuously improve products based on technical feedback.",
+      "Deliver transparent technical documentation and support.",
+      "Build long-term trust through reliable service and communication."
+    ]
+  }
+}

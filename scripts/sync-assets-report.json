@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-03-02T22:11:24.063Z",
+  "source": "https://pevalit.com",
+  "dryRun": false,
+  "visitedPages": 120,
+  "found": {
+    "images": 138,
+    "pdfs": 7
+  },
+  "downloaded": {
+    "images": 138,
+    "pdfs": 7
+  },
+  "updates": {
+    "categories": [
+      {
+        "slug": "pe-silicon",
+        "from": "/images/imported/en_US.png",
+        "to": "/images/imported/en_US.png"
+      }
+    ],
+    "products": [
+      {
+        "slug": "pe-fr-700",
+        "docs": [
+          {
+            "title": "Technical Data Sheet",
+            "from": "/catalogs/imported/Pevalit-FR-2023.pdf",
+            "to": "/catalogs/imported/Pevalit-FR-2023.pdf"
+          }
+        ]
+      }
+    ],
+    "catalogs": [
+      {
+        "slug": "master-catalog-2026",
+        "fileUrl": {
+          "from": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf",
+          "to": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf"
+        },
+        "previewImage": {
+          "from": "/images/imported/Pevalit-Catalogue-DE.jpg",
+          "to": "/images/imported/Pevalit-Catalogue-DE.jpg"
+        }
+      },
+      {
+        "slug": "pe-silicon-catalog",
+        "fileUrl": {
+          "from": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf",
+          "to": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf"
+        },
+        "previewImage": {
+          "from": "/images/imported/Pevalit-Catalogue-DE.jpg",
+          "to": "/images/imported/Pevalit-Catalogue-DE.jpg"
+        }
+      }
+    ]
+  },
+  "failedDownloads": {
+    "images": [],
+    "pdfs": []
+  }
+}

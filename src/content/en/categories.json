@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "pe-silicon",
+    "name": "PE Silicon",
+    "description": "Silicone masterbatch solutions that improve slip, anti-blocking, scratch resistance, and surface performance.",
+    "heroImage": "/images/imported/en_US.png"
+  },
+  {
+    "slug": "pe-flame-retardant",
+    "name": "PE Flame Retardant",
+    "description": "Halogen-free and optimized flame-retardant concentrates designed for safety-critical applications.",
+    "heroImage": "/images/pe-flame-retardant.jpg"
+  },
+  {
+    "slug": "pe-color",
+    "name": "PE Color",
+    "description": "Consistent color masterbatches for film, injection, and extrusion with strong dispersion quality.",
+    "heroImage": "/images/pe-color.jpg"
+  }
+]
