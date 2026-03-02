@@ -23,7 +23,7 @@ export default function HomePage() {
       <section className="site-container pb-10">
         <div className="grid gap-4 md:grid-cols-3">
           {categories.map((category) => (
-            <article className="card overflow-hidden p-0" key={category.slug}>
+            <Link className="card overflow-hidden p-0 hover:border-[var(--brand)]" key={category.slug} href={`/products/${category.slug}`}>
               <img
                 src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : "/images/imported/Pevalit-Catalogue-DE.jpg"}
                 alt={category.name}
@@ -31,13 +31,11 @@ export default function HomePage() {
                 loading="lazy"
               />
               <div className="p-6">
-              <h2 className="text-xl font-semibold">{category.name}</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
-              <Link className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]" href={`/products/${category.slug}`}>
-                Browse category
-              </Link>
+                <h2 className="text-xl font-semibold">{category.name}</h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
+                <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">Browse category</span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
