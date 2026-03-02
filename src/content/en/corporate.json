@@ -1,26 +1,36 @@
 {
   "about": {
-    "title": "About PEVALIT",
-    "intro": "PEVALIT is focused on additive concentrate and compound solutions for manufacturers that require technical consistency and practical support.",
+    "title": "Corporate",
+    "intro": "Ing - Luli was established in 1994 as a trading company for locally produced and imported building materials. The company later expanded into manufacturing and became a regional producer with certified product systems.",
+    "heroImage": "/images/imported/corporate-copy.jpg",
     "sections": [
       {
-        "heading": "What we do",
-        "body": "We formulate and supply masterbatch and additive systems that help customers improve process stability, surface performance, and product functionality."
+        "heading": "Foundation and Early Production",
+        "body": "In 1998, the company began implementing a production-focused strategy for construction adhesives and tile-setting compounds. The first products were introduced in July 1999, reaching around 10 tons per day."
       },
       {
-        "heading": "How we work",
-        "body": "Our approach combines product development, quality control, and application-oriented guidance to reduce trial time and production risk."
+        "heading": "Growth and Market Expansion",
+        "body": "From 2000 onward, sales expanded in Kosovo while domestic demand continued to grow. By 2005, products met EN 12004 requirements certified by the Accredited Institute ZAG - Ljubljana, opening export opportunities to Germany and Switzerland."
+      },
+      {
+        "heading": "Technology and Capacity Investments",
+        "body": "To support growing demand, a second factory was built in 2009, focused on thermo-insulation facade materials. In 2011, the company obtained ETAG 004 system certificates from ZAG - Ljubljana and fulfilled continuous monitoring criteria."
+      },
+      {
+        "heading": "Current Position and Direction",
+        "body": "Today, Ing - Luli is present in Macedonia and international markets including Kosovo, Germany, Switzerland, Austria, and France. The ongoing mission is to expand production capacity, invest in modern technology, and deliver practical solutions across all building stages."
       }
     ]
   },
   "qualityPolicy": {
     "title": "Quality Policy",
-    "intro": "Quality at PEVALIT is defined by repeatable performance, controlled processes, and responsive customer support.",
+    "intro": "Quality is built on certified systems, controlled production, and continuous compliance with European standards.",
     "points": [
-      "Maintain consistent raw material and production controls.",
-      "Continuously improve products based on technical feedback.",
-      "Deliver transparent technical documentation and support.",
-      "Build long-term trust through reliable service and communication."
+      "Maintain standardized production processes aligned with European norms.",
+      "Sustain product certification under EN 12004 and ETAG 004 requirements.",
+      "Support continuous monitoring and compliance checks by accredited institutions.",
+      "Invest in modern technology, qualified staff, and stable quality controls.",
+      "Provide reliable technical support and consistent service to regional and export markets."
     ]
   }
 }

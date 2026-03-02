@@ -48,6 +48,7 @@ export const corporateSchema = z.object({
   about: z.object({
     title: z.string(),
     intro: z.string(),
+    heroImage: z.string(),
     sections: z.array(z.object({ heading: z.string(), body: z.string() }))
   }),
   qualityPolicy: z.object({

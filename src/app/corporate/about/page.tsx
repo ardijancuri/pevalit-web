@@ -11,6 +11,14 @@ export default function AboutPage() {
   return (
     <>
       <PageIntro eyebrow="Corporate" title={corporate.about.title} description={corporate.about.intro} />
+      <section className="site-container pb-6">
+        <img
+          src={corporate.about.heroImage}
+          alt={corporate.about.title}
+          className="w-full rounded-2xl border border-[var(--line)] object-cover"
+          loading="lazy"
+        />
+      </section>
       <section className="site-container grid gap-4 pb-20 md:grid-cols-2">
         {corporate.about.sections.map((section) => (
           <article className="card p-6" key={section.heading}>
