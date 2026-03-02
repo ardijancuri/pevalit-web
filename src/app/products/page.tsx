@@ -33,22 +33,24 @@ export default function ProductsPage() {
             </div>
 
             {products.length ? (
-              <div className="mt-5 max-w-md">
-                <article className="overflow-hidden rounded-xl border border-[var(--line)]">
-                  <img
-                    src={products[0].imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
-                    alt={products[0].name}
-                    className="aspect-square w-full border-b border-[var(--line)] object-cover"
-                    loading="lazy"
-                  />
-                  <div className="p-4">
-                    <h3 className="text-base font-semibold">{products[0].name}</h3>
-                    <p className="mt-2 text-sm text-[var(--muted)]">{products[0].summary}</p>
-                    <Link href={`/product/${products[0].slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
-                      View product
-                    </Link>
-                  </div>
-                </article>
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                {products.slice(0, 2).map((product) => (
+                  <article className="overflow-hidden rounded-xl border border-[var(--line)]" key={product.slug}>
+                    <img
+                      src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
+                      alt={product.name}
+                      className="aspect-square w-full border-b border-[var(--line)] object-cover"
+                      loading="lazy"
+                    />
+                    <div className="p-4">
+                      <h3 className="text-base font-semibold">{product.name}</h3>
+                      <p className="mt-2 text-sm text-[var(--muted)]">{product.summary}</p>
+                      <Link href={`/product/${product.slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                        View product
+                      </Link>
+                    </div>
+                  </article>
+                ))}
               </div>
             ) : (
               <p className="mt-4 text-sm text-[var(--muted)]">No products currently listed in this category.</p>
