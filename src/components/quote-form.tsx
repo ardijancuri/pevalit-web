@@ -23,8 +23,12 @@ const captchaSiteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 
 export function QuoteForm({ productSlug }: QuoteFormProps) {
   const [captchaToken, setCaptchaToken] = useState("");
-  const [startedAt] = useState(Date.now());
+  const [startedAt, setStartedAt] = useState<string | null>(null);
   const [submitState, setSubmitState] = useState<SubmitState>({ status: "idle", message: "" });
+
+  useEffect(() => {
+    setStartedAt(String(Date.now()));
+  }, []);
 
   useEffect(() => {
     if (!captchaSiteKey) return;
@@ -52,6 +56,9 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     formData.append("captchaToken", captchaToken);
+    if (startedAt) {
+      formData.append("startedAt", startedAt);
+    }
     if (productSlug) {
       formData.append("productSlug", productSlug);
     }
@@ -109,7 +116,6 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
       </div>
 
       <input type="text" className="hidden" tabIndex={-1} autoComplete="off" name="website" aria-hidden="true" />
-      <input type="hidden" name="startedAt" value={String(startedAt)} />
 
       {captchaSiteKey ? (
         <div className="mt-4" id="hcaptcha-widget" />
