@@ -1,20 +1,62 @@
 [
   {
-    "slug": "pe-silicon",
-    "name": "PE Silicon",
-    "description": "Silicone masterbatch solutions that improve slip, anti-blocking, scratch resistance, and surface performance.",
-    "heroImage": "/images/imported/en_US.png"
+    "slug": "aquastop",
+    "name": "Aquastop",
+    "description": "Aquastop products imported from pevalit.com.",
+    "heroImage": "/images/imported/1-3-1024x974.jpg"
   },
   {
-    "slug": "pe-flame-retardant",
-    "name": "PE Flame Retardant",
-    "description": "Halogen-free and optimized flame-retardant concentrates designed for safety-critical applications.",
-    "heroImage": "/images/pe-flame-retardant.jpg"
+    "slug": "decorative-plasters",
+    "name": "Decorative Plasters",
+    "description": "Decorative Plasters products imported from pevalit.com.",
+    "heroImage": "/images/imported/BUNSTE-1024x974.jpg"
   },
   {
-    "slug": "pe-color",
-    "name": "PE Color",
-    "description": "Consistent color masterbatches for film, injection, and extrusion with strong dispersion quality.",
-    "heroImage": "/images/pe-color.jpg"
+    "slug": "eps-polystyrene-sheets",
+    "name": "EPS-Polystyrene Sheets",
+    "description": "EPS-Polystyrene Sheets products imported from pevalit.com.",
+    "heroImage": "/images/imported/3-2-1024x974.jpg"
+  },
+  {
+    "slug": "facade-adhesives",
+    "name": "Facade Adhesives",
+    "description": "Facade Adhesives products imported from pevalit.com.",
+    "heroImage": "/images/imported/24-1024x974.jpg"
+  },
+  {
+    "slug": "grouts",
+    "name": "Grouts",
+    "description": "Grouts products imported from pevalit.com.",
+    "heroImage": "/images/imported/2-1-1024x974.jpg"
+  },
+  {
+    "slug": "paints",
+    "name": "Paints",
+    "description": "Paints products imported from pevalit.com.",
+    "heroImage": "/images/imported/10-1024x974.jpg"
+  },
+  {
+    "slug": "plasters",
+    "name": "Plasters",
+    "description": "Plasters products imported from pevalit.com.",
+    "heroImage": "/images/imported/G220-1024x974.jpg"
+  },
+  {
+    "slug": "polyurethane-adhesive-foam",
+    "name": "Polyurethane Adhesive Foam",
+    "description": "Polyurethane Adhesive Foam products imported from pevalit.com.",
+    "heroImage": "/images/imported/2-2-1024x974.jpg"
+  },
+  {
+    "slug": "silicone-sealants",
+    "name": "Silicone Sealants",
+    "description": "Silicone Sealants products imported from pevalit.com.",
+    "heroImage": "/images/imported/3-1-1024x974.jpg"
+  },
+  {
+    "slug": "tile-adhesives",
+    "name": "Tile Adhesives",
+    "description": "Tile Adhesives products imported from pevalit.com.",
+    "heroImage": "/images/imported/09-1024x974.jpg"
   }
 ]

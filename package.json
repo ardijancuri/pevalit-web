@@ -9,7 +9,9 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "sync:assets": "node scripts/sync-assets.mjs",
-    "sync:assets:dry": "node scripts/sync-assets.mjs --dry-run"
+    "sync:assets:dry": "node scripts/sync-assets.mjs --dry-run",
+    "sync:products": "node scripts/sync-products.mjs",
+    "sync:products:dry": "node scripts/sync-products.mjs --dry-run"
   },
   "dependencies": {
     "next": "15.2.0",
