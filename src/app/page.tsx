@@ -33,7 +33,9 @@ export default function HomePage() {
               <div className="p-6">
                 <h2 className="text-xl font-semibold">{category.name}</h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
-                <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">Browse category</span>
+                <span className="mt-4 inline-block rounded-full border border-[var(--brand)] px-4 py-1.5 text-sm font-semibold text-[var(--brand)]">
+                  Browse category
+                </span>
               </div>
             </Link>
           ))}
