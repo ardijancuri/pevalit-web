@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
-import { ProductFilters } from "@/components/product-filters";
-import { categories, products } from "@/lib/content";
+import { productsByCategory } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Products | PEVALIT",
@@ -13,10 +13,51 @@ export default function ProductsPage() {
     <>
       <PageIntro
         eyebrow="Products"
-        title="Find products faster with category and application filters."
-        description="Explore our additive and masterbatch portfolio with a clearer structure, quick search, and streamlined product pages."
+        title="Browse products by category."
+        description="Products are grouped by category so you can quickly jump to the full list that matches your needs."
       />
-      <ProductFilters categories={categories} products={products} />
+      <section className="site-container space-y-8 pb-20">
+        {productsByCategory.map(({ category, products }) => (
+          <article className="card p-6" key={category.slug}>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 className="text-2xl font-semibold">{category.name}</h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
+              </div>
+              <Link
+                href={`/products/${category.slug}`}
+                className="rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-strong)]"
+              >
+                View all
+              </Link>
+            </div>
+
+            {products.length ? (
+              <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {products.slice(0, 3).map((product) => (
+                  <article className="rounded-xl border border-[var(--line)] overflow-hidden" key={product.slug}>
+                    <img
+                      src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
+                      alt={product.name}
+                      className="aspect-square w-full border-b border-[var(--line)] object-cover"
+                      loading="lazy"
+                    />
+                    <div className="p-4">
+                      <h3 className="text-base font-semibold">{product.name}</h3>
+                      <p className="mt-2 text-sm text-[var(--muted)]">{product.summary}</p>
+                      <Link href={`/product/${product.slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                        View product
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-4 text-sm text-[var(--muted)]">No products currently listed in this category.</p>
+            )}
+          </article>
+        ))}
+      </section>
     </>
   );
 }
