@@ -1,16 +1,51 @@
 [
   {
-    "slug": "master-catalog-2026",
-    "title": "PEVALIT Product Catalog 2026",
-    "description": "Complete product portfolio with technical overviews and application guidance.",
+    "slug": "catalog-en",
+    "title": "PEVALIT Catalogue (English)",
+    "description": "Complete product portfolio in English.",
     "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf",
+    "previewImage": "/images/imported/EN.jpg"
+  },
+  {
+    "slug": "catalog-al",
+    "title": "PEVALIT Catalogue (Albanian)",
+    "description": "Complete product portfolio in Albanian.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-AL-FINAL.pdf",
+    "previewImage": "/images/imported/AL.jpg"
+  },
+  {
+    "slug": "catalog-de",
+    "title": "PEVALIT Catalogue (German)",
+    "description": "Complete product portfolio in German.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-DE-2024.pdf",
     "previewImage": "/images/imported/Pevalit-Catalogue-DE.jpg"
   },
   {
-    "slug": "pe-silicon-catalog",
-    "title": "PE Silicon Product Range",
-    "description": "Detailed silicone additive lineup for film, molding, and compounding.",
-    "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf",
-    "previewImage": "/images/imported/Pevalit-Catalogue-DE.jpg"
+    "slug": "catalog-fr",
+    "title": "PEVALIT Catalogue (French)",
+    "description": "Complete product portfolio in French.",
+    "fileUrl": "/catalogs/imported/Pevalit-FR-2023.pdf",
+    "previewImage": "/images/imported/Pevalit-Catalogue-FR.jpg"
+  },
+  {
+    "slug": "catalog-mk",
+    "title": "PEVALIT Catalogue (Macedonian)",
+    "description": "Complete product portfolio in Macedonian.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-MK-1.pdf",
+    "previewImage": "/images/imported/MK-1.jpg"
+  },
+  {
+    "slug": "catalog-gr",
+    "title": "PEVALIT Catalogue (Greek)",
+    "description": "Complete product portfolio in Greek.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-GR-FINAL.pdf",
+    "previewImage": "/images/imported/GR.jpg"
+  },
+  {
+    "slug": "catalog-nl",
+    "title": "PEVALIT Catalogue (Dutch)",
+    "description": "Complete product portfolio in Dutch.",
+    "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20Dutch.pdf",
+    "previewImage": "/images/imported/Dutch-Cover.jpg"
   }
 ]
