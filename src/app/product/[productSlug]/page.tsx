@@ -30,9 +30,11 @@ export default async function ProductPage({ params }: Props) {
   if (!product) {
     notFound();
   }
+  const heroImage = product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg";
 
   return (
     <div className="site-container py-14">
+      <img src={heroImage} alt={product.name} className="mb-8 h-64 w-full rounded-2xl border border-[var(--line)] object-cover" />
       <div className="max-w-3xl">
         <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">{product.categorySlug}</p>
         <h1 className="mt-3 text-4xl leading-tight font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>

@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
 
@@ -6,33 +6,32 @@ const ROOT = process.cwd();
 const BASE_URL = process.env.ASSET_SOURCE_URL || "https://pevalit.com";
 const MAX_PAGES = Number(process.env.MAX_PAGES || 120);
 const DRY_RUN = process.argv.includes("--dry-run");
+const scopeArg = process.argv.find((arg) => arg.startsWith("--scope="));
+const SCOPE = (scopeArg?.split("=")[1] || "products").toLowerCase();
 
 const CONTENT_DIR = path.join(ROOT, "src", "content", "en");
-const CATEGORIES_PATH = path.join(CONTENT_DIR, "categories.json");
 const PRODUCTS_PATH = path.join(CONTENT_DIR, "products.json");
-const CATALOGS_PATH = path.join(CONTENT_DIR, "catalogs.json");
-
 const OUTPUT_IMAGES_DIR = path.join(ROOT, "public", "images", "imported");
 const OUTPUT_PDFS_DIR = path.join(ROOT, "public", "catalogs", "imported");
 const REPORT_PATH = path.join(ROOT, "scripts", "sync-assets-report.json");
+const BACKUPS_DIR = path.join(ROOT, "scripts", "backups");
 
 const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg"]);
 const PDF_EXTENSION = ".pdf";
 const SKIP_PAGE_EXTENSIONS = new Set([
-  ".jpg",
-  ".jpeg",
-  ".png",
-  ".webp",
-  ".avif",
-  ".gif",
-  ".svg",
-  ".pdf",
-  ".zip",
-  ".doc",
-  ".docx",
-  ".xlsx"
+  ".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg", ".pdf", ".zip", ".doc", ".docx", ".xlsx"
 ]);
 const STOP_WORDS = new Set(["pe", "mb", "and", "for", "with", "the", "product", "range", "additive"]);
+const REJECT_IMAGE_PATTERNS = [
+  /\/flags\//i,
+  /favicon/i,
+  /logo/i,
+  /core\/modules/i,
+  /\ben_us\b/i,
+  /\bde_de\b/i,
+  /\bmk_mk\b/i,
+  /\bsq\b/i
+];
 
 function toUrl(input, base) {
   try {
@@ -44,6 +43,10 @@ function toUrl(input, base) {
 
 function normalize(s) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function slugify(value) {
+  return normalize(value).replace(/\s+/g, "-");
 }
 
 function tokenize(...values) {
@@ -128,42 +131,73 @@ function pushAsset(assetMap, url, sourcePage) {
   assetMap.get(key).sourcePages.add(sourcePage);
 }
 
-function scoreAsset(asset, tokens, opts = {}) {
-  const haystack = normalize(asset.url);
-  const sourceText = normalize(asset.sourcePages.join(" "));
-  let score = 0;
-  for (const token of tokens) {
-    if (haystack.includes(token)) score += 5;
-    if (sourceText.includes(token)) score += 3;
-  }
-  if (opts.preferCatalog && haystack.includes("catalog")) score += 4;
-  if (opts.preferSafety && (haystack.includes("sds") || haystack.includes("safety"))) score += 6;
-  if (opts.preferTechnical && (haystack.includes("tds") || haystack.includes("technical"))) score += 6;
-  if (opts.preferPhoto && /(hero|banner|product|gallery)/.test(haystack)) score += 3;
-  if (opts.avoidLogo && /(logo|icon|favicon)/.test(haystack)) score -= 6;
-  return score;
-}
-
-function pickBestAsset(assets, tokens, opts) {
-  if (!assets.length) return null;
-  let best = null;
-  let bestScore = Number.NEGATIVE_INFINITY;
-  for (const asset of assets) {
-    const score = scoreAsset(asset, tokens, opts);
-    if (score > bestScore) {
-      bestScore = score;
-      best = asset;
-    }
-  }
-  if (!best || bestScore <= 0) return null;
-  return best;
-}
-
 function toWritableEntries(assetMap) {
   return [...assetMap.values()].map((item) => ({
     url: item.url,
     sourcePages: [...item.sourcePages]
   }));
+}
+
+function mergeAssetEntries(baseEntries, extraEntries) {
+  const merged = new Map(baseEntries.map((entry) => [entry.url, { ...entry, sourcePages: [...entry.sourcePages] }]));
+  for (const entry of extraEntries) {
+    if (!merged.has(entry.url)) {
+      merged.set(entry.url, { ...entry, sourcePages: [...entry.sourcePages] });
+      continue;
+    }
+    const existing = merged.get(entry.url);
+    const combined = new Set([...(existing.sourcePages || []), ...(entry.sourcePages || [])]);
+    existing.sourcePages = [...combined];
+  }
+  return [...merged.values()];
+}
+
+function estimateImageQuality(asset) {
+  const name = asset.fileName.toLowerCase();
+  if (/-(\d+)x(\d+)\./.test(name)) {
+    const [, w, h] = name.match(/-(\d+)x(\d+)\./) || [];
+    return Number(w || 0) * Number(h || 0);
+  }
+  if (/\b(300x|150x|120x|80x)\b/.test(name)) return 100;
+  return 1_000_000;
+}
+
+function isRejectedImage(url) {
+  return REJECT_IMAGE_PATTERNS.some((pattern) => pattern.test(url));
+}
+
+function productSlugVariants(product) {
+  const set = new Set();
+  set.add(product.slug);
+
+  const fromName = slugify(product.name);
+  if (fromName) set.add(fromName);
+
+  const noPeSlug = product.slug.replace(/^pe-/, "");
+  if (noPeSlug) set.add(noPeSlug);
+
+  const noPeName = fromName.replace(/^pe-/, "");
+  if (noPeName) set.add(noPeName);
+
+  return [...set];
+}
+
+function fileStem(fileName) {
+  return fileName.replace(/\.[^.]+$/, "").toLowerCase();
+}
+
+function strongFileMatch(stem, slugVariants) {
+  return slugVariants.some((variant) => {
+    const compact = variant.replace(/-/g, "");
+    return stem.includes(variant) || stem.includes(compact);
+  });
+}
+
+function exactProductPageMatch(sourcePages, slug) {
+  return sourcePages.some((page) => {
+    const normalized = page.replace(/\/+$/, "");
+    return normalized.endsWith(`/product/${slug}`);
+  });
 }
 
 async function crawlWebsite() {
@@ -195,6 +229,7 @@ async function crawlWebsite() {
     const linkCandidates = [
       ...extractAttributeUrls(html, "href"),
       ...extractAttributeUrls(html, "src"),
+      ...extractAttributeUrls(html, "data-src"),
       ...extractSrcSetUrls(html)
     ];
 
@@ -223,6 +258,38 @@ async function crawlWebsite() {
     imageAssets: toWritableEntries(imageMap),
     pdfAssets: toWritableEntries(pdfMap)
   };
+}
+
+async function crawlTargetProductPages(products) {
+  const assets = [];
+  for (const product of products) {
+    const targetUrl = new URL(`/product/${product.slug}/`, BASE_URL).toString();
+    let response;
+    try {
+      response = await fetchWithTimeout(targetUrl, 20000);
+    } catch {
+      continue;
+    }
+    if (!response.ok) continue;
+    const type = response.headers.get("content-type") || "";
+    if (!type.includes("text/html")) continue;
+    const html = await response.text();
+    const linkCandidates = [
+      ...extractAttributeUrls(html, "src"),
+      ...extractAttributeUrls(html, "data-src"),
+      ...extractSrcSetUrls(html)
+    ];
+    const seen = new Set();
+    for (const item of linkCandidates) {
+      const resolved = toUrl(item, targetUrl);
+      if (!resolved || !isImageUrl(resolved)) continue;
+      const key = resolved.toString();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      assets.push({ url: key, sourcePages: [targetUrl] });
+    }
+  }
+  return assets;
 }
 
 async function downloadAsset(asset, outputDir, publicPrefix, fallbackExt) {
@@ -256,68 +323,81 @@ async function writeJson(filePath, data) {
   await writeFile(filePath, output, "utf8");
 }
 
-function mapAssets(categories, products, catalogs, imageAssets, pdfAssets) {
-  const imagePool = imageAssets.map((item) => ({ ...item, sourcePages: item.sourcePages || [] }));
-  const pdfPool = pdfAssets.map((item) => ({ ...item, sourcePages: item.sourcePages || [] }));
-
-  const updates = {
-    categories: [],
-    products: [],
-    catalogs: []
-  };
-
-  for (const category of categories) {
-    const best = pickBestAsset(imagePool, tokenize(category.slug, category.name), { avoidLogo: true, preferPhoto: true });
-    if (best) {
-      updates.categories.push({ slug: category.slug, from: category.heroImage, to: best.webPath });
-      category.heroImage = best.webPath;
-    }
-  }
+function mapProductImages(products, imageAssets, targetedProductImages) {
+  const validImages = imageAssets.filter((asset) => !isRejectedImage(asset.url));
+  const updates = [];
+  const unmatched = [];
+  const rejected = [];
 
   for (const product of products) {
-    const productTokens = tokenize(product.slug, product.name, product.categorySlug);
-    const productUpdate = { slug: product.slug, docs: [] };
+    const slugVariants = productSlugVariants(product);
+    const candidates = [];
 
-    for (const doc of product.documents) {
-      const preferSafety = /safety|sds/i.test(doc.title);
-      const preferTechnical = /technical|tds/i.test(doc.title);
-      const best = pickBestAsset(pdfPool, productTokens, { preferSafety, preferTechnical });
-      if (best) {
-        productUpdate.docs.push({ title: doc.title, from: doc.url, to: best.webPath });
-        doc.url = best.webPath;
+    for (const asset of validImages) {
+      const stem = fileStem(asset.fileName);
+      const exactPage =
+        exactProductPageMatch(asset.sourcePages, product.slug) ||
+        (targetedProductImages.get(product.slug)?.has(asset.url) ?? false);
+      const strongName = strongFileMatch(stem, slugVariants);
+
+      if (!exactPage && !strongName) {
+        rejected.push({
+          product: product.slug,
+          asset: asset.webPath,
+          reason: "no_strong_match"
+        });
+        continue;
       }
+
+      const quality = estimateImageQuality(asset);
+      const score = (exactPage ? 1000 : 0) + (strongName ? 500 : 0) + quality;
+      candidates.push({ asset, exactPage, strongName, score, quality });
     }
 
-    if (productUpdate.docs.length) {
-      updates.products.push(productUpdate);
+    if (!candidates.length) {
+      unmatched.push({ slug: product.slug, name: product.name, currentImageUrl: product.imageUrl });
+      continue;
+    }
+
+    candidates.sort((a, b) => b.score - a.score);
+    const best = candidates[0];
+
+    if (best.asset.webPath !== product.imageUrl) {
+      updates.push({
+        slug: product.slug,
+        from: product.imageUrl,
+        to: best.asset.webPath,
+        evidence: {
+          exactProductPage: best.exactPage,
+          strongFileMatch: best.strongName,
+          sourcePages: best.asset.sourcePages
+        }
+      });
+      product.imageUrl = best.asset.webPath;
     }
   }
 
-  for (const catalog of catalogs) {
-    const catalogTokens = tokenize(catalog.slug, catalog.title, catalog.description);
-    const bestPdf = pickBestAsset(pdfPool, catalogTokens, { preferCatalog: true });
-    const bestImage = pickBestAsset(imagePool, catalogTokens, { preferCatalog: true, avoidLogo: true, preferPhoto: true });
+  return { updates, unmatched, rejected };
+}
 
-    const row = { slug: catalog.slug };
-    if (bestPdf) {
-      row.fileUrl = { from: catalog.fileUrl, to: bestPdf.webPath };
-      catalog.fileUrl = bestPdf.webPath;
-    }
-    if (bestImage) {
-      row.previewImage = { from: catalog.previewImage, to: bestImage.webPath };
-      catalog.previewImage = bestImage.webPath;
-    }
-    if (row.fileUrl || row.previewImage) {
-      updates.catalogs.push(row);
-    }
-  }
-
-  return updates;
+async function backupProductsFile() {
+  await mkdir(BACKUPS_DIR, { recursive: true });
+  const stamp = new Date().toISOString().replace(/[.:]/g, "-");
+  const backupPath = path.join(BACKUPS_DIR, `products.${stamp}.json`);
+  await copyFile(PRODUCTS_PATH, backupPath);
+  return backupPath;
 }
 
 async function main() {
+  if (SCOPE !== "products") {
+    throw new Error(`Unsupported scope '${SCOPE}'. Use --scope=products.`);
+  }
+
   console.log(`Crawling ${BASE_URL} (max pages: ${MAX_PAGES})...`);
   const crawled = await crawlWebsite();
+  const products = await readJson(PRODUCTS_PATH);
+  const targetPageAssets = await crawlTargetProductPages(products);
+  crawled.imageAssets = mergeAssetEntries(crawled.imageAssets, targetPageAssets);
   console.log(`Visited ${crawled.pagesVisited.length} pages.`);
   console.log(`Found ${crawled.imageAssets.length} image URLs and ${crawled.pdfAssets.length} PDF URLs.`);
 
@@ -331,25 +411,38 @@ async function main() {
     downloadedPdfs.push(await downloadAsset(pdf, OUTPUT_PDFS_DIR, "/catalogs/imported", ".pdf"));
   }
 
-  const validImages = downloadedImages.filter((item) => item.downloaded || DRY_RUN);
-  const validPdfs = downloadedPdfs.filter((item) => item.downloaded || DRY_RUN);
+  const validImages = downloadedImages
+    .filter((item) => item.downloaded || DRY_RUN)
+    .map((item) => ({ ...item, sourcePages: item.sourcePages || [] }));
 
-  const categories = await readJson(CATEGORIES_PATH);
-  const products = await readJson(PRODUCTS_PATH);
-  const catalogs = await readJson(CATALOGS_PATH);
+  const targetedProductImages = new Map();
+  for (const item of targetPageAssets) {
+    if (!item.sourcePages?.length) continue;
+    const source = item.sourcePages[0].replace(/\/+$/, "");
+    const slug = source.split("/").pop();
+    if (!slug) continue;
+    if (!targetedProductImages.has(slug)) targetedProductImages.set(slug, new Set());
+    targetedProductImages.get(slug).add(item.url);
+  }
 
-  const updates = mapAssets(categories, products, catalogs, validImages, validPdfs);
+  const mapping = mapProductImages(products, validImages, targetedProductImages);
 
+  let backupPath = null;
   if (!DRY_RUN) {
-    await writeJson(CATEGORIES_PATH, categories);
-    await writeJson(PRODUCTS_PATH, products);
-    await writeJson(CATALOGS_PATH, catalogs);
+    backupPath = await backupProductsFile();
+    try {
+      await writeJson(PRODUCTS_PATH, products);
+    } catch (error) {
+      await copyFile(backupPath, PRODUCTS_PATH);
+      throw error;
+    }
   }
 
   const report = {
     generatedAt: new Date().toISOString(),
     source: BASE_URL,
     dryRun: DRY_RUN,
+    scope: SCOPE,
     visitedPages: crawled.pagesVisited.length,
     found: {
       images: crawled.imageAssets.length,
@@ -359,7 +452,10 @@ async function main() {
       images: downloadedImages.filter((item) => item.downloaded).length,
       pdfs: downloadedPdfs.filter((item) => item.downloaded).length
     },
-    updates,
+    backupPath,
+    productsMatched: mapping.updates,
+    productsUnmatched: mapping.unmatched,
+    productsRejectedCandidates: mapping.rejected.slice(0, 500),
     failedDownloads: {
       images: downloadedImages.filter((item) => item.error).map((x) => ({ url: x.url, error: x.error })),
       pdfs: downloadedPdfs.filter((item) => item.error).map((x) => ({ url: x.url, error: x.error }))
@@ -372,7 +468,7 @@ async function main() {
   if (DRY_RUN) {
     console.log("Dry run complete. No files were downloaded or JSON files modified.");
   } else {
-    console.log("Assets synced and content JSON updated.");
+    console.log(`Product image sync complete. Matched ${mapping.updates.length}, unmatched ${mapping.unmatched.length}.`);
   }
 }
 

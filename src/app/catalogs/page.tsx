@@ -23,6 +23,12 @@ export default function CatalogsPage() {
               <div>
                 <h2 className="text-xl font-semibold">{catalog.title}</h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{catalog.description}</p>
+                <img
+                  src={catalog.previewImage}
+                  alt={catalog.title}
+                  className="mt-4 h-44 w-full rounded-xl border border-[var(--line)] object-cover"
+                  loading="lazy"
+                />
                 <Link
                   href={catalog.fileUrl}
                   className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-strong)]"

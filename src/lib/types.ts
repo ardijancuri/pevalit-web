@@ -27,6 +27,7 @@ export const productSchema = z.object({
   slug: z.string(),
   name: z.string(),
   categorySlug: z.string(),
+  imageUrl: z.string(),
   summary: z.string(),
   applications: z.array(z.string()),
   benefits: z.array(z.string()),

@@ -62,7 +62,14 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {filtered.map((product) => (
-          <article className="card p-6" key={product.slug}>
+          <article className="card overflow-hidden p-0" key={product.slug}>
+            <img
+              src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
+              alt={product.name}
+              className="h-40 w-full border-b border-[var(--line)] object-cover"
+              loading="lazy"
+            />
+            <div className="p-6">
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">{product.categorySlug}</p>
             <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
             <p className="mt-3 text-sm text-[var(--muted)]">{product.summary}</p>
@@ -72,6 +79,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
             >
               View Product
             </Link>
+            </div>
           </article>
         ))}
       </div>

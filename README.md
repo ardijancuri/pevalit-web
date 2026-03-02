@@ -60,10 +60,9 @@ What it does:
 - Crawls `https://pevalit.com` (override with `ASSET_SOURCE_URL`)
 - Downloads images to `public/images/imported`
 - Downloads PDFs to `public/catalogs/imported`
-- Updates:
-  - `src/content/en/categories.json` (`heroImage`)
-  - `src/content/en/products.json` (`documents[].url`)
-  - `src/content/en/catalogs.json` (`fileUrl`, `previewImage`)
+- Strictly updates product images in `src/content/en/products.json` (`imageUrl`) only when product name/slug strongly matches old-site assets.
+- Leaves unmatched products unchanged.
+- Creates backup file in `scripts/backups/` before writing.
 - Writes mapping/download report to `scripts/sync-assets-report.json`
 
 Optional environment variables:

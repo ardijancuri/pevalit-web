@@ -23,12 +23,20 @@ export default function HomePage() {
       <section className="site-container pb-10">
         <div className="grid gap-4 md:grid-cols-3">
           {categories.map((category) => (
-            <article className="card p-6" key={category.slug}>
+            <article className="card overflow-hidden p-0" key={category.slug}>
+              <img
+                src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : "/images/imported/Pevalit-Catalogue-DE.jpg"}
+                alt={category.name}
+                className="h-44 w-full border-b border-[var(--line)] object-cover"
+                loading="lazy"
+              />
+              <div className="p-6">
               <h2 className="text-xl font-semibold">{category.name}</h2>
               <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
               <Link className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]" href={`/products/${category.slug}`}>
                 Browse category
               </Link>
+              </div>
             </article>
           ))}
         </div>
@@ -39,9 +47,17 @@ export default function HomePage() {
           <h2 className="text-2xl font-semibold">Popular products</h2>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
             {products.slice(0, 3).map((product) => (
-              <Link key={product.slug} href={`/product/${product.slug}`} className="rounded-xl border border-[var(--line)] p-4 hover:border-[var(--brand)]">
+              <Link key={product.slug} href={`/product/${product.slug}`} className="rounded-xl border border-[var(--line)] p-0 hover:border-[var(--brand)]">
+                <img
+                  src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
+                  alt={product.name}
+                  className="h-36 w-full rounded-t-xl border-b border-[var(--line)] object-cover"
+                  loading="lazy"
+                />
+                <div className="p-4">
                 <p className="text-sm font-semibold">{product.name}</p>
                 <p className="mt-2 text-xs text-[var(--muted)]">{product.summary}</p>
+                </div>
               </Link>
             ))}
           </div>
