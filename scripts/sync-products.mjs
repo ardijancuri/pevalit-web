@@ -225,7 +225,7 @@ async function main() {
         name,
         categorySlug,
         imageUrl: imageWebPath,
-        summary: `${name} imported from pevalit.com.`,
+        summary: name,
         applications: [`Category: ${categoryTitle}`],
         benefits: ["Imported product data from legacy website."],
         technicalSpecs: [
@@ -234,7 +234,7 @@ async function main() {
         documents,
         seo: {
           title: `${name} | PEVALIT`,
-          description: `${name} imported from pevalit.com legacy product page.`
+          description: name
         }
       });
     }
@@ -243,7 +243,7 @@ async function main() {
     categoryRecords.push({
       slug: categorySlug,
       name: categoryTitle,
-      description: `${categoryTitle} products imported from pevalit.com.`,
+      description: `${categoryTitle} product range.`,
       heroImage: heroFromFirstProduct || "/images/imported/Pevalit-Catalogue-DE.jpg"
     });
   }
