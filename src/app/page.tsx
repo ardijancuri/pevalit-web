@@ -27,7 +27,7 @@ export default function HomePage() {
               <img
                 src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : "/images/imported/Pevalit-Catalogue-DE.jpg"}
                 alt={category.name}
-                className="h-44 w-full border-b border-[var(--line)] object-cover"
+                className="aspect-square w-full border-b border-[var(--line)] object-cover"
                 loading="lazy"
               />
               <div className="p-6">
@@ -51,7 +51,7 @@ export default function HomePage() {
                 <img
                   src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
                   alt={product.name}
-                  className="h-36 w-full rounded-t-xl border-b border-[var(--line)] object-cover"
+                  className="aspect-square w-full rounded-t-xl border-b border-[var(--line)] object-cover"
                   loading="lazy"
                 />
                 <div className="p-4">

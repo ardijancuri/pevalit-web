@@ -66,7 +66,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
             <img
               src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
               alt={product.name}
-              className="h-40 w-full border-b border-[var(--line)] object-cover"
+              className="aspect-square w-full border-b border-[var(--line)] object-cover"
               loading="lazy"
             />
             <div className="p-6">

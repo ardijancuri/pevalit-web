@@ -32,6 +32,10 @@ const REJECT_IMAGE_PATTERNS = [
   /\bmk_mk\b/i,
   /\bsq\b/i
 ];
+const PRODUCT_PAGE_ALIASES = {
+  "pe-fr-700": ["g220"],
+  "pe-color-black-100": ["g200"]
+};
 
 function toUrl(input, base) {
   try {
@@ -178,6 +182,9 @@ function productSlugVariants(product) {
 
   const noPeName = fromName.replace(/^pe-/, "");
   if (noPeName) set.add(noPeName);
+  for (const alias of PRODUCT_PAGE_ALIASES[product.slug] || []) {
+    set.add(alias);
+  }
 
   return [...set];
 }
@@ -193,10 +200,10 @@ function strongFileMatch(stem, slugVariants) {
   });
 }
 
-function exactProductPageMatch(sourcePages, slug) {
+function exactProductPageMatch(sourcePages, slugs) {
   return sourcePages.some((page) => {
     const normalized = page.replace(/\/+$/, "");
-    return normalized.endsWith(`/product/${slug}`);
+    return slugs.some((slug) => normalized.endsWith(`/product/${slug}`));
   });
 }
 
@@ -263,30 +270,33 @@ async function crawlWebsite() {
 async function crawlTargetProductPages(products) {
   const assets = [];
   for (const product of products) {
-    const targetUrl = new URL(`/product/${product.slug}/`, BASE_URL).toString();
-    let response;
-    try {
-      response = await fetchWithTimeout(targetUrl, 20000);
-    } catch {
-      continue;
-    }
-    if (!response.ok) continue;
-    const type = response.headers.get("content-type") || "";
-    if (!type.includes("text/html")) continue;
-    const html = await response.text();
-    const linkCandidates = [
-      ...extractAttributeUrls(html, "src"),
-      ...extractAttributeUrls(html, "data-src"),
-      ...extractSrcSetUrls(html)
-    ];
-    const seen = new Set();
-    for (const item of linkCandidates) {
-      const resolved = toUrl(item, targetUrl);
-      if (!resolved || !isImageUrl(resolved)) continue;
-      const key = resolved.toString();
-      if (seen.has(key)) continue;
-      seen.add(key);
-      assets.push({ url: key, sourcePages: [targetUrl] });
+    const targetSlugs = [product.slug, ...(PRODUCT_PAGE_ALIASES[product.slug] || [])];
+    for (const targetSlug of targetSlugs) {
+      const targetUrl = new URL(`/product/${targetSlug}/`, BASE_URL).toString();
+      let response;
+      try {
+        response = await fetchWithTimeout(targetUrl, 20000);
+      } catch {
+        continue;
+      }
+      if (!response.ok) continue;
+      const type = response.headers.get("content-type") || "";
+      if (!type.includes("text/html")) continue;
+      const html = await response.text();
+      const linkCandidates = [
+        ...extractAttributeUrls(html, "src"),
+        ...extractAttributeUrls(html, "data-src"),
+        ...extractSrcSetUrls(html)
+      ];
+      const seen = new Set();
+      for (const item of linkCandidates) {
+        const resolved = toUrl(item, targetUrl);
+        if (!resolved || !isImageUrl(resolved)) continue;
+        const key = resolved.toString();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        assets.push({ url: key, sourcePages: [targetUrl] });
+      }
     }
   }
   return assets;
@@ -335,8 +345,9 @@ function mapProductImages(products, imageAssets, targetedProductImages) {
 
     for (const asset of validImages) {
       const stem = fileStem(asset.fileName);
+      const allowedProductSlugs = [product.slug, ...(PRODUCT_PAGE_ALIASES[product.slug] || [])];
       const exactPage =
-        exactProductPageMatch(asset.sourcePages, product.slug) ||
+        exactProductPageMatch(asset.sourcePages, allowedProductSlugs) ||
         (targetedProductImages.get(product.slug)?.has(asset.url) ?? false);
       const strongName = strongFileMatch(stem, slugVariants);
 

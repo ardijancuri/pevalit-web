@@ -1,48 +1,56 @@
 {
-  "generatedAt": "2026-03-02T22:33:30.345Z",
+  "generatedAt": "2026-03-02T22:41:06.114Z",
   "source": "https://pevalit.com",
   "dryRun": false,
   "scope": "products",
   "visitedPages": 120,
   "found": {
-    "images": 138,
+    "images": 143,
     "pdfs": 7
   },
   "downloaded": {
-    "images": 138,
+    "images": 143,
     "pdfs": 7
   },
-  "backupPath": "C:\\Users\\ardij\\OneDrive\\Desktop\\Projects\\pevalit-web\\scripts\\backups\\products.2026-03-02T22-33-30-343Z.json",
+  "backupPath": "C:\\Users\\ardij\\OneDrive\\Desktop\\Projects\\pevalit-web\\scripts\\backups\\products.2026-03-02T22-41-06-111Z.json",
   "productsMatched": [
     {
-      "slug": "pe-silicon",
-      "from": "/images/imported/1-1024x974.jpg",
-      "to": "/images/imported/1-1536x1461.jpg",
+      "slug": "pe-fr-700",
+      "from": "/images/imported/Pevalit-Catalogue-DE.jpg",
+      "to": "/images/imported/G220-1536x1461.jpg",
       "evidence": {
         "exactProductPage": true,
-        "strongFileMatch": false,
+        "strongFileMatch": true,
         "sourcePages": [
-          "https://pevalit.com/all-products/",
-          "https://pevalit.com/sq/all-products/",
-          "https://pevalit.com/mk/all-products/",
-          "https://pevalit.com/de/all-products/",
-          "https://pevalit.com/product/pe-silicon/"
+          "https://pevalit.com/",
+          "https://pevalit.com/sq/",
+          "https://pevalit.com/mk/",
+          "https://pevalit.com/de/",
+          "https://pevalit.com/#content",
+          "https://pevalit.com/sq/#content",
+          "https://pevalit.com/sq",
+          "https://pevalit.com/mk/#content",
+          "https://pevalit.com/mk",
+          "https://pevalit.com/de/#content",
+          "https://pevalit.com/de",
+          "https://pevalit.com/product/g220/"
+        ]
+      }
+    },
+    {
+      "slug": "pe-color-black-100",
+      "from": "/images/imported/Pevalit-Catalogue-DE.jpg",
+      "to": "/images/imported/G200-1536x1461.jpg",
+      "evidence": {
+        "exactProductPage": true,
+        "strongFileMatch": true,
+        "sourcePages": [
+          "https://pevalit.com/product/g200/"
         ]
       }
     }
   ],
-  "productsUnmatched": [
-    {
-      "slug": "pe-fr-700",
-      "name": "PE FR-700",
-      "currentImageUrl": "/images/imported/Pevalit-Catalogue-DE.jpg"
-    },
-    {
-      "slug": "pe-color-black-100",
-      "name": "PE Color Black 100",
-      "currentImageUrl": "/images/imported/Pevalit-Catalogue-DE.jpg"
-    }
-  ],
+  "productsUnmatched": [],
   "productsRejectedCandidates": [
     {
       "product": "pe-silicon",
@@ -675,6 +683,31 @@
       "reason": "no_strong_match"
     },
     {
+      "product": "pe-silicon",
+      "asset": "/images/imported/G200-1024x974.jpg",
+      "reason": "no_strong_match"
+    },
+    {
+      "product": "pe-silicon",
+      "asset": "/images/imported/G200-300x285.jpg",
+      "reason": "no_strong_match"
+    },
+    {
+      "product": "pe-silicon",
+      "asset": "/images/imported/G200-768x731.jpg",
+      "reason": "no_strong_match"
+    },
+    {
+      "product": "pe-silicon",
+      "asset": "/images/imported/G200-1536x1461.jpg",
+      "reason": "no_strong_match"
+    },
+    {
+      "product": "pe-silicon",
+      "asset": "/images/imported/G200-13x12.jpg",
+      "reason": "no_strong_match"
+    },
+    {
       "product": "pe-fr-700",
       "asset": "/images/imported/AdobeStock_478480103-scaled-e1728664833472.jpeg",
       "reason": "no_strong_match"
@@ -697,11 +730,6 @@
     {
       "product": "pe-fr-700",
       "asset": "/images/imported/1-1024x974.jpg",
-      "reason": "no_strong_match"
-    },
-    {
-      "product": "pe-fr-700",
-      "asset": "/images/imported/G220-1024x974.jpg",
       "reason": "no_strong_match"
     },
     {
@@ -752,31 +780,6 @@
     {
       "product": "pe-fr-700",
       "asset": "/images/imported/1.jpg",
-      "reason": "no_strong_match"
-    },
-    {
-      "product": "pe-fr-700",
-      "asset": "/images/imported/G220-300x285.jpg",
-      "reason": "no_strong_match"
-    },
-    {
-      "product": "pe-fr-700",
-      "asset": "/images/imported/G220-768x731.jpg",
-      "reason": "no_strong_match"
-    },
-    {
-      "product": "pe-fr-700",
-      "asset": "/images/imported/G220-1536x1461.jpg",
-      "reason": "no_strong_match"
-    },
-    {
-      "product": "pe-fr-700",
-      "asset": "/images/imported/G220-13x12.jpg",
-      "reason": "no_strong_match"
-    },
-    {
-      "product": "pe-fr-700",
-      "asset": "/images/imported/G220.jpg",
       "reason": "no_strong_match"
     },
     {
@@ -1335,6 +1338,31 @@
       "reason": "no_strong_match"
     },
     {
+      "product": "pe-fr-700",
+      "asset": "/images/imported/G200-1024x974.jpg",
+      "reason": "no_strong_match"
+    },
+    {
+      "product": "pe-fr-700",
+      "asset": "/images/imported/G200-300x285.jpg",
+      "reason": "no_strong_match"
+    },
+    {
+      "product": "pe-fr-700",
+      "asset": "/images/imported/G200-768x731.jpg",
+      "reason": "no_strong_match"
+    },
+    {
+      "product": "pe-fr-700",
+      "asset": "/images/imported/G200-1536x1461.jpg",
+      "reason": "no_strong_match"
+    },
+    {
+      "product": "pe-fr-700",
+      "asset": "/images/imported/G200-13x12.jpg",
+      "reason": "no_strong_match"
+    },
+    {
       "product": "pe-color-black-100",
       "asset": "/images/imported/AdobeStock_478480103-scaled-e1728664833472.jpeg",
       "reason": "no_strong_match"
@@ -1717,11 +1745,6 @@
     {
       "product": "pe-color-black-100",
       "asset": "/images/imported/2-4.jpg",
-      "reason": "no_strong_match"
-    },
-    {
-      "product": "pe-color-black-100",
-      "asset": "/images/imported/G200.jpg",
       "reason": "no_strong_match"
     },
     {
