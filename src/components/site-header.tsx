@@ -41,15 +41,15 @@ const HEADER_COPY: Record<LanguageCode, { menu: string; close: string; productCa
     }
   },
   mk: {
-    menu: "Meni",
-    close: "Zatvori",
-    productCategories: "Kategorii na proizvodi",
+    menu: "Мени",
+    close: "Затвори",
+    productCategories: "Категории на производи",
     nav: {
-      "/": "Doma",
-      "/products": "Proizvodi",
-      "/catalogs": "Katalozi",
-      "/corporate/about": "Korporativno",
-      "/contact": "Kontakt"
+      "/": "Дома",
+      "/products": "Производи",
+      "/catalogs": "Каталози",
+      "/corporate/about": "Корпоративно",
+      "/contact": "Контакт"
     }
   },
   de: {
