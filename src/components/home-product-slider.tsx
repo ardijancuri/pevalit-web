@@ -146,7 +146,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
   };
 
   return (
-    <section className="pt-10 pb-8">
+    <section className="pt-8 pb-2">
       <div
         className={`mx-auto w-[min(1400px,calc(100%-1.25rem))] touch-pan-y select-none overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] sm:w-[min(1400px,calc(100%-2rem))] ${
           isDragging ? "cursor-grabbing" : "cursor-grab"

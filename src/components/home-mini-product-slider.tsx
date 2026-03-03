@@ -91,7 +91,7 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
   };
 
   return (
-    <section className="site-container pb-12">
+    <section className="site-container pb-10">
       <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4 sm:p-5">
         <div className="mb-3 flex items-center justify-between gap-2">
           <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">More Products</p>
