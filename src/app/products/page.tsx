@@ -27,7 +27,7 @@ export default function ProductsPage() {
               </div>
               <Link
                 href={`/products/${category.slug}`}
-                className="rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-strong)]"
+                className="rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
               >
                 View all
               </Link>

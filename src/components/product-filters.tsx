@@ -85,7 +85,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
             <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
             <p className="mt-3 text-sm text-[var(--muted)]">{displaySummary(product)}</p>
             <Link
-              className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--brand-strong)]"
+              className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-medium !text-white hover:bg-[var(--brand-strong)]"
               href={`/product/${product.slug}`}
             >
               View Product

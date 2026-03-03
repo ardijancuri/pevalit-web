@@ -117,7 +117,7 @@ export default function HomePage() {
             Share substrate, climate, application method, and desired performance. Our team responds with suitable product options and next-step quote guidance.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/contact" className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--brand-strong)]">
+            <Link href="/contact" className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]">
               Request Technical Quote
             </Link>
             <Link href="/catalogs" className="rounded-full border border-white/35 px-5 py-2.5 text-sm font-semibold text-white hover:border-white">

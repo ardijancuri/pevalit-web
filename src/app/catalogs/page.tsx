@@ -33,7 +33,7 @@ export default function CatalogsPage() {
               />
               <Link
                 href={catalog.fileUrl}
-                className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--brand-strong)]"
+                className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
               >
                 Download PDF
               </Link>

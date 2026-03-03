@@ -127,7 +127,7 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
       )}
 
       <button
-        className="mt-6 rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--brand-strong)] disabled:opacity-65"
+        className="mt-6 rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)] disabled:opacity-65"
         disabled={submitState.status === "submitting"}
         type="submit"
       >
