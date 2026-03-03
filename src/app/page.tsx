@@ -1,12 +1,34 @@
 import Link from "next/link";
 import Image from "next/image";
+import { HomeMiniProductSlider } from "@/components/home-mini-product-slider";
+import { HomeProductSlider } from "@/components/home-product-slider";
 import { TrackedLink } from "@/components/tracked-link";
-import { categories, getProductSummary, products, siteData } from "@/lib/content";
+import { categories, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
+  const featuredProducts = products.slice(0, 6).map((product) => ({
+    slug: product.slug,
+    name: product.name,
+    imageUrl: product.imageUrl,
+    categoryName: getCategoryNameBySlug(product.categorySlug),
+    summary: getProductSummary(product),
+    applications: product.applications,
+    benefits: product.benefits,
+    documentsCount: product.documents.length
+  }));
+  const secondaryProducts = products.slice(6).map((product) => ({
+    slug: product.slug,
+    name: product.name,
+    imageUrl: product.imageUrl,
+    categoryName: getCategoryNameBySlug(product.categorySlug)
+  }));
+
   return (
     <>
-      <section className="site-container pt-18 pb-16">
+      <HomeProductSlider products={featuredProducts} />
+      <HomeMiniProductSlider products={secondaryProducts} />
+
+      <section className="site-container pt-10 pb-16">
         <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Engineered Polymer Solutions</p>
         <h1 className="mt-4 max-w-3xl text-5xl leading-tight font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
           {siteData.tagline}
