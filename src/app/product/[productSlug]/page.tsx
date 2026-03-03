@@ -94,7 +94,7 @@ export default async function ProductPage({ params }: Props) {
           <h2 className="mt-8 text-xl font-semibold">Typical Applications</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {product.applications.map((application) => (
-              <span key={application} className="rounded-full bg-[var(--accent)] px-3 py-1 text-xs text-[var(--brand-strong)]">
+              <span key={application} className="rounded-full bg-[var(--accent)] px-3 py-1 text-xs text-[var(--text)]">
                 {application}
               </span>
             ))}
