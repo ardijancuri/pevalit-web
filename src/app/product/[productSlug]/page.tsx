@@ -69,24 +69,22 @@ export default async function ProductPage({ params }: Props) {
     <div className="site-container py-14">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <Image
-        src={heroImage}
-        alt={product.name}
-        width={1200}
-        height={900}
-        className="mx-auto mb-8 aspect-[4/3] w-full max-w-3xl rounded-2xl border border-[var(--line)] bg-white object-contain p-2"
-      />
-      <div className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">{product.categorySlug}</p>
-        <h1 className="mt-3 text-4xl leading-tight font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-          {product.name}
-        </h1>
-        <p className="mt-4 text-lg text-[var(--muted)]">{summary}</p>
-      </div>
-
-      <section className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
+      <section className="grid gap-8 lg:grid-cols-[1.3fr_1fr]">
         <article className="card p-6">
-          <h2 className="text-xl font-semibold">Key Benefits</h2>
+          <Image
+            src={heroImage}
+            alt={product.name}
+            width={1200}
+            height={900}
+            className="mx-auto mb-6 aspect-[4/3] w-full max-w-2xl rounded-2xl border border-[var(--line)] bg-white object-contain p-2"
+          />
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">{product.categorySlug}</p>
+          <h1 className="mt-3 text-4xl leading-tight font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+            {product.name}
+          </h1>
+          <p className="mt-4 text-lg text-[var(--muted)]">{summary}</p>
+
+          <h2 className="mt-8 text-xl font-semibold">Key Benefits</h2>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
             {product.benefits.map((benefit) => (
               <li key={benefit}>{benefit}</li>
@@ -137,11 +135,7 @@ export default async function ProductPage({ params }: Props) {
           ) : null}
         </article>
 
-        <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="card mb-4 p-4">
-            <p className="text-sm font-semibold">Need a technical recommendation?</p>
-            <p className="mt-1 text-xs text-[var(--muted)]">Tell us your use case and we will respond with a suitable product and dosage direction.</p>
-          </div>
+        <aside className="lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
           <QuoteForm productSlug={product.slug} />
         </aside>
       </section>

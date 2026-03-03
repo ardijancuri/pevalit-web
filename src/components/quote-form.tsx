@@ -6,7 +6,10 @@ import { trackQuoteSubmit } from "@/lib/analytics";
 declare global {
   interface Window {
     hcaptcha?: {
-      render: (container: string | HTMLElement, options: { sitekey: string; callback: (token: string) => void }) => void;
+      render: (
+        container: string | HTMLElement,
+        options: { sitekey: string; callback: (token: string) => void; hl?: string }
+      ) => void;
     };
   }
 }
@@ -36,14 +39,15 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
     if (!captchaSiteKey) return;
 
     const script = document.createElement("script");
-    script.src = "https://js.hcaptcha.com/1/api.js?render=explicit";
+    script.src = "https://js.hcaptcha.com/1/api.js?render=explicit&hl=en";
     script.async = true;
     script.defer = true;
     script.onload = () => {
       if (window.hcaptcha) {
         window.hcaptcha.render("#hcaptcha-widget", {
           sitekey: captchaSiteKey,
-          callback: (token) => setCaptchaToken(token)
+          callback: (token) => setCaptchaToken(token),
+          hl: "en"
         });
       }
     };
@@ -144,11 +148,7 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
 
       {captchaSiteKey ? (
         <div className="mt-4" id="hcaptcha-widget" />
-      ) : (
-        <p className="mt-4 text-xs text-[var(--muted)]">
-          hCaptcha site key is not configured. Set `NEXT_PUBLIC_HCAPTCHA_SITE_KEY` for spam protection.
-        </p>
-      )}
+      ) : null}
 
       <button
         className="mt-6 rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)] disabled:opacity-65"
