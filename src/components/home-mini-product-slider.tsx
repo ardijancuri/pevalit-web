@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 
 type MiniProduct = {
   slug: string;
@@ -38,49 +38,81 @@ function getMiniImageClass(categorySlug: string, slug: string) {
 export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) {
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const autoDirectionRef = useRef<1 | -1>(1);
+  const activeIndexRef = useRef(0);
   const pointerIdRef = useRef<number | null>(null);
   const startXRef = useRef(0);
   const startScrollLeftRef = useRef(0);
   const movedRef = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
 
-  useEffect(() => {
+  const getCardTargets = useCallback(() => {
     const viewport = viewportRef.current;
-    if (!viewport || products.length < 2 || isDragging) {
+    if (!viewport) {
+      return [];
+    }
+    const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+    const cards = Array.from(viewport.querySelectorAll<HTMLElement>("[data-mini-card='true']"));
+    return cards.map((card) => Math.min(card.offsetLeft, maxScrollLeft));
+  }, []);
+
+  const scrollToCard = useCallback((index: number, behavior: ScrollBehavior) => {
+    const viewport = viewportRef.current;
+    if (!viewport) {
+      return false;
+    }
+
+    const targets = getCardTargets();
+    if (targets.length === 0) {
+      return false;
+    }
+
+    const safeIndex = Math.max(0, Math.min(index, targets.length - 1));
+    activeIndexRef.current = safeIndex;
+    viewport.scrollTo({ left: targets[safeIndex], behavior });
+    return true;
+  }, [getCardTargets]);
+
+  useEffect(() => {
+    autoDirectionRef.current = 1;
+    activeIndexRef.current = 0;
+    scrollToCard(0, "auto");
+  }, [products.length, scrollToCard]);
+
+  useEffect(() => {
+    if (products.length < 2 || isDragging) {
       return;
     }
 
     const intervalId = window.setInterval(() => {
-      const firstCard = viewport.querySelector<HTMLElement>("[data-mini-card='true']");
-      const step = (firstCard?.offsetWidth ?? 220) + 12;
-      const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
-      if (maxScrollLeft <= 0) {
+      const targets = getCardTargets();
+      const lastIndex = targets.length - 1;
+      if (lastIndex < 1) {
         return;
       }
 
-      const current = viewport.scrollLeft;
+      const current = activeIndexRef.current;
 
       if (autoDirectionRef.current === 1) {
-        if (current >= maxScrollLeft - 4) {
+        if (current >= lastIndex) {
           autoDirectionRef.current = -1;
-          viewport.scrollTo({ left: Math.max(0, maxScrollLeft - step), behavior: "smooth" });
+          scrollToCard(lastIndex - 1, "smooth");
           return;
         }
-        viewport.scrollTo({ left: Math.min(maxScrollLeft, current + step), behavior: "smooth" });
+        scrollToCard(current + 1, "smooth");
         return;
       }
 
-      if (current <= 4) {
+      if (current <= 0) {
         autoDirectionRef.current = 1;
-        viewport.scrollTo({ left: Math.min(maxScrollLeft, step), behavior: "smooth" });
+        scrollToCard(1, "smooth");
         return;
       }
 
-      viewport.scrollTo({ left: Math.max(0, current - step), behavior: "smooth" });
+      scrollToCard(current - 1, "smooth");
     }, AUTO_SCROLL_MS);
 
     return () => window.clearInterval(intervalId);
-  }, [products.length, isDragging]);
+  }, [products.length, isDragging, getCardTargets, scrollToCard]);
 
   if (products.length === 0) {
     return null;
@@ -123,6 +155,28 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
 
     pointerIdRef.current = null;
     setIsDragging(false);
+
+    const viewport = viewportRef.current;
+    if (!viewport) {
+      return;
+    }
+
+    const targets = getCardTargets();
+    if (targets.length === 0) {
+      return;
+    }
+
+    let nearestIndex = 0;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+    const current = viewport.scrollLeft;
+    targets.forEach((target, index) => {
+      const distance = Math.abs(target - current);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+    scrollToCard(nearestIndex, "smooth");
   };
 
   return (
