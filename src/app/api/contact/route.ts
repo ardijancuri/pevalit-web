@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import crypto from "node:crypto";
 
 const requestSchema = z.object({
   name: z.string().min(2),
@@ -19,6 +20,7 @@ const resendKey = process.env.RESEND_API_KEY;
 const hcaptchaSecret = process.env.HCAPTCHA_SECRET;
 const recipient = process.env.CONTACT_TO_EMAIL || "sales@pevalit.com";
 const sender = process.env.CONTACT_FROM_EMAIL || "PEVALIT <no-reply@pevalit.com>";
+const autoReplyEnabled = process.env.CONTACT_AUTOREPLY_ENABLED === "true";
 
 async function verifyHCaptcha(captchaToken?: string) {
   if (!hcaptchaSecret) return true;
@@ -64,11 +66,13 @@ export async function POST(request: Request) {
   }
 
   const resend = new Resend(resendKey);
+  const requestId = `RQ-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
   await resend.emails.send({
     from: sender,
     to: recipient,
-    subject: `Quote request${data.productSlug ? `: ${data.productSlug}` : ""}`,
+    subject: `Quote request ${requestId}${data.productSlug ? `: ${data.productSlug}` : ""}`,
     text: [
+      `Request ID: ${requestId}`,
       `Name: ${data.name}`,
       `Email: ${data.email}`,
       `Company: ${data.company}`,
@@ -81,5 +85,27 @@ export async function POST(request: Request) {
     ].join("\n")
   });
 
-  return NextResponse.json({ success: true, message: "Thanks. Your request has been sent successfully." });
+  if (autoReplyEnabled) {
+    await resend.emails.send({
+      from: sender,
+      to: data.email,
+      subject: `We received your request (${requestId})`,
+      text: [
+        `Hi ${data.name},`,
+        "",
+        "Thanks for contacting PEVALIT.",
+        "Our team has received your request and will reply with technical feedback and the next steps.",
+        "",
+        `Reference ID: ${requestId}`,
+        "",
+        "PEVALIT Team"
+      ].join("\n")
+    });
+  }
+
+  return NextResponse.json({
+    success: true,
+    message: "Thanks. Your request has been sent successfully.",
+    requestId
+  });
 }

@@ -10,6 +10,14 @@ type ProductFiltersProps = {
   initialCategory?: string;
 };
 
+function displaySummary(product: Product) {
+  const summary = (product.summary || "").trim();
+  if (!summary || summary.toLowerCase() === product.name.toLowerCase()) {
+    return `${product.name} with stable performance and technical support for category-specific applications.`;
+  }
+  return summary;
+}
+
 export function ProductFilters({ categories, products, initialCategory = "all" }: ProductFiltersProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(initialCategory);
@@ -23,7 +31,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
       const q = query.toLowerCase();
       return (
         product.name.toLowerCase().includes(q) ||
-        product.summary.toLowerCase().includes(q) ||
+        displaySummary(product).toLowerCase().includes(q) ||
         product.applications.some((item) => item.toLowerCase().includes(q))
       );
     });
@@ -72,7 +80,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
             <div className="p-6">
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">{product.categorySlug}</p>
             <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
-            <p className="mt-3 text-sm text-[var(--muted)]">{product.summary}</p>
+            <p className="mt-3 text-sm text-[var(--muted)]">{displaySummary(product)}</p>
             <Link
               className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--brand-strong)]"
               href={`/product/${product.slug}`}

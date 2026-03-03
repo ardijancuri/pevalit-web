@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
-import { productsByCategory } from "@/lib/content";
+import { getProductSummary, productsByCategory } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Products | PEVALIT",
-  description: "Discover PEVALIT additives and compounds by category, application, and performance requirement."
+  description: "Explore PEVALIT product categories, review technical product families, and navigate to detailed product documentation."
 };
 
 export default function ProductsPage() {
@@ -44,7 +44,7 @@ export default function ProductsPage() {
                     />
                     <div className="p-4">
                       <h3 className="text-base font-semibold">{product.name}</h3>
-                      <p className="mt-2 text-sm text-[var(--muted)]">{product.summary}</p>
+                      <p className="mt-2 text-sm text-[var(--muted)]">{getProductSummary(product)}</p>
                       <Link href={`/product/${product.slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
                         View product
                       </Link>

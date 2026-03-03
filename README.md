@@ -45,6 +45,7 @@ Required env vars:
 - `NEXT_PUBLIC_HCAPTCHA_SITE_KEY`
 - `CONTACT_FROM_EMAIL`
 - `CONTACT_TO_EMAIL`
+- `CONTACT_AUTOREPLY_ENABLED` (optional, `true`/`false`)
 
 ## Asset sync script
 

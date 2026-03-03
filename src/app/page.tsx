@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categories, products, siteData } from "@/lib/content";
+import { categories, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
   return (
@@ -56,11 +56,28 @@ export default function HomePage() {
                 />
                 <div className="p-4">
                 <p className="text-sm font-semibold">{product.name}</p>
-                <p className="mt-2 text-xs text-[var(--muted)]">{product.summary}</p>
+                <p className="mt-2 text-xs text-[var(--muted)]">{getProductSummary(product)}</p>
                 </div>
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="site-container pb-20">
+        <div className="grid gap-4 md:grid-cols-3">
+          <article className="card p-6">
+            <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">Certified Systems</p>
+            <p className="mt-3 text-sm text-[var(--muted)]">Production and products aligned with EN 12004 and ETAG 004 certification standards.</p>
+          </article>
+          <article className="card p-6">
+            <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">Regional + Export Reach</p>
+            <p className="mt-3 text-sm text-[var(--muted)]">Serving projects across Macedonia and international markets with consistent technical support.</p>
+          </article>
+          <article className="card p-6">
+            <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">Fast Technical Response</p>
+            <p className="mt-3 text-sm text-[var(--muted)]">Share your application and get a focused quote recommendation with relevant documentation.</p>
+          </article>
         </div>
       </section>
     </>

@@ -17,6 +17,7 @@ type QuoteFormProps = {
 type SubmitState = {
   status: "idle" | "submitting" | "success" | "error";
   message: string;
+  requestId?: string;
 };
 
 const captchaSiteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
@@ -71,11 +72,11 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
       body: JSON.stringify(Object.fromEntries(formData.entries()))
     });
 
-    const payload = (await response.json()) as { message: string };
+    const payload = (await response.json()) as { message: string; requestId?: string };
     if (response.ok) {
       event.currentTarget.reset();
       setCaptchaToken("");
-      setSubmitState({ status: "success", message: payload.message });
+      setSubmitState({ status: "success", message: payload.message, requestId: payload.requestId });
       return;
     }
 
@@ -139,6 +140,15 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
         >
           {submitState.message}
         </p>
+      ) : null}
+      {submitState.status === "success" ? (
+        <div className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
+          <p className="font-semibold">What happens next</p>
+          <p className="mt-1">1) Technical team reviews your request.</p>
+          <p>2) You receive recommendation + documentation by email.</p>
+          <p>3) Commercial quote follows after confirmation.</p>
+          {submitState.requestId ? <p className="mt-1 font-medium">Reference: {submitState.requestId}</p> : null}
+        </div>
       ) : null}
     </form>
   );

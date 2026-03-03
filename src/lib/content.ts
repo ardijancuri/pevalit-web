@@ -31,3 +31,25 @@ export function getCategoryBySlug(slug: string) {
 export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug) ?? null;
 }
+
+const categoryNameBySlug = new Map(categories.map((category) => [category.slug, category.name]));
+
+export function getCategoryNameBySlug(slug: string) {
+  return categoryNameBySlug.get(slug) ?? slug;
+}
+
+export function getProductSummary(product: (typeof products)[number]) {
+  const raw = (product.summary || "").trim();
+  if (!raw || raw.toLowerCase() === product.name.toLowerCase()) {
+    return `${product.name} for ${getCategoryNameBySlug(product.categorySlug)} applications with stable quality and consistent process performance.`;
+  }
+  return raw;
+}
+
+export function getProductSeoDescription(product: (typeof products)[number]) {
+  const raw = (product.seo?.description || "").trim();
+  if (!raw || raw.toLowerCase() === product.name.toLowerCase()) {
+    return `${product.name} by PEVALIT with technical documentation, category-specific applications, and quote support.`;
+  }
+  return raw;
+}

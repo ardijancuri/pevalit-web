@@ -26,6 +26,10 @@ export default function ContactPage() {
           <p className="text-sm font-medium">{siteData.contact.phone}</p>
           <p className="mt-4 text-sm text-[var(--muted)]">Address</p>
           <p className="text-sm font-medium">{siteData.contact.address}</p>
+          <div className="mt-6 rounded-lg border border-[var(--line)] bg-[var(--accent)] p-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">Response Promise</p>
+            <p className="mt-2 text-sm text-[var(--muted)]">Technical response within one business day for complete quote requests.</p>
+          </div>
         </aside>
       </section>
     </>

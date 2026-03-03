@@ -21,7 +21,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${category.name} | PEVALIT`,
-    description: category.description
+    description: `${category.name} category products by PEVALIT with technical documentation and quote support.`,
+    alternates: { canonical: `/products/${category.slug}` },
+    openGraph: {
+      title: `${category.name} | PEVALIT`,
+      description: `${category.name} category products by PEVALIT with technical documentation and quote support.`,
+      images: [{ url: category.heroImage || "/images/imported/Pevalit-Catalogue-DE.jpg" }]
+    }
   };
 }
 
