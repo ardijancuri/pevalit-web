@@ -1,11 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
+import { HeroProductSlider } from "@/components/hero-product-slider";
 import { TrackedLink } from "@/components/tracked-link";
 import { catalogs, categories, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
   const highlightedCatalogs = catalogs.slice(0, 3);
   const highlightedProducts = products.slice(0, 4);
+  const heroProducts = products.slice(0, 10).map((product) => ({
+    slug: product.slug,
+    name: product.name,
+    categoryName: getCategoryNameBySlug(product.categorySlug),
+    summary: getProductSummary(product),
+    imageUrl: product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"
+  }));
   const reasons = [
     "Certified systems aligned with EN 12004 and ETAG 004.",
     "Consistent quality control with stable production methods.",
@@ -15,65 +23,50 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="overflow-hidden border-y border-[var(--line)] bg-[var(--bg)]">
-        <div className="site-container grid gap-8 py-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-14">
-          <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--brand)]">Technical Construction Systems</p>
-            <h1 className="mt-4 max-w-3xl text-4xl leading-tight font-semibold md:text-5xl" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-              {siteData.tagline}
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--muted)] md:text-lg">{siteData.description}</p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <TrackedLink
-                className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
-                href={siteData.primaryCta.href}
-                trackingLabel={siteData.primaryCta.label}
-                trackingLocation="home_hero"
-              >
-                {siteData.primaryCta.label}
-              </TrackedLink>
-              <TrackedLink
-                className="rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] hover:border-[var(--brand)]"
-                href={siteData.secondaryCta.href}
-                trackingLabel={siteData.secondaryCta.label}
-                trackingLocation="home_hero"
-              >
-                {siteData.secondaryCta.label}
-              </TrackedLink>
+      <section className="relative overflow-hidden bg-[linear-gradient(112deg,#f3f4f6_0%,#e8ebee_52%,#dde2e8_100%)] text-[var(--text)]">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(255,255,255,0.75),transparent_45%)]" />
+        <div className="relative mx-auto w-[min(1540px,calc(100%-2rem))] py-7 lg:py-8">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-[#626d79]">Construction Systems</p>
+              <h1 className="mt-3 max-w-xl text-3xl leading-[1.08] font-semibold md:text-[3.25rem]" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+                We build dependable insulation systems from foundation to finish.
+              </h1>
+              <p className="mt-3 max-w-2xl text-base leading-relaxed text-[var(--muted)] md:text-lg">{siteData.description}</p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <TrackedLink
+                  className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
+                  href={siteData.primaryCta.href}
+                  trackingLabel={siteData.primaryCta.label}
+                  trackingLocation="home_hero"
+                >
+                  {siteData.primaryCta.label}
+                </TrackedLink>
+                <TrackedLink
+                  className="rounded-full border border-[#c6ced6] bg-white px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--text)] hover:border-[var(--brand)]"
+                  href={siteData.secondaryCta.href}
+                  trackingLabel={siteData.secondaryCta.label}
+                  trackingLocation="home_hero"
+                >
+                  {siteData.secondaryCta.label}
+                </TrackedLink>
+              </div>
             </div>
-            <div className="mt-7 grid gap-3 sm:grid-cols-3">
-              <article className="rounded-xl border border-[var(--line)] bg-white/80 px-4 py-3">
-                <p className="text-[0.63rem] uppercase tracking-[0.14em] text-[var(--brand)]">Production</p>
-                <p className="mt-1 text-sm font-semibold">Standards-Based Process</p>
-              </article>
-              <article className="rounded-xl border border-[var(--line)] bg-white/80 px-4 py-3">
-                <p className="text-[0.63rem] uppercase tracking-[0.14em] text-[var(--brand)]">Support</p>
-                <p className="mt-1 text-sm font-semibold">Fast Technical Reply</p>
-              </article>
-              <article className="rounded-xl border border-[var(--line)] bg-white/80 px-4 py-3">
-                <p className="text-[0.63rem] uppercase tracking-[0.14em] text-[var(--brand)]">Coverage</p>
-                <p className="mt-1 text-sm font-semibold">Regional + Export Ready</p>
-              </article>
+
+            <div className="relative">
+              <div className="absolute inset-x-10 bottom-4 h-24 rounded-full bg-[#9aa4af]/35 blur-3xl" />
+              <Image
+                src="/images/imported/3-2-1024x974.jpg"
+                alt="PEVALIT EPS systems"
+                width={1100}
+                height={1048}
+                className="relative z-10 ml-auto w-full max-w-[690px] object-contain drop-shadow-[0_20px_26px_rgba(46,56,67,0.25)]"
+                priority
+              />
             </div>
           </div>
 
-          <article className="relative overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--text)] text-white shadow-xl">
-            <Image
-              src="/images/imported/corporate-copy.jpg"
-              alt="PEVALIT production and technical support"
-              width={900}
-              height={1100}
-              className="h-full w-full object-cover object-center opacity-70"
-              priority
-            />
-            <div className="absolute inset-0 bg-[var(--text)]/45" />
-            <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
-              <p className="text-[0.65rem] uppercase tracking-[0.14em] text-[var(--brand)]">Built For Contractors And Manufacturers</p>
-              <p className="mt-2 text-sm leading-relaxed text-white/90">
-                Product systems with documented performance, stable quality control, and practical on-site technical guidance.
-              </p>
-            </div>
-          </article>
+          <HeroProductSlider products={heroProducts} />
         </div>
       </section>
 
@@ -133,10 +126,10 @@ export default function HomePage() {
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
             <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-              Browse By Category
+              Find Products by Category
             </h2>
             <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-              Select the product family that matches your project type, then open full product details and documentation.
+              Browse categories to quickly find the right product family, with direct access to full product lists, technical specs, and documentation.
             </p>
           </div>
           <TrackedLink

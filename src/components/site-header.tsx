@@ -184,151 +184,143 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-white relative">
-      <div className="border-b border-white/15 bg-[var(--text)] text-white">
-        <div className="site-container flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em]">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/90">
-            <a href={`tel:${siteData.contact.phone}`} className="hover:text-white">
-              {siteData.contact.phone}
-            </a>
-            <a href={`mailto:${siteData.contact.email}`} className="hover:text-white">
-              {siteData.contact.email}
-            </a>
-            <span className="text-white/75">{siteData.contact.address}</span>
+    <header className="sticky top-0 z-40 bg-transparent px-2 pt-2">
+      <div className="rounded-md border border-[#d4dbe1] bg-[linear-gradient(90deg,#eff2f5_0%,#e6eaee_100%)] text-[var(--text)] shadow-[0_8px_20px_rgba(24,39,56,0.12)]">
+        <div className="mx-auto flex w-[min(1540px,calc(100%-1rem))] items-stretch justify-between gap-3 py-0">
+          <div className="flex items-stretch">
+            <span className="hidden w-16 bg-[var(--brand)] lg:block" />
+            <Link href="/" aria-label={siteData.companyName} className="inline-flex items-center bg-white px-4 md:px-5">
+              <Image
+                src="/images/imported/logo.svg"
+                alt={siteData.companyName}
+                width={228}
+                height={46}
+                className="h-8 w-auto"
+              />
+            </Link>
           </div>
-          <Link
-            href={siteData.secondaryCta.href}
-            className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[0.65rem] tracking-[0.1em] text-white transition hover:border-white hover:bg-white hover:!text-[var(--text)]"
+
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-controls="mobile-menu"
+            aria-expanded={mobileMenuOpen}
+            className="my-2 rounded-lg border border-[#c7ced6] bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text)] md:hidden"
+            onClick={() => setMobileMenuOpen(true)}
           >
-            {siteData.secondaryCta.label}
-          </Link>
-        </div>
-      </div>
+            {headerCopy.menu}
+          </button>
 
-      <div className="site-container flex items-center justify-between py-3">
-        <Link href="/" aria-label={siteData.companyName} className="inline-flex items-center">
-          <Image
-            src="/images/imported/logo.svg"
-            alt={siteData.companyName}
-            width={228}
-            height={46}
-            className="h-9 w-auto"
-          />
-        </Link>
-        <button
-          type="button"
-          aria-label="Open menu"
-          aria-controls="mobile-menu"
-          aria-expanded={mobileMenuOpen}
-          className="rounded-lg border border-[var(--line)] bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text)] md:hidden"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          {headerCopy.menu}
-        </button>
-        <div className="hidden items-center gap-4 md:flex">
-          <nav aria-label="Main navigation">
-            <ul className="flex flex-wrap gap-4 text-sm text-[var(--muted)]">
-              {siteData.navigation.map((item) => {
-                const baseClass = `inline-flex border-b-2 px-0.5 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.1em] transition ${
-                  isActive(item.href)
-                    ? "border-[var(--brand)] text-[var(--text)]"
-                    : "border-transparent text-[var(--muted)] hover:border-[var(--brand)] hover:text-[var(--text)]"
-                }`;
-                const translatedLabel = headerCopy.nav[item.href] || item.label;
+          <div className="hidden min-w-0 flex-1 items-center justify-between md:flex">
+            <nav aria-label="Main navigation" className="min-w-0 pl-5">
+              <ul className="flex flex-wrap items-center gap-x-5 text-sm">
+                {siteData.navigation.map((item) => {
+                  const baseClass = `inline-flex border-b-2 px-0.5 py-5 text-[0.72rem] font-semibold uppercase tracking-[0.08em] transition ${
+                    isActive(item.href)
+                      ? "border-[var(--brand)] text-[var(--text)]"
+                      : "border-transparent text-[#5b6570] hover:border-[#97a1ac] hover:text-[var(--text)]"
+                  }`;
+                  const translatedLabel = headerCopy.nav[item.href] || item.label;
 
-                if (item.href !== "/products") {
+                  if (item.href !== "/products") {
+                    return (
+                      <li key={item.href}>
+                        <Link className={baseClass} href={item.href}>
+                          {translatedLabel}
+                        </Link>
+                      </li>
+                    );
+                  }
+
                   return (
-                    <li key={item.href}>
-                      <Link className={baseClass} href={item.href}>
-                        {translatedLabel}
-                      </Link>
-                    </li>
-                  );
-                }
-
-                return (
-                  <li
-                    key={item.href}
-                    onMouseEnter={openProductsMenu}
-                    onMouseLeave={closeProductsMenu}
-                    onFocus={openProductsMenu}
-                    onBlur={closeProductsMenu}
-                  >
-                    <Link className={baseClass} href={item.href} aria-expanded={productsMenuOpen} aria-haspopup="menu">
-                      {translatedLabel}
-                    </Link>
-                    <div
-                      className={`absolute left-0 right-0 top-full border-y border-[var(--line)] bg-white shadow-xl transition ${
-                        productsMenuOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
-                      }`}
+                    <li
+                      key={item.href}
+                      className="relative"
                       onMouseEnter={openProductsMenu}
                       onMouseLeave={closeProductsMenu}
+                      onFocus={openProductsMenu}
+                      onBlur={closeProductsMenu}
                     >
-                      <div className="site-container pt-6 pb-4">
-                        <div className="grid grid-cols-5 gap-3">
-                          {productsByCategory.slice(0, 10).map(({ category, products }) => (
-                            <Link
-                              key={category.slug}
-                              href={`/products/${category.slug}`}
-                              className="overflow-hidden rounded-xl border border-[var(--line)] hover:border-[var(--brand)]"
-                            >
-                              <Image
-                                src={products[0]?.imageUrl || category.heroImage || "/images/imported/Pevalit-Catalogue-DE.jpg"}
-                                alt={category.name}
-                                width={600}
-                                height={600}
-                                className="aspect-square w-full border-b border-[var(--line)] object-cover"
-                                loading="lazy"
-                              />
-                              <p className="p-2 text-xs font-semibold text-[var(--text)]">{category.name}</p>
-                            </Link>
-                          ))}
+                      <Link className={baseClass} href={item.href} aria-expanded={productsMenuOpen} aria-haspopup="menu">
+                        {translatedLabel}
+                      </Link>
+                      <div
+                        className={`absolute left-1/2 top-full z-40 mt-2 w-[min(1040px,calc(100vw-2rem))] -translate-x-1/2 rounded-xl border border-[var(--line)] bg-white shadow-2xl transition ${
+                          productsMenuOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
+                        }`}
+                        onMouseEnter={openProductsMenu}
+                        onMouseLeave={closeProductsMenu}
+                      >
+                        <div className="p-4">
+                          <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+                            {productsByCategory.slice(0, 10).map(({ category, products }) => (
+                              <Link
+                                key={category.slug}
+                                href={`/products/${category.slug}`}
+                                className="overflow-hidden rounded-lg border border-[var(--line)] bg-white hover:border-[var(--brand)]"
+                              >
+                                <Image
+                                  src={products[0]?.imageUrl || category.heroImage || "/images/imported/Pevalit-Catalogue-DE.jpg"}
+                                  alt={category.name}
+                                  width={600}
+                                  height={600}
+                                  className="aspect-square w-full border-b border-[var(--line)] object-cover"
+                                  loading="lazy"
+                                />
+                                <p className="p-2 text-xs font-semibold text-[var(--text)]">{category.name}</p>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
 
-          <div className="relative" ref={languageMenuRef}>
-            <button
-              type="button"
-              aria-label="Change language"
-              aria-expanded={languageMenuOpen}
-              className="rounded-full border border-[var(--line)] bg-white px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
-              onClick={() => setLanguageMenuOpen((prev) => !prev)}
-            >
-              {selectedLanguage.short}
-            </button>
-            <ul
-              className={`absolute left-1/2 mt-2 min-w-[12rem] -translate-x-1/2 rounded-xl border border-[var(--line)] bg-white p-1 shadow-xl transition ${
-                languageMenuOpen ? "visible opacity-100" : "invisible opacity-0"
-              }`}
-            >
-              {LANGUAGE_OPTIONS.map((option) => (
-                <li key={option.code}>
-                  <button
-                    type="button"
-                    onClick={() => onLanguageChange(option.code)}
-                    className={`w-full rounded-lg px-3 py-2 text-left text-xs font-semibold ${
-                      option.code === language ? "bg-[var(--brand)] !text-white" : "text-[var(--text)] hover:bg-[var(--accent)]"
-                    }`}
-                  >
-                    {option.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <div className="flex shrink-0 items-center gap-4">
+              <div className="relative" ref={languageMenuRef}>
+                <button
+                  type="button"
+                  aria-label="Change language"
+                  aria-expanded={languageMenuOpen}
+                  className="rounded-full border border-[#c7ced6] bg-white px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
+                  onClick={() => setLanguageMenuOpen((prev) => !prev)}
+                >
+                  {selectedLanguage.short}
+                </button>
+                <ul
+                  className={`absolute right-0 mt-2 min-w-[12rem] rounded-xl border border-[var(--line)] bg-white p-1 shadow-xl transition ${
+                    languageMenuOpen ? "visible opacity-100" : "invisible opacity-0"
+                  }`}
+                >
+                  {LANGUAGE_OPTIONS.map((option) => (
+                    <li key={option.code}>
+                      <button
+                        type="button"
+                        onClick={() => onLanguageChange(option.code)}
+                        className={`w-full rounded-lg px-3 py-2 text-left text-xs font-semibold ${
+                          option.code === language ? "bg-[var(--brand)] !text-white" : "text-[var(--text)] hover:bg-[var(--accent)]"
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="hidden flex-col text-right text-[0.76rem] leading-tight font-semibold lg:flex">
+                <a href={`tel:${siteData.contact.phone}`} className="text-[#4f5964] hover:text-[var(--text)]">
+                  {siteData.contact.phone}
+                </a>
+                <a href={`mailto:${siteData.contact.email}`} className="mt-1 text-[#4f5964] hover:text-[var(--text)]">
+                  {siteData.contact.email}
+                </a>
+              </div>
+            </div>
           </div>
-
-          <Link
-            href={siteData.secondaryCta.href}
-            className="rounded-full bg-[var(--brand)] px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
-          >
-            {siteData.secondaryCta.label}
-          </Link>
         </div>
       </div>
 
