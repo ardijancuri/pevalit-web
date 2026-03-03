@@ -20,7 +20,8 @@ export default function HomePage() {
     slug: product.slug,
     name: product.name,
     imageUrl: product.imageUrl,
-    categoryName: getCategoryNameBySlug(product.categorySlug)
+    categoryName: getCategoryNameBySlug(product.categorySlug),
+    categorySlug: product.categorySlug
   }));
 
   return (
