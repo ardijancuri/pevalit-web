@@ -45,7 +45,10 @@ export default function ProductsPage() {
                     <div className="p-4">
                       <h3 className="text-base font-semibold">{product.name}</h3>
                       <p className="mt-2 text-sm text-[var(--muted)]">{getProductSummary(product)}</p>
-                      <Link href={`/product/${product.slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                      <Link
+                        href={`/product/${product.slug}`}
+                        className="mt-3 inline-block rounded-full bg-[var(--brand)] px-3 py-1.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
+                      >
                         View product
                       </Link>
                     </div>
