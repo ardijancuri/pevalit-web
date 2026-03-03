@@ -24,7 +24,7 @@ export function SiteHeader() {
     }
     closeTimeoutRef.current = window.setTimeout(() => {
       setProductsMenuOpen(false);
-    }, 120);
+    }, 260);
   }
 
   function isActive(href: string) {
@@ -71,13 +71,13 @@ export function SiteHeader() {
                     {item.label}
                   </Link>
                   <div
-                    className={`absolute left-0 right-0 top-full border-y border-[var(--line)] bg-white shadow-xl transition ${
+                    className={`absolute left-0 right-0 top-[calc(100%-0.75rem)] border-y border-[var(--line)] bg-white shadow-xl transition ${
                       productsMenuOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
                     }`}
                     onMouseEnter={openProductsMenu}
                     onMouseLeave={closeProductsMenu}
                   >
-                    <div className="site-container py-4">
+                    <div className="site-container pt-6 pb-4">
                       <div className="grid grid-cols-5 gap-3">
                         {productsByCategory.slice(0, 10).map(({ category, products }) => (
                           <Link
