@@ -8,6 +8,7 @@ import { productsByCategory, siteData } from "@/lib/content";
 export function SiteHeader() {
   const pathname = usePathname();
   const [productsMenuOpen, setProductsMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
 
   function openProductsMenu() {
@@ -34,13 +35,25 @@ export function SiteHeader() {
     return pathname === href || pathname.startsWith(`${href}/`);
   }
 
+  function closeMobileMenu() {
+    setMobileMenuOpen(false);
+  }
+
   return (
     <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-white/90 backdrop-blur relative">
       <div className="site-container flex items-center justify-between py-4">
         <Link href="/" className="font-semibold tracking-wide">
           {siteData.companyName}
         </Link>
-        <nav aria-label="Main navigation">
+        <button
+          type="button"
+          aria-label="Open menu"
+          className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm font-semibold text-[var(--text)] md:hidden"
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          Menu
+        </button>
+        <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex flex-wrap gap-4 text-sm text-[var(--muted)]">
             {siteData.navigation.map((item) => {
               const baseClass = `rounded-full border px-3 py-1.5 transition ${
@@ -103,6 +116,66 @@ export function SiteHeader() {
           </ul>
         </nav>
       </div>
+
+      <div
+        className={`fixed inset-0 z-40 bg-black/40 transition md:hidden ${
+          mobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+        onClick={closeMobileMenu}
+      />
+      <aside
+        className={`fixed inset-y-0 right-0 z-50 w-[88vw] max-w-sm border-l border-[var(--line)] bg-[var(--surface)] p-5 shadow-2xl transition-transform md:hidden ${
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+        style={{ backgroundColor: "var(--surface)" }}
+      >
+        <div className="mb-5 flex items-center justify-between">
+          <p className="font-semibold">{siteData.companyName}</p>
+          <button
+            type="button"
+            aria-label="Close menu"
+            className="rounded-lg border border-[var(--line)] px-3 py-1.5 text-sm font-semibold"
+            onClick={closeMobileMenu}
+          >
+            Close
+          </button>
+        </div>
+
+        <ul className="space-y-2">
+          {siteData.navigation.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                onClick={closeMobileMenu}
+                className={`block rounded-lg border px-3 py-2 text-sm font-semibold ${
+                  isActive(item.href)
+                    ? "border-[var(--brand)] bg-[var(--brand)] !text-white"
+                    : "border-[var(--line)] text-[var(--text)]"
+                }`}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6">
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">Product Categories</p>
+          <ul className="mt-3 space-y-2">
+            {productsByCategory.slice(0, 10).map(({ category }) => (
+              <li key={category.slug}>
+                <Link
+                  href={`/products/${category.slug}`}
+                  onClick={closeMobileMenu}
+                  className="block rounded-lg border border-[var(--line)] px-3 py-2 text-sm text-[var(--text)]"
+                >
+                  {category.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
     </header>
   );
 }
