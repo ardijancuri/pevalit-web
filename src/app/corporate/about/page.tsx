@@ -15,7 +15,7 @@ export default function AboutPage() {
         <img
           src={corporate.about.heroImage}
           alt={corporate.about.title}
-          className="mx-auto w-full max-w-4xl rounded-2xl border border-[var(--line)] object-cover"
+          className="mx-auto w-full max-w-2xl rounded-2xl border border-[var(--line)] object-cover"
           loading="lazy"
         />
       </section>
