@@ -14,34 +14,36 @@ export default function CatalogsPage() {
     <>
       <PageIntro
         eyebrow="Catalogs"
-        title="Technical catalogs with quick preview and direct download."
-        description="Review portfolio documents without leaving the page, then download the latest PDF version."
+        title="Technical Catalogues, Ready To Download."
+        description="Open the latest PEVALIT catalogues and download PDF versions directly."
       />
-      <section className="site-container grid gap-6 pb-20 md:grid-cols-2">
-        {catalogs.map((catalog) => (
-          <article className="card overflow-hidden" key={catalog.slug}>
-            <div className="p-6">
-              <h2 className="text-xl font-semibold">{catalog.title}</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">{catalog.description}</p>
+      <section className="site-container pb-20">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {catalogs.map((catalog) => (
+            <article className="overflow-hidden rounded-2xl border border-[var(--line)] bg-white" key={catalog.slug}>
               <Image
                 src={catalog.previewImage}
                 alt={catalog.title}
                 width={700}
                 height={1000}
-                className="mt-4 aspect-[1/1.42] w-full rounded-xl border border-[var(--line)] object-cover"
+                className="aspect-[1/1.34] w-full border-b border-[var(--line)] object-cover"
                 loading="lazy"
               />
-              <TrackedLink
-                href={catalog.fileUrl}
-                className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
-                trackingLabel={`Download PDF - ${catalog.title}`}
-                trackingLocation="catalogs_grid"
-              >
-                Download PDF
-              </TrackedLink>
-            </div>
-          </article>
-        ))}
+              <div className="p-5">
+                <h2 className="text-xl font-semibold">{catalog.title}</h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">{catalog.description}</p>
+                <TrackedLink
+                  href={catalog.fileUrl}
+                  className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
+                  trackingLabel={`Download PDF - ${catalog.title}`}
+                  trackingLocation="catalogs_grid"
+                >
+                  Download PDF
+                </TrackedLink>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     </>
   );

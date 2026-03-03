@@ -191,7 +191,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
                     draggable={false}
                     priority={index === 0}
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[var(--text)]/45 via-transparent to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 bg-[var(--text)]/30" />
                 </div>
               </article>
             ))}

@@ -184,15 +184,35 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-white/90 backdrop-blur relative">
-      <div className="site-container flex items-center justify-between py-4">
+    <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-white relative">
+      <div className="border-b border-white/15 bg-[var(--text)] text-white">
+        <div className="site-container flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em]">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/90">
+            <a href={`tel:${siteData.contact.phone}`} className="hover:text-white">
+              {siteData.contact.phone}
+            </a>
+            <a href={`mailto:${siteData.contact.email}`} className="hover:text-white">
+              {siteData.contact.email}
+            </a>
+            <span className="text-white/75">{siteData.contact.address}</span>
+          </div>
+          <Link
+            href={siteData.secondaryCta.href}
+            className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[0.65rem] tracking-[0.1em] text-white transition hover:border-white hover:bg-white hover:!text-[var(--text)]"
+          >
+            {siteData.secondaryCta.label}
+          </Link>
+        </div>
+      </div>
+
+      <div className="site-container flex items-center justify-between py-3">
         <Link href="/" aria-label={siteData.companyName} className="inline-flex items-center">
           <Image
             src="/images/imported/logo.svg"
             alt={siteData.companyName}
             width={228}
             height={46}
-            className="h-8 w-auto"
+            className="h-9 w-auto"
           />
         </Link>
         <button
@@ -200,19 +220,19 @@ export function SiteHeader() {
           aria-label="Open menu"
           aria-controls="mobile-menu"
           aria-expanded={mobileMenuOpen}
-          className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm font-semibold text-[var(--text)] md:hidden"
+          className="rounded-lg border border-[var(--line)] bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text)] md:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
           {headerCopy.menu}
         </button>
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-4 md:flex">
           <nav aria-label="Main navigation">
             <ul className="flex flex-wrap gap-4 text-sm text-[var(--muted)]">
               {siteData.navigation.map((item) => {
-                const baseClass = `rounded-full border px-3 py-1.5 transition ${
+                const baseClass = `inline-flex border-b-2 px-0.5 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.1em] transition ${
                   isActive(item.href)
-                    ? "border-[var(--brand)] bg-[var(--brand)] !text-white"
-                    : "border-transparent text-[var(--muted)] hover:border-[var(--brand)] hover:text-[var(--brand)]"
+                    ? "border-[var(--brand)] text-[var(--text)]"
+                    : "border-transparent text-[var(--muted)] hover:border-[var(--brand)] hover:text-[var(--text)]"
                 }`;
                 const translatedLabel = headerCopy.nav[item.href] || item.label;
 
@@ -238,7 +258,7 @@ export function SiteHeader() {
                       {translatedLabel}
                     </Link>
                     <div
-                      className={`absolute left-0 right-0 top-[calc(100%-0.75rem)] border-y border-[var(--line)] bg-white shadow-xl transition ${
+                      className={`absolute left-0 right-0 top-full border-y border-[var(--line)] bg-white shadow-xl transition ${
                         productsMenuOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
                       }`}
                       onMouseEnter={openProductsMenu}
@@ -277,7 +297,7 @@ export function SiteHeader() {
               type="button"
               aria-label="Change language"
               aria-expanded={languageMenuOpen}
-              className="rounded-full border border-[var(--line)] bg-white px-3 py-1.5 text-xs font-semibold text-[var(--text)]"
+              className="rounded-full border border-[var(--line)] bg-white px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
               onClick={() => setLanguageMenuOpen((prev) => !prev)}
             >
               {selectedLanguage.short}
@@ -302,6 +322,13 @@ export function SiteHeader() {
               ))}
             </ul>
           </div>
+
+          <Link
+            href={siteData.secondaryCta.href}
+            className="rounded-full bg-[var(--brand)] px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
+          >
+            {siteData.secondaryCta.label}
+          </Link>
         </div>
       </div>
 
