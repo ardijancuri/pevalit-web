@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageIntro } from "@/components/page-intro";
 import { corporate } from "@/lib/content";
 
@@ -12,9 +13,11 @@ export default function AboutPage() {
     <>
       <PageIntro eyebrow="Corporate" title={corporate.about.title} description={corporate.about.intro} />
       <section className="site-container pb-6">
-        <img
+        <Image
           src={corporate.about.heroImage}
           alt={corporate.about.title}
+          width={1200}
+          height={700}
           className="mx-auto w-full max-w-2xl rounded-2xl border border-[var(--line)] object-cover"
           loading="lazy"
         />

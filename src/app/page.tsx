@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { categories, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
@@ -24,9 +25,11 @@ export default function HomePage() {
         <div className="grid gap-4 md:grid-cols-3">
           {categories.map((category) => (
             <Link className="card overflow-hidden p-0 hover:border-[var(--brand)]" key={category.slug} href={`/products/${category.slug}`}>
-              <img
+              <Image
                 src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : "/images/imported/Pevalit-Catalogue-DE.jpg"}
                 alt={category.name}
+                width={700}
+                height={700}
                 className="aspect-square w-full border-b border-[var(--line)] object-cover"
                 loading="lazy"
               />
@@ -48,9 +51,11 @@ export default function HomePage() {
           <div className="mt-5 grid gap-3 md:grid-cols-3">
             {products.slice(0, 3).map((product) => (
               <Link key={product.slug} href={`/product/${product.slug}`} className="rounded-xl border border-[var(--line)] p-0 hover:border-[var(--brand)]">
-                <img
+                <Image
                   src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
                   alt={product.name}
+                  width={700}
+                  height={700}
                   className="aspect-square w-full rounded-t-xl border-b border-[var(--line)] object-cover"
                   loading="lazy"
                 />
@@ -78,6 +83,47 @@ export default function HomePage() {
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">Fast Technical Response</p>
             <p className="mt-3 text-sm text-[var(--muted)]">Share your application and get a focused quote recommendation with relevant documentation.</p>
           </article>
+        </div>
+      </section>
+
+      <section className="site-container pb-8">
+        <div className="card grid gap-4 p-6 md:grid-cols-4">
+          <article>
+            <p className="text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>15+</p>
+            <p className="mt-1 text-sm text-[var(--muted)]">Years serving contractors and manufacturers</p>
+          </article>
+          <article>
+            <p className="text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>100+</p>
+            <p className="mt-1 text-sm text-[var(--muted)]">Product formulations across key categories</p>
+          </article>
+          <article>
+            <p className="text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>24h</p>
+            <p className="mt-1 text-sm text-[var(--muted)]">Typical first technical response time</p>
+          </article>
+          <article>
+            <p className="text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>EU</p>
+            <p className="mt-1 text-sm text-[var(--muted)]">Standards-driven quality and documentation</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="site-container pb-24">
+        <div className="rounded-2xl border border-[var(--line)] bg-[var(--text)] p-8 text-white">
+          <p className="text-xs uppercase tracking-[0.18em] text-[var(--brand)]">Technical + Commercial Support</p>
+          <h2 className="mt-3 max-w-2xl text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+            Send your formulation goal and get product recommendation with documents.
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm text-white/80">
+            Share substrate, climate, application method, and desired performance. Our team responds with suitable product options and next-step quote guidance.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/contact" className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--brand-strong)]">
+              Request Technical Quote
+            </Link>
+            <Link href="/catalogs" className="rounded-full border border-white/35 px-5 py-2.5 text-sm font-semibold text-white hover:border-white">
+              View Catalogs
+            </Link>
+          </div>
         </div>
       </section>
     </>

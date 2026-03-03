@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
@@ -42,8 +43,14 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-white/90 backdrop-blur relative">
       <div className="site-container flex items-center justify-between py-4">
-        <Link href="/" className="font-semibold tracking-wide">
-          {siteData.companyName}
+        <Link href="/" aria-label={siteData.companyName} className="inline-flex items-center">
+          <Image
+            src="/images/imported/logo.svg"
+            alt={siteData.companyName}
+            width={228}
+            height={46}
+            className="h-8 w-auto"
+          />
         </Link>
         <button
           type="button"
@@ -98,9 +105,11 @@ export function SiteHeader() {
                             href={`/products/${category.slug}`}
                             className="overflow-hidden rounded-xl border border-[var(--line)] hover:border-[var(--brand)]"
                           >
-                            <img
+                            <Image
                               src={products[0]?.imageUrl || category.heroImage || "/images/imported/Pevalit-Catalogue-DE.jpg"}
                               alt={category.name}
+                              width={600}
+                              height={600}
                               className="aspect-square w-full border-b border-[var(--line)] object-cover"
                               loading="lazy"
                             />
@@ -118,19 +127,24 @@ export function SiteHeader() {
       </div>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/65 transition md:hidden ${
+        className={`fixed inset-0 z-40 bg-black/40 transition md:hidden ${
           mobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
         onClick={closeMobileMenu}
       />
       <aside
-        className={`fixed inset-y-0 right-0 z-50 w-[88vw] max-w-sm border-l border-[var(--line)] bg-[#f2f5f4] p-5 shadow-2xl transition-transform md:hidden ${
+        className={`fixed inset-y-0 right-0 z-50 w-[88vw] max-w-sm border-l border-[var(--line)] bg-white p-5 shadow-2xl transition-transform md:hidden ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ backgroundColor: "#f2f5f4" }}
       >
         <div className="mb-5 flex items-center justify-between">
-          <p className="font-semibold">{siteData.companyName}</p>
+          <Image
+            src="/images/imported/logo.svg"
+            alt={siteData.companyName}
+            width={228}
+            height={46}
+            className="h-7 w-auto"
+          />
           <button
             type="button"
             aria-label="Close menu"

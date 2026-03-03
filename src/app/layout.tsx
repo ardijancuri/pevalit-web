@@ -18,18 +18,53 @@ const bodyFont = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pevalit.com"),
-  title: `${siteData.companyName} | Additives and Compounds`,
+  title: {
+    default: `${siteData.companyName} | Additives and Compounds`,
+    template: `%s | ${siteData.companyName}`
+  },
   description: siteData.description,
+  keywords: [
+    "polymer additives",
+    "construction chemistry",
+    "tile adhesive additives",
+    "drymix mortar",
+    "technical compounds",
+    "PEVALIT"
+  ],
+  authors: [{ name: siteData.companyName }],
+  creator: siteData.companyName,
+  publisher: siteData.companyName,
   alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true
+  },
+  icons: {
+    icon: "/images/imported/favicon-pevalit.png",
+    shortcut: "/images/imported/favicon-pevalit.png",
+    apple: "/images/imported/favicon-pevalit.png"
+  },
   openGraph: {
     title: `${siteData.companyName} | Additives and Compounds`,
     description: siteData.description,
-    type: "website"
+    type: "website",
+    url: "/",
+    siteName: siteData.companyName,
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/imported/Pevalit-Catalogue-EN.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${siteData.companyName} product catalog cover`
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteData.companyName} | Additives and Compounds`,
-    description: siteData.description
+    description: siteData.description,
+    images: ["/images/imported/Pevalit-Catalogue-EN.jpg"]
   }
 };
 

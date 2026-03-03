@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PageIntro } from "@/components/page-intro";
 import { getProductSummary, productsByCategory } from "@/lib/content";
 
@@ -36,9 +37,11 @@ export default function ProductsPage() {
               <div className="mt-5 grid gap-4 md:grid-cols-2">
                 {products.slice(0, 2).map((product) => (
                   <article className="overflow-hidden rounded-xl border border-[var(--line)]" key={product.slug}>
-                    <img
+                    <Image
                       src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
                       alt={product.name}
+                      width={700}
+                      height={700}
                       className="aspect-square w-full border-b border-[var(--line)] object-cover"
                       loading="lazy"
                     />

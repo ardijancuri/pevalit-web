@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { QuoteForm } from "@/components/quote-form";
 import { getCategoryNameBySlug, getProductBySlug, getProductSeoDescription, getProductSummary, products } from "@/lib/content";
@@ -68,9 +69,11 @@ export default async function ProductPage({ params }: Props) {
     <div className="site-container py-14">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <img
+      <Image
         src={heroImage}
         alt={product.name}
+        width={1200}
+        height={900}
         className="mx-auto mb-8 aspect-[4/3] w-full max-w-3xl rounded-2xl border border-[var(--line)] bg-white object-contain p-2"
       />
       <div className="max-w-3xl">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PageIntro } from "@/components/page-intro";
 import { catalogs } from "@/lib/content";
 
@@ -22,9 +23,11 @@ export default function CatalogsPage() {
             <div className="p-6">
               <h2 className="text-xl font-semibold">{catalog.title}</h2>
               <p className="mt-2 text-sm text-[var(--muted)]">{catalog.description}</p>
-              <img
+              <Image
                 src={catalog.previewImage}
                 alt={catalog.title}
+                width={700}
+                height={1000}
                 className="mt-4 aspect-[1/1.42] w-full rounded-xl border border-[var(--line)] object-cover"
                 loading="lazy"
               />

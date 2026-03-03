@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Category, Product } from "@/lib/types";
 
 type ProductFiltersProps = {
@@ -71,9 +72,11 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {filtered.map((product) => (
           <article className="card overflow-hidden p-0" key={product.slug}>
-            <img
+            <Image
               src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
               alt={product.name}
+              width={700}
+              height={700}
               className="aspect-square w-full border-b border-[var(--line)] object-cover"
               loading="lazy"
             />
