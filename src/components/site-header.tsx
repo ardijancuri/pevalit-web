@@ -126,15 +126,9 @@ export function SiteHeader() {
         </nav>
       </div>
 
-      <div
-        className={`fixed inset-0 z-40 bg-black/40 transition md:hidden ${
-          mobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"
-        }`}
-        onClick={closeMobileMenu}
-      />
       <aside
-        className={`fixed inset-y-0 right-0 z-50 w-[88vw] max-w-sm border-l border-[var(--line)] bg-white p-5 shadow-2xl transition-transform md:hidden ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed inset-0 z-50 h-dvh w-full overflow-y-auto bg-white p-5 shadow-2xl transition-all md:hidden ${
+          mobileMenuOpen ? "visible translate-y-0 opacity-100" : "invisible translate-y-4 opacity-0"
         }`}
       >
         <div className="mb-5 flex items-center justify-between">

@@ -66,21 +66,41 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
 
     setSubmitState({ status: "submitting", message: "Sending your request..." });
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(formData.entries()))
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(formData.entries()))
+      });
 
-    const payload = (await response.json()) as { message: string; requestId?: string };
-    if (response.ok) {
-      event.currentTarget.reset();
-      setCaptchaToken("");
-      setSubmitState({ status: "success", message: payload.message, requestId: payload.requestId });
-      return;
+      let payload: { message?: string; requestId?: string } = {};
+      try {
+        payload = (await response.json()) as { message?: string; requestId?: string };
+      } catch {
+        payload = {};
+      }
+
+      if (response.ok) {
+        event.currentTarget.reset();
+        setCaptchaToken("");
+        setSubmitState({
+          status: "success",
+          message: payload.message || "Thanks. Your request has been sent successfully.",
+          requestId: payload.requestId
+        });
+        return;
+      }
+
+      setSubmitState({
+        status: "error",
+        message: payload.message || "Unable to submit your request right now."
+      });
+    } catch {
+      setSubmitState({
+        status: "error",
+        message: "Network error. Please try again in a moment."
+      });
     }
-
-    setSubmitState({ status: "error", message: payload.message || "Unable to submit your request right now." });
   }
 
   return (
