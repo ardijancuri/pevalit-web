@@ -71,7 +71,7 @@ export default async function ProductPage({ params }: Props) {
       <img
         src={heroImage}
         alt={product.name}
-        className="mb-8 aspect-[4/3] w-full rounded-2xl border border-[var(--line)] bg-white object-contain p-2"
+        className="mx-auto mb-8 aspect-[4/3] w-full max-w-3xl rounded-2xl border border-[var(--line)] bg-white object-contain p-2"
       />
       <div className="max-w-3xl">
         <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">{product.categorySlug}</p>
