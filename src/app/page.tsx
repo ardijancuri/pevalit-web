@@ -11,7 +11,7 @@ export default function HomePage() {
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-[var(--muted)]">{siteData.description}</p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <Link className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--brand-strong)]" href={siteData.primaryCta.href}>
+          <Link className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]" href={siteData.primaryCta.href}>
             {siteData.primaryCta.label}
           </Link>
           <Link className="rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-sm font-semibold hover:border-[var(--brand)]" href={siteData.secondaryCta.href}>
@@ -33,7 +33,7 @@ export default function HomePage() {
               <div className="p-6">
                 <h2 className="text-xl font-semibold">{category.name}</h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
-                <span className="mt-4 inline-block rounded-full border border-[var(--brand)] px-4 py-1.5 text-sm font-semibold text-[var(--brand)]">
+                <span className="mt-4 inline-block rounded-full border border-[var(--brand)] bg-[var(--brand)] px-4 py-1.5 text-sm font-semibold !text-white">
                   Browse category
                 </span>
               </div>
