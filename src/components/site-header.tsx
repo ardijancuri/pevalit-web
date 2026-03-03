@@ -283,7 +283,7 @@ export function SiteHeader() {
               {selectedLanguage.short}
             </button>
             <ul
-              className={`absolute right-0 mt-2 min-w-[12rem] rounded-xl border border-[var(--line)] bg-white p-1 shadow-xl transition ${
+              className={`absolute left-1/2 mt-2 min-w-[12rem] -translate-x-1/2 rounded-xl border border-[var(--line)] bg-white p-1 shadow-xl transition ${
                 languageMenuOpen ? "visible opacity-100" : "invisible opacity-0"
               }`}
             >
