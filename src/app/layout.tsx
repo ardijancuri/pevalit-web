@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Manrope, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { siteData } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
@@ -15,6 +16,9 @@ const bodyFont = Manrope({
   subsets: ["latin"],
   variable: "--font-body"
 });
+
+const socialImage = "/images/og/pevalit-og.jpg";
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pevalit.com"),
@@ -53,10 +57,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/imported/Pevalit-Catalogue-EN.jpg",
+        url: socialImage,
         width: 1200,
         height: 630,
-        alt: `${siteData.companyName} product catalog cover`
+        alt: `${siteData.companyName} social cover`
       }
     ]
   },
@@ -64,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteData.companyName} | Additives and Compounds`,
     description: siteData.description,
-    images: ["/images/imported/Pevalit-Catalogue-EN.jpg"]
+    images: [socialImage]
   }
 };
 
@@ -85,6 +89,18 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en" className={`${headingFont.variable} ${bodyFont.variable}`}>
       <body suppressHydrationWarning style={{ fontFamily: "var(--font-body), sans-serif" }}>
+        {gaId ? <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" /> : null}
+        {gaId ? (
+          <Script id="ga-init" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('js', new Date());
+              gtag('config', '${gaId}', { anonymize_ip: true });
+            `}
+          </Script>
+        ) : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }} />
         <SiteHeader />
         <main>{children}</main>

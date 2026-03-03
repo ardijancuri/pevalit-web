@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { TrackedLink } from "@/components/tracked-link";
 import type { Category, Product } from "@/lib/types";
 
 type ProductFiltersProps = {
@@ -84,12 +84,14 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">{product.categorySlug}</p>
             <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
             <p className="mt-3 text-sm text-[var(--muted)]">{displaySummary(product)}</p>
-            <Link
+            <TrackedLink
               className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-medium !text-white hover:bg-[var(--brand-strong)]"
               href={`/product/${product.slug}`}
+              trackingLabel={`View Product - ${product.name}`}
+              trackingLocation="products_filters"
             >
               View Product
-            </Link>
+            </TrackedLink>
             </div>
           </article>
         ))}

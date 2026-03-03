@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import { TrackedLink } from "@/components/tracked-link";
 import { PageIntro } from "@/components/page-intro";
 import { getProductSummary, productsByCategory } from "@/lib/content";
 
@@ -25,12 +25,14 @@ export default function ProductsPage() {
                 <h2 className="text-2xl font-semibold">{category.name}</h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
               </div>
-              <Link
+              <TrackedLink
                 href={`/products/${category.slug}`}
                 className="rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
+                trackingLabel={`View All - ${category.name}`}
+                trackingLocation="products_category_card"
               >
-                View all
-              </Link>
+                View All
+              </TrackedLink>
             </div>
 
             {products.length ? (
@@ -48,12 +50,14 @@ export default function ProductsPage() {
                     <div className="p-4">
                       <h3 className="text-base font-semibold">{product.name}</h3>
                       <p className="mt-2 text-sm text-[var(--muted)]">{getProductSummary(product)}</p>
-                      <Link
+                      <TrackedLink
                         href={`/product/${product.slug}`}
                         className="mt-3 inline-block rounded-full bg-[var(--brand)] px-3 py-1.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
+                        trackingLabel={`View Product - ${product.name}`}
+                        trackingLocation="products_category_card"
                       >
-                        View product
-                      </Link>
+                        View Product
+                      </TrackedLink>
                     </div>
                   </article>
                 ))}

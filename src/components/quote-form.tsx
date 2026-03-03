@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { trackQuoteSubmit } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -83,6 +84,7 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
       if (response.ok) {
         event.currentTarget.reset();
         setCaptchaToken("");
+        trackQuoteSubmit("success", productSlug);
         setSubmitState({
           status: "success",
           message: payload.message || "Thanks. Your request has been sent successfully.",
@@ -95,11 +97,13 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
         status: "error",
         message: payload.message || "Unable to submit your request right now."
       });
+      trackQuoteSubmit("error", productSlug);
     } catch {
       setSubmitState({
         status: "error",
         message: "Network error. Please try again in a moment."
       });
+      trackQuoteSubmit("error", productSlug);
     }
   }
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { TrackedLink } from "@/components/tracked-link";
 import { categories, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
@@ -12,12 +13,22 @@ export default function HomePage() {
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-[var(--muted)]">{siteData.description}</p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <Link className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]" href={siteData.primaryCta.href}>
+          <TrackedLink
+            className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
+            href={siteData.primaryCta.href}
+            trackingLabel={siteData.primaryCta.label}
+            trackingLocation="home_hero"
+          >
             {siteData.primaryCta.label}
-          </Link>
-          <Link className="rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-sm font-semibold hover:border-[var(--brand)]" href={siteData.secondaryCta.href}>
+          </TrackedLink>
+          <TrackedLink
+            className="rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-sm font-semibold hover:border-[var(--brand)]"
+            href={siteData.secondaryCta.href}
+            trackingLabel={siteData.secondaryCta.label}
+            trackingLocation="home_hero"
+          >
             {siteData.secondaryCta.label}
-          </Link>
+          </TrackedLink>
         </div>
       </section>
 
@@ -117,12 +128,22 @@ export default function HomePage() {
             Share substrate, climate, application method, and desired performance. Our team responds with suitable product options and next-step quote guidance.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/contact" className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]">
+            <TrackedLink
+              href="/contact"
+              className="rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
+              trackingLabel="Request Technical Quote"
+              trackingLocation="home_conversion"
+            >
               Request Technical Quote
-            </Link>
-            <Link href="/catalogs" className="rounded-full border border-white/35 px-5 py-2.5 text-sm font-semibold text-white hover:border-white">
+            </TrackedLink>
+            <TrackedLink
+              href="/catalogs"
+              className="rounded-full border border-white/35 px-5 py-2.5 text-sm font-semibold text-white hover:border-white"
+              trackingLabel="View Catalogs"
+              trackingLocation="home_conversion"
+            >
               View Catalogs
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </section>

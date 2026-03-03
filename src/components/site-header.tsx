@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { productsByCategory, siteData } from "@/lib/content";
 
 export function SiteHeader() {
@@ -11,6 +11,7 @@ export function SiteHeader() {
   const [productsMenuOpen, setProductsMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
+  const mobileMenuRef = useRef<HTMLElement | null>(null);
 
   function openProductsMenu() {
     if (closeTimeoutRef.current) {
@@ -40,6 +41,51 @@ export function SiteHeader() {
     setMobileMenuOpen(false);
   }
 
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+    const focusable = mobileMenuRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    );
+    focusable?.[0]?.focus();
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeMobileMenu();
+        return;
+      }
+
+      if (event.key !== "Tab" || !focusable?.length) {
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const activeElement = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey && activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      }
+
+      if (!event.shiftKey && activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-white/90 backdrop-blur relative">
       <div className="site-container flex items-center justify-between py-4">
@@ -55,6 +101,8 @@ export function SiteHeader() {
         <button
           type="button"
           aria-label="Open menu"
+          aria-controls="mobile-menu"
+          aria-expanded={mobileMenuOpen}
           className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm font-semibold text-[var(--text)] md:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
@@ -127,8 +175,14 @@ export function SiteHeader() {
       </div>
 
       <aside
+        id="mobile-menu"
+        ref={mobileMenuRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        aria-hidden={!mobileMenuOpen}
         className={`fixed inset-0 z-50 h-dvh w-full overflow-y-auto bg-white p-5 shadow-2xl transition-all md:hidden ${
-          mobileMenuOpen ? "visible translate-y-0 opacity-100" : "invisible translate-y-4 opacity-0"
+          mobileMenuOpen ? "visible translate-y-0 opacity-100" : "invisible pointer-events-none translate-y-4 opacity-0"
         }`}
       >
         <div className="mb-5 flex items-center justify-between">

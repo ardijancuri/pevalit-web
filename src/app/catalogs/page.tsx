@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
+import { TrackedLink } from "@/components/tracked-link";
 import { PageIntro } from "@/components/page-intro";
 import { catalogs } from "@/lib/content";
 
@@ -31,12 +31,14 @@ export default function CatalogsPage() {
                 className="mt-4 aspect-[1/1.42] w-full rounded-xl border border-[var(--line)] object-cover"
                 loading="lazy"
               />
-              <Link
+              <TrackedLink
                 href={catalog.fileUrl}
                 className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)]"
+                trackingLabel={`Download PDF - ${catalog.title}`}
+                trackingLocation="catalogs_grid"
               >
                 Download PDF
-              </Link>
+              </TrackedLink>
             </div>
           </article>
         ))}
