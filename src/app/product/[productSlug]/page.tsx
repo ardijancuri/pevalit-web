@@ -68,7 +68,11 @@ export default async function ProductPage({ params }: Props) {
     <div className="site-container py-14">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <img src={heroImage} alt={product.name} className="mb-8 h-64 w-full rounded-2xl border border-[var(--line)] object-cover" />
+      <img
+        src={heroImage}
+        alt={product.name}
+        className="mb-8 aspect-[4/3] w-full rounded-2xl border border-[var(--line)] bg-white object-contain p-2"
+      />
       <div className="max-w-3xl">
         <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">{product.categorySlug}</p>
         <h1 className="mt-3 text-4xl leading-tight font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
