@@ -19,7 +19,11 @@ type HomeMiniProductSliderProps = {
 const FALLBACK_IMAGE = "/images/imported/Pevalit-Catalogue-DE.jpg";
 const AUTO_SCROLL_MS = 3000;
 
-function getMiniImageClass(categorySlug: string) {
+function getMiniImageClass(categorySlug: string, slug: string) {
+  if (slug === "384") {
+    return "object-cover object-[center_40%] scale-[0.88]";
+  }
+
   if (categorySlug === "eps-polystyrene-sheets") {
     return "object-contain p-2";
   }
@@ -160,7 +164,7 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
                   alt={product.name}
                   fill
                   sizes="220px"
-                  className={`pointer-events-none ${getMiniImageClass(product.categorySlug)}`}
+                  className={`pointer-events-none ${getMiniImageClass(product.categorySlug, product.slug)}`}
                   draggable={false}
                 />
               </div>
