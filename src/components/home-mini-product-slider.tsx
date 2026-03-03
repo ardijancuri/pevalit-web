@@ -40,6 +40,8 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
   const autoDirectionRef = useRef<1 | -1>(1);
   const activeIndexRef = useRef(0);
   const pointerIdRef = useRef<number | null>(null);
+  const dragRafRef = useRef<number | null>(null);
+  const pendingScrollLeftRef = useRef<number | null>(null);
   const startXRef = useRef(0);
   const startScrollLeftRef = useRef(0);
   const movedRef = useRef(false);
@@ -52,7 +54,8 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
     }
     const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
     const cards = Array.from(viewport.querySelectorAll<HTMLElement>("[data-mini-card='true']"));
-    return cards.map((card) => Math.min(card.offsetLeft, maxScrollLeft));
+    const targets = cards.map((card) => Math.min(card.offsetLeft, maxScrollLeft));
+    return Array.from(new Set(targets.map((value) => Math.round(value)))).sort((a, b) => a - b);
   }, []);
 
   const scrollToCard = useCallback((index: number, behavior: ScrollBehavior) => {
@@ -71,6 +74,22 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
     viewport.scrollTo({ left: targets[safeIndex], behavior });
     return true;
   }, [getCardTargets]);
+
+  const flushPendingDragScroll = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (viewport && pendingScrollLeftRef.current !== null) {
+      viewport.scrollLeft = pendingScrollLeftRef.current;
+    }
+    dragRafRef.current = null;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (dragRafRef.current !== null) {
+        window.cancelAnimationFrame(dragRafRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     autoDirectionRef.current = 1;
@@ -141,7 +160,10 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
     if (Math.abs(deltaX) > 5) {
       movedRef.current = true;
     }
-    viewport.scrollLeft = startScrollLeftRef.current - deltaX;
+    pendingScrollLeftRef.current = startScrollLeftRef.current - deltaX;
+    if (dragRafRef.current === null) {
+      dragRafRef.current = window.requestAnimationFrame(flushPendingDragScroll);
+    }
   };
 
   const stopDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -155,6 +177,14 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
 
     pointerIdRef.current = null;
     setIsDragging(false);
+    if (dragRafRef.current !== null) {
+      window.cancelAnimationFrame(dragRafRef.current);
+      dragRafRef.current = null;
+    }
+    if (pendingScrollLeftRef.current !== null) {
+      viewportRef.current?.scrollTo({ left: pendingScrollLeftRef.current, behavior: "auto" });
+      pendingScrollLeftRef.current = null;
+    }
 
     const viewport = viewportRef.current;
     if (!viewport) {
@@ -189,12 +219,13 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
 
         <div
           ref={viewportRef}
-          className={`flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-            isDragging ? "cursor-grabbing" : "cursor-grab"
+          className={`flex touch-pan-y select-none gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+            isDragging ? "snap-none cursor-grabbing" : "snap-x snap-mandatory scroll-smooth cursor-grab"
           }`}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={stopDrag}
+          onPointerLeave={stopDrag}
           onPointerCancel={stopDrag}
           onDragStart={(event) => event.preventDefault()}
           onClickCapture={(event) => {
@@ -210,14 +241,14 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
               key={product.slug}
               href={`/product/${product.slug}`}
               data-mini-card="true"
-              className="group shrink-0 min-w-[185px] max-w-[185px] overflow-hidden rounded-xl border border-[var(--line)] bg-white sm:min-w-[220px] sm:max-w-[220px]"
+              className="group shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] overflow-hidden rounded-xl border border-[var(--line)] bg-white sm:basis-[calc((100%-2.25rem)/4)]"
             >
               <div className="relative h-28 overflow-hidden border-b border-[var(--line)] bg-[#f7f8f8] sm:h-32">
                 <Image
                   src={product.imageUrl || FALLBACK_IMAGE}
                   alt={product.name}
                   fill
-                  sizes="220px"
+                  sizes="(min-width: 640px) 24vw, 48vw"
                   className={`pointer-events-none ${getMiniImageClass(product.categorySlug, product.slug)}`}
                   draggable={false}
                 />
