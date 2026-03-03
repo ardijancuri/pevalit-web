@@ -146,7 +146,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
   };
 
   return (
-    <section className="pt-8 pb-2">
+    <section className="pt-6 pb-1">
       <div
         className={`mx-auto w-[min(1400px,calc(100%-1.25rem))] touch-pan-y select-none overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] sm:w-[min(1400px,calc(100%-2rem))] ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
@@ -164,14 +164,14 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
           <div className="flex will-change-transform" style={trackStyle}>
             {products.map((product, index) => (
               <article key={product.slug} className="grid min-w-full lg:grid-cols-12">
-                <div className="order-2 bg-[var(--text)] px-6 py-7 text-white lg:order-1 lg:col-span-5 lg:px-8 lg:py-9">
+                <div className="order-2 bg-[var(--text)] px-5 py-6 text-white lg:order-1 lg:col-span-5 lg:px-7 lg:py-7">
                   <p className="text-xs uppercase tracking-[0.18em] text-[var(--brand)]">Featured Products</p>
-                  <h2 className="mt-3 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+                  <h2 className="mt-3 text-2xl font-semibold lg:text-3xl" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
                     {product.name}
                   </h2>
                   <p className="mt-3 text-sm text-white/80">{product.summary}</p>
 
-                  <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+                  <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
                     {getSlideMetrics(product).map((metric) => (
                       <article key={metric.label} className="rounded-lg border border-white/20 bg-white/8 p-2.5">
                         <p className="text-[0.65rem] uppercase tracking-[0.14em] text-[var(--brand)]">{metric.label}</p>
@@ -181,7 +181,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
                   </div>
                 </div>
 
-                <div className="relative order-1 min-h-[320px] lg:order-2 lg:col-span-7 lg:min-h-[520px]">
+                <div className="relative order-1 min-h-[260px] lg:order-2 lg:col-span-7 lg:min-h-[440px]">
                   <Image
                     src={product.imageUrl || FALLBACK_IMAGE}
                     alt={product.name}
@@ -198,7 +198,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 border-t border-[var(--line)] bg-[var(--surface)] px-5 py-4 sm:px-7">
+        <div className="flex flex-wrap items-center gap-2 border-t border-[var(--line)] bg-[var(--surface)] px-5 py-3 sm:px-7">
           <button
             type="button"
             aria-label="Previous product"
