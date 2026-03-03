@@ -16,10 +16,11 @@ type HomeMiniProductSliderProps = {
 };
 
 const FALLBACK_IMAGE = "/images/imported/Pevalit-Catalogue-DE.jpg";
-const AUTO_SCROLL_MS = 3200;
+const AUTO_SCROLL_MS = 3000;
 
 export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) {
   const viewportRef = useRef<HTMLDivElement | null>(null);
+  const autoDirectionRef = useRef<1 | -1>(1);
   const pointerIdRef = useRef<number | null>(null);
   const startXRef = useRef(0);
   const startScrollLeftRef = useRef(0);
@@ -36,12 +37,29 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
       const firstCard = viewport.querySelector<HTMLElement>("[data-mini-card='true']");
       const step = (firstCard?.offsetWidth ?? 220) + 12;
       const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
-      const nextScrollLeft = viewport.scrollLeft + step;
+      if (maxScrollLeft <= 0) {
+        return;
+      }
 
-      viewport.scrollTo({
-        left: nextScrollLeft >= maxScrollLeft - 4 ? 0 : nextScrollLeft,
-        behavior: "smooth"
-      });
+      const current = viewport.scrollLeft;
+
+      if (autoDirectionRef.current === 1) {
+        if (current >= maxScrollLeft - 4) {
+          autoDirectionRef.current = -1;
+          viewport.scrollTo({ left: Math.max(0, maxScrollLeft - step), behavior: "smooth" });
+          return;
+        }
+        viewport.scrollTo({ left: Math.min(maxScrollLeft, current + step), behavior: "smooth" });
+        return;
+      }
+
+      if (current <= 4) {
+        autoDirectionRef.current = 1;
+        viewport.scrollTo({ left: Math.min(maxScrollLeft, step), behavior: "smooth" });
+        return;
+      }
+
+      viewport.scrollTo({ left: Math.max(0, current - step), behavior: "smooth" });
     }, AUTO_SCROLL_MS);
 
     return () => window.clearInterval(intervalId);
