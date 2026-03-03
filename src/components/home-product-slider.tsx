@@ -146,9 +146,9 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
   };
 
   return (
-    <section className="pt-6 pb-1">
+    <section className="site-container pt-6 pb-1">
       <div
-        className={`mx-auto w-[min(1400px,calc(100%-1.25rem))] touch-pan-y select-none overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] sm:w-[min(1400px,calc(100%-2rem))] ${
+        className={`w-full touch-pan-y select-none overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         onPointerDown={handlePointerDown}
@@ -205,7 +205,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
             onClick={() => setActiveIndex((current) => (current - 1 + products.length) % products.length)}
             className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)] hover:border-[var(--brand)]"
           >
-            Prev
+            &larr;
           </button>
           <button
             type="button"
@@ -213,7 +213,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
             onClick={() => setActiveIndex((current) => (current + 1) % products.length)}
             className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)] hover:border-[var(--brand)]"
           >
-            Next
+            &rarr;
           </button>
           <div className="flex flex-wrap gap-1.5 sm:ml-2">
             {products.map((product, index) => (

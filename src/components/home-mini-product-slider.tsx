@@ -52,10 +52,27 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
     if (!viewport) {
       return [];
     }
-    const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+
     const cards = Array.from(viewport.querySelectorAll<HTMLElement>("[data-mini-card='true']"));
-    const targets = cards.map((card) => Math.min(card.offsetLeft, maxScrollLeft));
-    return Array.from(new Set(targets.map((value) => Math.round(value)))).sort((a, b) => a - b);
+    if (cards.length === 0) {
+      return [];
+    }
+
+    const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+    if (cards.length === 1) {
+      return [0];
+    }
+
+    // Keep snap stops aligned to full visible groups: 4 cards on >=sm, 2 cards on mobile.
+    const visibleCount = Math.min(cards.length, viewport.clientWidth >= 640 ? 4 : 2);
+    const maxStartIndex = Math.max(0, cards.length - visibleCount);
+
+    const targets: number[] = [];
+    for (let index = 0; index <= maxStartIndex; index += 1) {
+      targets.push(Math.min(Math.round(cards[index].offsetLeft), Math.round(maxScrollLeft)));
+    }
+
+    return Array.from(new Set(targets));
   }, []);
 
   const scrollToCard = useCallback((index: number, behavior: ScrollBehavior) => {
