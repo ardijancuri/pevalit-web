@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
-import { catalogs, corporate, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
+import { catalogs, categories, corporate, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
   const about = corporate.about;
@@ -185,7 +185,7 @@ export default function HomePage() {
               alt="PEVALIT factory and operations"
               width={1100}
               height={900}
-              className="h-full min-h-[320px] w-full object-cover"
+              className="h-full min-h-[320px] w-full scale-[1.015] object-cover"
               loading="lazy"
             />
           </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
             </TrackedLink>
           </div>
 
-          <div className="grid gap-3 grid-cols-1">
+          <div className="grid gap-3 md:grid-cols-3">
             {highlightedCatalogs.map((catalog) => (
               <article key={catalog.slug} className="overflow-hidden rounded-xl border border-[var(--line)] bg-white">
                 <Image
