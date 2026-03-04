@@ -139,7 +139,7 @@ export default function HomePage() {
             </TrackedLink>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-3">
+          <div className="grid gap-3 grid-cols-1">
             {highlightedCatalogs.map((catalog) => (
               <article key={catalog.slug} className="overflow-hidden rounded-xl border border-[var(--line)] bg-white">
                 <Image
