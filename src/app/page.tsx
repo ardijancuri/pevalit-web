@@ -1,11 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
-import { catalogs, categories, corporate, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
+import { HeroProductSlider } from "@/components/hero-product-slider";
+import { catalogs, corporate, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
   const about = corporate.about;
   const highlightedCatalogs = catalogs.slice(0, 3);
+  const solutionProducts = products.map((product) => ({
+    slug: product.slug,
+    name: product.name,
+    categoryName: getCategoryNameBySlug(product.categorySlug),
+    summary: getProductSummary(product),
+    imageUrl: product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"
+  }));
   const highlightedProducts = products.slice(0, 4);
   const reasons = [
     "Certified systems aligned with EN 12004 and ETAG 004.",
@@ -83,15 +91,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-container pb-14">
+      <section className="site-container pt-12 pb-14">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
             <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-              Find Products by Category
+              Explore Core Product Solutions
             </h2>
             <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-              Browse categories to quickly find the right product family, with direct access to full product lists, technical specs, and documentation.
+              Drag with click-and-hold to browse key product options quickly, then open any item for full specs and documentation.
             </p>
           </div>
           <TrackedLink
@@ -104,81 +112,15 @@ export default function HomePage() {
           </TrackedLink>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-4">
-          {categories.map((category) => (
-            <Link
-              className="group card flex h-full flex-col overflow-hidden p-0 transition hover:-translate-y-0.5 hover:border-[var(--brand)]"
-              key={category.slug}
-              href={`/products/${category.slug}`}
-            >
-              <Image
-                src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : "/images/imported/Pevalit-Catalogue-DE.jpg"}
-                alt={category.name}
-                width={700}
-                height={700}
-                className="aspect-square w-full border-b border-[var(--line)] object-cover"
-                loading="lazy"
-              />
-              <div className="flex h-full flex-col p-5">
-                <h2
-                  className="mb-3 min-h-[3.25rem] text-lg leading-snug font-semibold"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden"
-                  }}
-                >
-                  {category.name}
-                </h2>
-                <span className="mt-auto self-start rounded-full border border-[var(--brand)] bg-[var(--brand)] px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] !text-white">
-                  Browse Category
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <HeroProductSlider
+          products={solutionProducts}
+          label={null}
+          className="mt-2"
+          ariaLabel="Solutions portfolio slider"
+        />
       </section>
 
       <section className="site-container py-14">
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-          <div className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.19em] text-[var(--brand)]">About Us</p>
-            <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-              Built On A Proven Industry Story
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{about.intro}</p>
-            <div className="mt-5 space-y-2">
-              {about.sections.slice(0, 3).map((section) => (
-                <p key={section.heading} className="text-sm text-[var(--text)]">
-                  <span className="font-semibold">{section.heading}:</span> {section.body}
-                </p>
-              ))}
-            </div>
-            <TrackedLink
-              href="/corporate/about"
-              className="mt-5 inline-block rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
-              trackingLabel="Read More About Us"
-              trackingLocation="home_about"
-            >
-              Read More
-            </TrackedLink>
-          </div>
-
-          <div className="overflow-hidden">
-            <Image
-              src={about.heroImage}
-              alt="PEVALIT factory and operations"
-              width={1100}
-              height={900}
-              className="h-full min-h-[320px] w-full scale-[1.015] object-cover"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="site-container pb-14">
         <div className="rounded-2xl border border-[var(--line)] bg-white p-6 md:p-7">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -225,6 +167,44 @@ export default function HomePage() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="site-container pb-14">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <div className="max-w-4xl">
+            <p className="text-xs uppercase tracking-[0.19em] text-[var(--brand)]">About Us</p>
+            <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+              Built On A Proven Industry Story
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{about.intro}</p>
+            <div className="mt-5 space-y-2">
+              {about.sections.slice(0, 3).map((section) => (
+                <p key={section.heading} className="text-sm text-[var(--text)]">
+                  <span className="font-semibold">{section.heading}:</span> {section.body}
+                </p>
+              ))}
+            </div>
+            <TrackedLink
+              href="/corporate/about"
+              className="mt-5 inline-block rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
+              trackingLabel="Read More About Us"
+              trackingLocation="home_about"
+            >
+              Read More
+            </TrackedLink>
+          </div>
+
+          <div className="overflow-hidden">
+            <Image
+              src={about.heroImage}
+              alt="PEVALIT factory and operations"
+              width={1100}
+              height={900}
+              className="h-full min-h-[320px] w-full scale-[1.015] object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
