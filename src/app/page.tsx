@@ -13,20 +13,6 @@ export default function HomePage() {
     "Fast technical guidance for specification and application.",
     "Regional and export coverage with practical support."
   ];
-  const qualityFocusAreas = [
-    {
-      title: "Surface Heating",
-      items: ["Flat and pitched roof terraces", "Attics", "Acoustic ceiling systems"]
-    },
-    {
-      title: "Thermal Insulation",
-      items: ["Wall heating systems", "Partition walls", "Underfloor heating", "Floors and mezzanine structures"]
-    },
-    {
-      title: "Waterproofing",
-      items: ["Facade layers", "Walls in contact with soil", "Foundations and base plates"]
-    }
-  ];
   const insulationFaqs = [
     {
       question: "Fire performance: what matters in practice?",
@@ -285,52 +271,6 @@ export default function HomePage() {
                 </div>
               </details>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-[linear-gradient(102deg,#1f63ac_0%,#18a8d8_100%)] py-16 text-white">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_12%,rgba(255,255,255,0.18),transparent_46%)]" />
-        <div className="site-container relative">
-          <div className="grid gap-7 lg:grid-cols-[0.95fr_1.05fr]">
-            <div>
-              <h2 className="max-w-xl text-4xl leading-tight font-semibold md:text-5xl" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-                Products of recognizable quality.
-              </h2>
-              <div className="mt-4 flex items-center gap-2">
-                <span className="text-[var(--brand)]">...</span>
-                <span className="h-1 w-24 rounded-full bg-[var(--brand)]" />
-              </div>
-            </div>
-            <p className="max-w-3xl text-base leading-relaxed text-white/90">
-              Our systems support thermal insulation, waterproofing, and underfloor heating applications with dependable material quality and practical installation performance for construction teams and project planners.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-            <div className="mx-auto w-full max-w-[850px]">
-              <Image
-                src="/images/imported/catalog-insulation-scene.jpeg"
-                alt="PEVALIT catalog construction insulation visual"
-                width={681}
-                height={353}
-                className="h-[420px] w-full rounded-2xl object-cover object-center shadow-[0_26px_36px_rgba(7,36,67,0.35)]"
-                loading="lazy"
-              />
-            </div>
-
-            <div className="space-y-5">
-              {qualityFocusAreas.map((focus) => (
-                <div key={focus.title}>
-                  <h3 className="text-4xl font-semibold">{focus.title}:</h3>
-                  <ul className="mt-2 space-y-1.5 pl-5 text-2xl text-white/92">
-                    {focus.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
