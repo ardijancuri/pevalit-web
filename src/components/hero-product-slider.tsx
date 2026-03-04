@@ -20,42 +20,38 @@ type HeroProductSliderProps = {
 };
 
 const AUTO_SCROLL_MS = 3000;
-const AUTO_SCROLL_SETTLE_MS = 650;
-
 export function HeroProductSlider({ products, label = "Featured Products", className = "mt-6", ariaLabel = "Featured products slider" }: HeroProductSliderProps) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const dragStartXRef = useRef(0);
   const dragStartScrollRef = useRef(0);
   const nextScrollLeftRef = useRef(0);
+  const activePointerIdRef = useRef<number | null>(null);
   const currentTargetIndexRef = useRef(0);
   const autoDirectionRef = useRef<1 | -1>(1);
-  const isAutoAnimatingRef = useRef(false);
   const dragRafRef = useRef<number | null>(null);
   const isDraggingRef = useRef(false);
+  const autoPauseUntilRef = useRef(0);
   const movedDuringDragRef = useRef(false);
   const suppressClickRef = useRef(false);
   const clearSuppressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const clearAutoAnimatingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
     if (!trackRef.current) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
-
-    if (clearAutoAnimatingTimeoutRef.current) {
-      clearTimeout(clearAutoAnimatingTimeoutRef.current);
-      clearAutoAnimatingTimeoutRef.current = null;
-    }
-    isAutoAnimatingRef.current = false;
+    activePointerIdRef.current = event.pointerId;
     isDraggingRef.current = true;
+    autoPauseUntilRef.current = Date.now() + AUTO_SCROLL_MS;
     movedDuringDragRef.current = false;
     dragStartXRef.current = event.clientX;
     dragStartScrollRef.current = trackRef.current.scrollLeft;
     nextScrollLeftRef.current = dragStartScrollRef.current;
+    trackRef.current.style.scrollBehavior = "auto";
+    trackRef.current.style.scrollSnapType = "none";
     trackRef.current.setPointerCapture(event.pointerId);
   }
 
   function onPointerMove(event: React.PointerEvent<HTMLDivElement>) {
-    if (!isDraggingRef.current || !trackRef.current) return;
+    if (!isDraggingRef.current || !trackRef.current || activePointerIdRef.current !== event.pointerId) return;
 
     const deltaX = event.clientX - dragStartXRef.current;
     if (Math.abs(deltaX) > 4) {
@@ -76,12 +72,15 @@ export function HeroProductSlider({ products, label = "Featured Products", class
   }
 
   function onPointerEnd(event: React.PointerEvent<HTMLDivElement>) {
-    if (!trackRef.current || !isDraggingRef.current) return;
+    if (!trackRef.current || !isDraggingRef.current || activePointerIdRef.current !== event.pointerId) return;
 
     isDraggingRef.current = false;
+    activePointerIdRef.current = null;
     if (trackRef.current.hasPointerCapture(event.pointerId)) {
       trackRef.current.releasePointerCapture(event.pointerId);
     }
+    trackRef.current.style.scrollBehavior = "auto";
+    trackRef.current.style.scrollSnapType = "none";
 
     if (dragRafRef.current !== null) {
       window.cancelAnimationFrame(dragRafRef.current);
@@ -104,7 +103,8 @@ export function HeroProductSlider({ products, label = "Featured Products", class
       return;
     }
     currentTargetIndexRef.current = getNearestTargetIndex(trackRef.current.scrollLeft, targets);
-    trackRef.current.scrollTo({ left: targets[currentTargetIndexRef.current], behavior: "smooth" });
+    trackRef.current.scrollTo({ left: targets[currentTargetIndexRef.current], behavior: "auto" });
+    autoPauseUntilRef.current = Date.now() + AUTO_SCROLL_MS;
   }
 
   function onTrackClickCapture(event: React.MouseEvent<HTMLDivElement>) {
@@ -143,6 +143,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
     currentTargetIndexRef.current = 0;
     autoDirectionRef.current = 1;
     if (trackRef.current) {
+      trackRef.current.style.scrollSnapType = "none";
       trackRef.current.scrollTo({ left: 0, behavior: "auto" });
     }
   }, [products.length]);
@@ -153,7 +154,10 @@ export function HeroProductSlider({ products, label = "Featured Products", class
     }
 
     const intervalId = window.setInterval(() => {
-      if (!trackRef.current || isDraggingRef.current || isAutoAnimatingRef.current) {
+      if (!trackRef.current || isDraggingRef.current) {
+        return;
+      }
+      if (Date.now() < autoPauseUntilRef.current) {
         return;
       }
 
@@ -174,15 +178,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
 
       nextIndex = Math.max(0, Math.min(lastIndex, nextIndex + autoDirectionRef.current));
       currentTargetIndexRef.current = nextIndex;
-      isAutoAnimatingRef.current = true;
       track.scrollTo({ left: targets[nextIndex], behavior: "smooth" });
-
-      if (clearAutoAnimatingTimeoutRef.current) {
-        clearTimeout(clearAutoAnimatingTimeoutRef.current);
-      }
-      clearAutoAnimatingTimeoutRef.current = setTimeout(() => {
-        isAutoAnimatingRef.current = false;
-      }, AUTO_SCROLL_SETTLE_MS);
     }, AUTO_SCROLL_MS);
 
     return () => window.clearInterval(intervalId);
@@ -192,9 +188,6 @@ export function HeroProductSlider({ products, label = "Featured Products", class
     return () => {
       if (clearSuppressTimeoutRef.current) {
         clearTimeout(clearSuppressTimeoutRef.current);
-      }
-      if (clearAutoAnimatingTimeoutRef.current) {
-        clearTimeout(clearAutoAnimatingTimeoutRef.current);
       }
       if (dragRafRef.current !== null) {
         window.cancelAnimationFrame(dragRafRef.current);
@@ -212,12 +205,13 @@ export function HeroProductSlider({ products, label = "Featured Products", class
 
       <div
         ref={trackRef}
-        className="flex gap-3 overflow-x-auto pb-2 select-none touch-pan-y cursor-grab active:cursor-grabbing scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="flex gap-3 lg:gap-[5px] overflow-x-auto px-[1px] pb-2 select-none touch-pan-y cursor-grab active:cursor-grabbing scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         aria-label={ariaLabel}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerEnd}
         onPointerCancel={onPointerEnd}
+        onDragStart={(event) => event.preventDefault()}
         onClickCapture={onTrackClickCapture}
       >
         {products.map((product) => (

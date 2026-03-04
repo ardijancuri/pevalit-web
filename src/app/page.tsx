@@ -1,19 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
-import { HeroProductSlider } from "@/components/hero-product-slider";
-import { catalogs, corporate, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
+import { HomeCategorySlider } from "@/components/home-category-slider";
+import { catalogs, categories, corporate, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
   const about = corporate.about;
   const highlightedCatalogs = catalogs.slice(0, 3);
-  const solutionProducts = products.map((product) => ({
-    slug: product.slug,
-    name: product.name,
-    categoryName: getCategoryNameBySlug(product.categorySlug),
-    summary: getProductSummary(product),
-    imageUrl: product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"
-  }));
   const highlightedProducts = products.slice(0, 4);
   const reasons = [
     "Certified systems aligned with EN 12004 and ETAG 004.",
@@ -96,10 +89,10 @@ export default function HomePage() {
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
             <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-              Explore Core Product Solutions
+              Find Products by Category
             </h2>
             <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-              Drag with click-and-hold to browse key product options quickly, then open any item for full specs and documentation.
+              Browse categories automatically or use left and right controls to move through the full category range.
             </p>
           </div>
           <TrackedLink
@@ -112,11 +105,10 @@ export default function HomePage() {
           </TrackedLink>
         </div>
 
-        <HeroProductSlider
-          products={solutionProducts}
-          label={null}
-          className="mt-2 ml-auto w-full max-w-[1542px]"
-          ariaLabel="Solutions portfolio slider"
+        <HomeCategorySlider
+          categories={categories}
+          className="mt-2 ml-auto w-full max-w-[1500px]"
+          ariaLabel="Solutions portfolio category slider"
         />
       </section>
 
