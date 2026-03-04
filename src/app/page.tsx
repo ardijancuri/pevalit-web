@@ -1,19 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { HeroProductSlider } from "@/components/hero-product-slider";
 import { TrackedLink } from "@/components/tracked-link";
 import { catalogs, categories, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
   const highlightedCatalogs = catalogs.slice(0, 3);
   const highlightedProducts = products.slice(0, 4);
-  const heroProducts = products.slice(0, 10).map((product) => ({
-    slug: product.slug,
-    name: product.name,
-    categoryName: getCategoryNameBySlug(product.categorySlug),
-    summary: getProductSummary(product),
-    imageUrl: product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"
-  }));
   const reasons = [
     "Certified systems aligned with EN 12004 and ETAG 004.",
     "Consistent quality control with stable production methods.",
@@ -65,8 +57,63 @@ export default function HomePage() {
               />
             </div>
           </div>
+        </div>
+      </section>
 
-          <HeroProductSlider products={heroProducts} />
+      <section className="site-container pb-14">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
+            <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+              Find Products by Category
+            </h2>
+            <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
+              Browse categories to quickly find the right product family, with direct access to full product lists, technical specs, and documentation.
+            </p>
+          </div>
+          <TrackedLink
+            href="/products"
+            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.09em] hover:border-[var(--brand)]"
+            trackingLabel="View all products"
+            trackingLocation="home_categories"
+          >
+            View all products
+          </TrackedLink>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-4">
+          {categories.map((category) => (
+            <Link
+              className="group card flex h-full flex-col overflow-hidden p-0 transition hover:-translate-y-0.5 hover:border-[var(--brand)]"
+              key={category.slug}
+              href={`/products/${category.slug}`}
+            >
+              <Image
+                src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : "/images/imported/Pevalit-Catalogue-DE.jpg"}
+                alt={category.name}
+                width={700}
+                height={700}
+                className="aspect-square w-full border-b border-[var(--line)] object-cover"
+                loading="lazy"
+              />
+              <div className="flex h-full flex-col p-5">
+                <h2
+                  className="mb-3 min-h-[3.25rem] text-lg leading-snug font-semibold"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden"
+                  }}
+                >
+                  {category.name}
+                </h2>
+                <span className="mt-auto self-start rounded-full border border-[var(--brand)] bg-[var(--brand)] px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] !text-white">
+                  Browse Category
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -118,54 +165,6 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="site-container pb-14">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
-            <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-              Find Products by Category
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-              Browse categories to quickly find the right product family, with direct access to full product lists, technical specs, and documentation.
-            </p>
-          </div>
-          <TrackedLink
-            href="/products"
-            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.09em] hover:border-[var(--brand)]"
-            trackingLabel="View all products"
-            trackingLocation="home_categories"
-          >
-            View all products
-          </TrackedLink>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-4">
-          {categories.map((category) => (
-            <Link
-              className="group card overflow-hidden p-0 transition hover:-translate-y-0.5 hover:border-[var(--brand)]"
-              key={category.slug}
-              href={`/products/${category.slug}`}
-            >
-              <Image
-                src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : "/images/imported/Pevalit-Catalogue-DE.jpg"}
-                alt={category.name}
-                width={700}
-                height={700}
-                className="aspect-square w-full border-b border-[var(--line)] object-cover"
-                loading="lazy"
-              />
-              <div className="p-5">
-                <h2 className="text-lg font-semibold">{category.name}</h2>
-                <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
-                <span className="mt-4 inline-block rounded-full border border-[var(--brand)] bg-[var(--brand)] px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] !text-white">
-                  Browse Category
-                </span>
-              </div>
-            </Link>
-          ))}
         </div>
       </section>
 
