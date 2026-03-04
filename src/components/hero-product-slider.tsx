@@ -20,25 +20,32 @@ type HeroProductSliderProps = {
 };
 
 const AUTO_SCROLL_MS = 3000;
+const AUTO_SCROLL_SETTLE_MS = 650;
 
 export function HeroProductSlider({ products, label = "Featured Products", className = "mt-6", ariaLabel = "Featured products slider" }: HeroProductSliderProps) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const dragStartXRef = useRef(0);
   const dragStartScrollRef = useRef(0);
   const nextScrollLeftRef = useRef(0);
+  const currentTargetIndexRef = useRef(0);
   const autoDirectionRef = useRef<1 | -1>(1);
+  const isAutoAnimatingRef = useRef(false);
   const dragRafRef = useRef<number | null>(null);
   const isDraggingRef = useRef(false);
   const movedDuringDragRef = useRef(false);
   const suppressClickRef = useRef(false);
   const clearSuppressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clearAutoAnimatingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
     if (!trackRef.current) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
 
-    trackRef.current.style.scrollSnapType = "none";
-    trackRef.current.style.scrollBehavior = "auto";
+    if (clearAutoAnimatingTimeoutRef.current) {
+      clearTimeout(clearAutoAnimatingTimeoutRef.current);
+      clearAutoAnimatingTimeoutRef.current = null;
+    }
+    isAutoAnimatingRef.current = false;
     isDraggingRef.current = true;
     movedDuringDragRef.current = false;
     dragStartXRef.current = event.clientX;
@@ -72,9 +79,9 @@ export function HeroProductSlider({ products, label = "Featured Products", class
     if (!trackRef.current || !isDraggingRef.current) return;
 
     isDraggingRef.current = false;
-    trackRef.current.releasePointerCapture(event.pointerId);
-    trackRef.current.style.scrollSnapType = "x proximity";
-    trackRef.current.style.scrollBehavior = "";
+    if (trackRef.current.hasPointerCapture(event.pointerId)) {
+      trackRef.current.releasePointerCapture(event.pointerId);
+    }
 
     if (dragRafRef.current !== null) {
       window.cancelAnimationFrame(dragRafRef.current);
@@ -91,6 +98,13 @@ export function HeroProductSlider({ products, label = "Featured Products", class
         suppressClickRef.current = false;
       }, 120);
     }
+
+    const targets = getScrollTargets();
+    if (!targets.length) {
+      return;
+    }
+    currentTargetIndexRef.current = getNearestTargetIndex(trackRef.current.scrollLeft, targets);
+    trackRef.current.scrollTo({ left: targets[currentTargetIndexRef.current], behavior: "smooth" });
   }
 
   function onTrackClickCapture(event: React.MouseEvent<HTMLDivElement>) {
@@ -112,7 +126,21 @@ export function HeroProductSlider({ products, label = "Featured Products", class
     return Array.from(new Set(targets));
   }
 
+  function getNearestTargetIndex(scrollLeft: number, targets: number[]) {
+    let nearestIndex = 0;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+    targets.forEach((target, index) => {
+      const distance = Math.abs(target - scrollLeft);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+    return nearestIndex;
+  }
+
   useEffect(() => {
+    currentTargetIndexRef.current = 0;
     autoDirectionRef.current = 1;
     if (trackRef.current) {
       trackRef.current.scrollTo({ left: 0, behavior: "auto" });
@@ -125,7 +153,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
     }
 
     const intervalId = window.setInterval(() => {
-      if (!trackRef.current || isDraggingRef.current) {
+      if (!trackRef.current || isDraggingRef.current || isAutoAnimatingRef.current) {
         return;
       }
 
@@ -135,28 +163,26 @@ export function HeroProductSlider({ products, label = "Featured Products", class
         return;
       }
 
-      let nearestIndex = 0;
-      let nearestDistance = Number.POSITIVE_INFINITY;
-      targets.forEach((target, index) => {
-        const distance = Math.abs(target - track.scrollLeft);
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nearestIndex = index;
-        }
-      });
-
       const lastIndex = targets.length - 1;
-      let nextIndex = nearestIndex + autoDirectionRef.current;
+      let nextIndex = Math.max(0, Math.min(currentTargetIndexRef.current, lastIndex));
 
-      if (nextIndex > lastIndex) {
+      if (autoDirectionRef.current === 1 && nextIndex >= lastIndex) {
         autoDirectionRef.current = -1;
-        nextIndex = Math.max(0, lastIndex - 1);
-      } else if (nextIndex < 0) {
+      } else if (autoDirectionRef.current === -1 && nextIndex <= 0) {
         autoDirectionRef.current = 1;
-        nextIndex = Math.min(lastIndex, 1);
       }
 
+      nextIndex = Math.max(0, Math.min(lastIndex, nextIndex + autoDirectionRef.current));
+      currentTargetIndexRef.current = nextIndex;
+      isAutoAnimatingRef.current = true;
       track.scrollTo({ left: targets[nextIndex], behavior: "smooth" });
+
+      if (clearAutoAnimatingTimeoutRef.current) {
+        clearTimeout(clearAutoAnimatingTimeoutRef.current);
+      }
+      clearAutoAnimatingTimeoutRef.current = setTimeout(() => {
+        isAutoAnimatingRef.current = false;
+      }, AUTO_SCROLL_SETTLE_MS);
     }, AUTO_SCROLL_MS);
 
     return () => window.clearInterval(intervalId);
@@ -166,6 +192,9 @@ export function HeroProductSlider({ products, label = "Featured Products", class
     return () => {
       if (clearSuppressTimeoutRef.current) {
         clearTimeout(clearSuppressTimeoutRef.current);
+      }
+      if (clearAutoAnimatingTimeoutRef.current) {
+        clearTimeout(clearAutoAnimatingTimeoutRef.current);
       }
       if (dragRafRef.current !== null) {
         window.cancelAnimationFrame(dragRafRef.current);
@@ -183,7 +212,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
 
       <div
         ref={trackRef}
-        className="flex snap-x snap-proximity gap-3 overflow-x-auto pb-2 select-none touch-pan-y cursor-grab active:cursor-grabbing scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="flex gap-3 overflow-x-auto pb-2 select-none touch-pan-y cursor-grab active:cursor-grabbing scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         aria-label={ariaLabel}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -196,7 +225,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
             key={product.slug}
             href={`/product/${product.slug}`}
             data-slider-item="true"
-            className="group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[calc((100%-3rem)/5)] overflow-hidden rounded-xl border border-[#d1d8de] bg-white transition hover:border-[var(--brand)]"
+            className="group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden rounded-xl border border-[#d1d8de] bg-white transition hover:border-[var(--brand)]"
             draggable={false}
           >
             <Image

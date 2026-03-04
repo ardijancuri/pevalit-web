@@ -91,7 +91,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-container pt-12 pb-14">
+      <section className="mx-auto w-[min(1600px,calc(100%-2rem))] pt-12 pb-14">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
@@ -115,7 +115,7 @@ export default function HomePage() {
         <HeroProductSlider
           products={solutionProducts}
           label={null}
-          className="mt-2"
+          className="mt-2 ml-auto w-full max-w-[1542px]"
           ariaLabel="Solutions portfolio slider"
         />
       </section>
