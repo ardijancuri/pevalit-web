@@ -2,9 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { HeroProductSlider } from "@/components/hero-product-slider";
 import { TrackedLink } from "@/components/tracked-link";
-import { catalogs, categories, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
+import { catalogs, corporate, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
+  const about = corporate.about;
   const highlightedCatalogs = catalogs.slice(0, 3);
   const highlightedProducts = products.slice(0, 4);
   const heroProducts = products.slice(0, 10).map((product) => ({
@@ -19,6 +20,42 @@ export default function HomePage() {
     "Consistent quality control with stable production methods.",
     "Fast technical guidance for specification and application.",
     "Regional and export coverage with practical support."
+  ];
+  const qualityFocusAreas = [
+    {
+      title: "Surface Heating",
+      items: ["Flat and pitched roof terraces", "Attics", "Acoustic ceiling systems"]
+    },
+    {
+      title: "Thermal Insulation",
+      items: ["Wall heating systems", "Partition walls", "Underfloor heating", "Floors and mezzanine structures"]
+    },
+    {
+      title: "Waterproofing",
+      items: ["Facade layers", "Walls in contact with soil", "Foundations and base plates"]
+    }
+  ];
+  const insulationFaqs = [
+    {
+      question: "Fire performance: what matters in practice?",
+      answer:
+        "Expanded polystyrene used in facade systems is specified with complete assembly behavior in mind. When paired with reinforcing layers and finishing plaster, systems are designed to support required reaction-to-fire classifications according to project standards."
+    },
+    {
+      question: "Is EPS suitable for schools, public buildings, and stations?",
+      answer:
+        "Yes, when selected and installed according to local code requirements. The key factors are certified system components, tested assembly details, and proper execution on site."
+    },
+    {
+      question: "Are EPS panels resistant to moisture?",
+      answer:
+        "EPS does not absorb moisture like open-structure materials. Good detailing, sealed joints, and proper facade layers remain essential to prevent water entry and preserve long-term thermal performance."
+    },
+    {
+      question: "Does insulation stop walls from breathing?",
+      answer:
+        "Indoor humidity control depends mainly on ventilation and airtight window detailing. External insulation supports thermal stability, while indoor air management should be solved through balanced ventilation strategy."
+    }
   ];
 
   return (
@@ -67,6 +104,44 @@ export default function HomePage() {
           </div>
 
           <HeroProductSlider products={heroProducts} />
+        </div>
+      </section>
+
+      <section className="site-container py-14">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <div className="max-w-4xl">
+            <p className="text-xs uppercase tracking-[0.19em] text-[var(--brand)]">About Us</p>
+            <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+              Built On A Proven Industry Story
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{about.intro}</p>
+            <div className="mt-5 space-y-2">
+              {about.sections.slice(0, 3).map((section) => (
+                <p key={section.heading} className="text-sm text-[var(--text)]">
+                  <span className="font-semibold">{section.heading}:</span> {section.body}
+                </p>
+              ))}
+            </div>
+            <TrackedLink
+              href="/corporate/about"
+              className="mt-5 inline-block rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
+              trackingLabel="Read More About Us"
+              trackingLocation="home_about"
+            >
+              Read More
+            </TrackedLink>
+          </div>
+
+          <div className="overflow-hidden">
+            <Image
+              src={about.heroImage}
+              alt="PEVALIT factory and operations"
+              width={1100}
+              height={900}
+              className="h-full min-h-[320px] w-full object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
       </section>
 
@@ -121,51 +196,95 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-container pb-14">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
-            <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-              Find Products by Category
+      <section className="bg-[#eceef1] py-14">
+        <div className="site-container grid gap-8 lg:grid-cols-[1fr_1fr]">
+          <article>
+            <h2 className="max-w-2xl text-4xl leading-tight font-semibold text-[#2a2f36] md:text-5xl" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+              How do insulated walls stay dry and durable over time?
             </h2>
-            <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-              Browse categories to quickly find the right product family, with direct access to full product lists, technical specs, and documentation.
+            <div className="mt-4 flex items-center gap-2">
+              <span className="text-[#1f6db8]">...</span>
+              <span className="h-1 w-24 rounded-full bg-[#1f6db8]" />
+            </div>
+            <div className="mt-5 space-y-3 text-base leading-relaxed text-[#4c535c]">
+              <p>
+                Wall moisture issues are often caused by poor ventilation and airtight windows without proper air exchange, not by the insulation layer itself.
+              </p>
+              <p>
+                In renovation projects, vapor generated indoors from cooking, drying, and daily use can be several times greater than outward diffusion through facade walls.
+              </p>
+              <p>
+                Well-designed facade systems combine thermal insulation, reinforcement, and finishing layers to help control temperature stress, reduce condensation risk, and keep wall performance stable.
+              </p>
+              <p>
+                Selecting tested components and applying them correctly on site is the decisive factor for long-term durability.
+              </p>
+            </div>
+          </article>
+
+          <div className="space-y-3">
+            {insulationFaqs.map((item, index) => (
+              <details
+                key={item.question}
+                open={index === 0}
+                className="group border border-[#dde2e8] bg-[#f4f6f8] open:bg-white"
+              >
+                <summary className="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 text-xl font-semibold text-[#2d333b]">
+                  <span>{item.question}</span>
+                  <span className="text-[var(--brand)] transition group-open:rotate-180">v</span>
+                </summary>
+                <div className="border-t border-[#e3e8ed] px-4 py-4">
+                  <p className="text-base leading-relaxed text-[#4d5460]">{item.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[linear-gradient(102deg,#1f63ac_0%,#18a8d8_100%)] py-16 text-white">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_12%,rgba(255,255,255,0.18),transparent_46%)]" />
+        <div className="site-container relative">
+          <div className="grid gap-7 lg:grid-cols-[0.95fr_1.05fr]">
+            <div>
+              <h2 className="max-w-xl text-4xl leading-tight font-semibold md:text-5xl" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+                Products of recognizable quality.
+              </h2>
+              <div className="mt-4 flex items-center gap-2">
+                <span className="text-[var(--brand)]">...</span>
+                <span className="h-1 w-24 rounded-full bg-[var(--brand)]" />
+              </div>
+            </div>
+            <p className="max-w-3xl text-base leading-relaxed text-white/90">
+              Our systems support thermal insulation, waterproofing, and underfloor heating applications with dependable material quality and practical installation performance for construction teams and project planners.
             </p>
           </div>
-          <TrackedLink
-            href="/products"
-            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.09em] hover:border-[var(--brand)]"
-            trackingLabel="View all products"
-            trackingLocation="home_categories"
-          >
-            View all products
-          </TrackedLink>
-        </div>
 
-        <div className="grid gap-4 md:grid-cols-4">
-          {categories.map((category) => (
-            <Link
-              className="group card overflow-hidden p-0 transition hover:-translate-y-0.5 hover:border-[var(--brand)]"
-              key={category.slug}
-              href={`/products/${category.slug}`}
-            >
+          <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div className="mx-auto w-full max-w-[850px]">
               <Image
-                src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : "/images/imported/Pevalit-Catalogue-DE.jpg"}
-                alt={category.name}
-                width={700}
-                height={700}
-                className="aspect-square w-full border-b border-[var(--line)] object-cover"
+                src="/images/imported/catalog-insulation-scene.jpeg"
+                alt="PEVALIT catalog construction insulation visual"
+                width={681}
+                height={353}
+                className="h-[420px] w-full rounded-2xl object-cover object-center shadow-[0_26px_36px_rgba(7,36,67,0.35)]"
                 loading="lazy"
               />
-              <div className="p-5">
-                <h2 className="text-lg font-semibold">{category.name}</h2>
-                <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
-                <span className="mt-4 inline-block rounded-full border border-[var(--brand)] bg-[var(--brand)] px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] !text-white">
-                  Browse Category
-                </span>
-              </div>
-            </Link>
-          ))}
+            </div>
+
+            <div className="space-y-5">
+              {qualityFocusAreas.map((focus) => (
+                <div key={focus.title}>
+                  <h3 className="text-4xl font-semibold">{focus.title}:</h3>
+                  <ul className="mt-2 space-y-1.5 pl-5 text-2xl text-white/92">
+                    {focus.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

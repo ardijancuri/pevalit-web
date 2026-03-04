@@ -20,27 +20,24 @@ export function HeroProductSlider({ products }: HeroProductSliderProps) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const dragStartXRef = useRef(0);
   const dragStartScrollRef = useRef(0);
+  const nextScrollLeftRef = useRef(0);
+  const dragRafRef = useRef<number | null>(null);
   const isDraggingRef = useRef(false);
   const movedDuringDragRef = useRef(false);
   const suppressClickRef = useRef(false);
   const clearSuppressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function scrollTrack(direction: "prev" | "next") {
-    if (!trackRef.current) return;
-    const firstItem = trackRef.current.querySelector<HTMLElement>("[data-slider-item='true']");
-    const step = firstItem ? firstItem.offsetWidth + 12 : 300;
-    const left = direction === "next" ? step : -step;
-    trackRef.current.scrollBy({ left, behavior: "smooth" });
-  }
-
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
     if (!trackRef.current) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
 
+    trackRef.current.style.scrollSnapType = "none";
+    trackRef.current.style.scrollBehavior = "auto";
     isDraggingRef.current = true;
     movedDuringDragRef.current = false;
     dragStartXRef.current = event.clientX;
     dragStartScrollRef.current = trackRef.current.scrollLeft;
+    nextScrollLeftRef.current = dragStartScrollRef.current;
     trackRef.current.setPointerCapture(event.pointerId);
   }
 
@@ -51,7 +48,18 @@ export function HeroProductSlider({ products }: HeroProductSliderProps) {
     if (Math.abs(deltaX) > 4) {
       movedDuringDragRef.current = true;
     }
-    trackRef.current.scrollLeft = dragStartScrollRef.current - deltaX;
+    nextScrollLeftRef.current = dragStartScrollRef.current - deltaX;
+
+    if (dragRafRef.current !== null) {
+      return;
+    }
+
+    dragRafRef.current = window.requestAnimationFrame(() => {
+      if (trackRef.current) {
+        trackRef.current.scrollLeft = nextScrollLeftRef.current;
+      }
+      dragRafRef.current = null;
+    });
   }
 
   function onPointerEnd(event: React.PointerEvent<HTMLDivElement>) {
@@ -59,6 +67,14 @@ export function HeroProductSlider({ products }: HeroProductSliderProps) {
 
     isDraggingRef.current = false;
     trackRef.current.releasePointerCapture(event.pointerId);
+    trackRef.current.style.scrollSnapType = "x proximity";
+    trackRef.current.style.scrollBehavior = "";
+
+    if (dragRafRef.current !== null) {
+      window.cancelAnimationFrame(dragRafRef.current);
+      dragRafRef.current = null;
+      trackRef.current.scrollLeft = nextScrollLeftRef.current;
+    }
 
     if (movedDuringDragRef.current) {
       suppressClickRef.current = true;
@@ -83,6 +99,9 @@ export function HeroProductSlider({ products }: HeroProductSliderProps) {
       if (clearSuppressTimeoutRef.current) {
         clearTimeout(clearSuppressTimeoutRef.current);
       }
+      if (dragRafRef.current !== null) {
+        window.cancelAnimationFrame(dragRafRef.current);
+      }
     };
   }, []);
 
@@ -92,31 +111,11 @@ export function HeroProductSlider({ products }: HeroProductSliderProps) {
 
   return (
     <div className="mt-6">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5f6873]">Featured Products</p>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => scrollTrack("prev")}
-            className="rounded-full border border-[#c8d0d8] bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-[#2a333c] hover:border-[var(--brand)]"
-            aria-label="Scroll products left"
-          >
-            Prev
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollTrack("next")}
-            className="rounded-full border border-[#c8d0d8] bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-[#2a333c] hover:border-[var(--brand)]"
-            aria-label="Scroll products right"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#5f6873]">Featured Products</p>
 
       <div
         ref={trackRef}
-        className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 select-none touch-pan-y cursor-grab active:cursor-grabbing"
+        className="flex snap-x snap-proximity gap-3 overflow-x-auto pb-2 select-none touch-pan-y cursor-grab active:cursor-grabbing [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         aria-label="Featured products slider"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
