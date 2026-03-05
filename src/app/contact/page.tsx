@@ -16,21 +16,23 @@ export default function ContactPage() {
         title="Talk to our team about your production requirements."
         description="Use the form to send your request and include your application details for a faster technical response."
       />
-      <section className="site-container grid gap-8 pb-20 lg:grid-cols-[1.2fr_1fr]">
-        <QuoteForm />
-        <aside className="card p-6">
-          <h2 className="text-xl font-semibold">Direct Contact</h2>
-          <p className="mt-4 text-sm text-[var(--muted)]">Email</p>
-          <p className="text-sm font-medium">{siteData.contact.email}</p>
-          <p className="mt-4 text-sm text-[var(--muted)]">Phone</p>
-          <p className="text-sm font-medium">{siteData.contact.phone}</p>
-          <p className="mt-4 text-sm text-[var(--muted)]">Address</p>
-          <p className="text-sm font-medium">{siteData.contact.address}</p>
-          <div className="mt-6 rounded-lg border border-[var(--line)] bg-[var(--accent)] p-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">Response Promise</p>
-            <p className="mt-2 text-sm text-[var(--muted)]">Technical response within one business day for complete quote requests.</p>
-          </div>
-        </aside>
+      <section className="section-block bg-white">
+        <div className="site-container grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+          <QuoteForm />
+          <aside className="card p-4 md:p-6">
+            <h2 className="text-xl font-semibold">Direct Contact</h2>
+            <p className="mt-4 text-sm text-[var(--muted)]">Email</p>
+            <p className="text-sm font-medium">{siteData.contact.email}</p>
+            <p className="mt-4 text-sm text-[var(--muted)]">Phone</p>
+            <p className="text-sm font-medium">{siteData.contact.phone}</p>
+            <p className="mt-4 text-sm text-[var(--muted)]">Address</p>
+            <p className="text-sm font-medium">{siteData.contact.address}</p>
+            <div className="mt-6 rounded-[8px] bg-[var(--bg-soft)] p-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">Response Promise</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">Technical response within one business day for complete quote requests.</p>
+            </div>
+          </aside>
+        </div>
       </section>
     </>
   );

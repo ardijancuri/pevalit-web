@@ -219,7 +219,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
             key={product.slug}
             href={`/product/${product.slug}`}
             data-slider-item="true"
-            className="group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden rounded-xl border border-[#d1d8de] bg-white transition hover:border-[var(--brand)]"
+            className="group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden rounded-[8px] bg-white transition"
             draggable={false}
           >
             <Image
@@ -227,7 +227,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
               alt={product.name}
               width={520}
               height={520}
-              className="h-36 w-full border-b border-[#e0e5ea] object-cover"
+              className="h-36 w-full object-cover"
               loading="lazy"
               draggable={false}
             />

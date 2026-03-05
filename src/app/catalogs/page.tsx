@@ -11,22 +11,23 @@ export const metadata: Metadata = {
 
 export default function CatalogsPage() {
   return (
-    <>
+    <div className="bg-[var(--bg)]">
       <PageIntro
         eyebrow="Catalogs"
         title="Technical Catalogues, Ready To Download."
         description="Open the latest PEVALIT catalogues and download PDF versions directly."
+        surface="white"
       />
-      <section className="site-container pb-20">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className="section-block bg-[var(--bg)]">
+        <div className="site-container grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {catalogs.map((catalog) => (
-            <article className="overflow-hidden rounded-2xl border border-[var(--line)] bg-white" key={catalog.slug}>
+            <article className="overflow-hidden bg-white" key={catalog.slug}>
               <Image
                 src={catalog.previewImage}
                 alt={catalog.title}
                 width={700}
                 height={1000}
-                className="aspect-[1/1.34] w-full border-b border-[var(--line)] object-cover"
+                className="aspect-[1/1.42] w-full object-cover"
                 loading="lazy"
               />
               <div className="p-5">
@@ -34,7 +35,7 @@ export default function CatalogsPage() {
                 <p className="mt-2 text-sm text-[var(--muted)]">{catalog.description}</p>
                 <TrackedLink
                   href={catalog.fileUrl}
-                  className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
+                  className="btn-primary mt-4"
                   trackingLabel={`Download PDF - ${catalog.title}`}
                   trackingLocation="catalogs_grid"
                 >
@@ -45,6 +46,6 @@ export default function CatalogsPage() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }

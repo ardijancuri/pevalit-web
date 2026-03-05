@@ -15,14 +15,16 @@ export default function QualityPolicyPage() {
         title={corporate.qualityPolicy.title}
         description={corporate.qualityPolicy.intro}
       />
-      <section className="site-container pb-20">
-        <article className="card p-6">
-          <ul className="list-disc space-y-3 pl-5 text-sm text-[var(--muted)]">
-            {corporate.qualityPolicy.points.map((point) => (
-              <li key={point}>{point}</li>
-            ))}
-          </ul>
-        </article>
+      <section className="section-block bg-white">
+        <div className="site-container">
+          <article className="card p-6">
+            <ul className="list-disc space-y-3 pl-5 text-sm text-[var(--muted)]">
+              {corporate.qualityPolicy.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          </article>
+        </div>
       </section>
     </>
   );

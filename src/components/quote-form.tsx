@@ -112,7 +112,7 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
   }
 
   return (
-    <form className="card p-6" onSubmit={onSubmit}>
+    <form className="card p-4 md:p-6" onSubmit={onSubmit}>
       <h2 className="text-2xl font-semibold">Request a Quote</h2>
       <p className="mt-2 text-sm text-[var(--muted)]">
         Share your application details and our team will respond with the best-fit recommendation.
@@ -120,27 +120,27 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         <label className="text-sm text-[var(--muted)]">
           Name
-          <input className="mt-1 w-full rounded-lg border border-[var(--line)] px-3 py-2" name="name" required />
+          <input className="mt-1 w-full rounded-[8px] border border-[var(--line)] px-3 py-2" name="name" required />
         </label>
         <label className="text-sm text-[var(--muted)]">
           Email
-          <input className="mt-1 w-full rounded-lg border border-[var(--line)] px-3 py-2" type="email" name="email" required />
+          <input className="mt-1 w-full rounded-[8px] border border-[var(--line)] px-3 py-2" type="email" name="email" required />
         </label>
         <label className="text-sm text-[var(--muted)]">
           Company
-          <input className="mt-1 w-full rounded-lg border border-[var(--line)] px-3 py-2" name="company" required />
+          <input className="mt-1 w-full rounded-[8px] border border-[var(--line)] px-3 py-2" name="company" required />
         </label>
         <label className="text-sm text-[var(--muted)]">
           Phone
-          <input className="mt-1 w-full rounded-lg border border-[var(--line)] px-3 py-2" name="phone" />
+          <input className="mt-1 w-full rounded-[8px] border border-[var(--line)] px-3 py-2" name="phone" />
         </label>
         <label className="text-sm text-[var(--muted)] md:col-span-2">
           Country
-          <input className="mt-1 w-full rounded-lg border border-[var(--line)] px-3 py-2" name="country" required />
+          <input className="mt-1 w-full rounded-[8px] border border-[var(--line)] px-3 py-2" name="country" required />
         </label>
         <label className="text-sm text-[var(--muted)] md:col-span-2">
           Message
-          <textarea className="mt-1 min-h-28 w-full rounded-lg border border-[var(--line)] px-3 py-2" name="message" required />
+          <textarea className="mt-1 min-h-28 w-full rounded-[8px] border border-[var(--line)] px-3 py-2" name="message" required />
         </label>
       </div>
 
@@ -151,7 +151,7 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
       ) : null}
 
       <button
-        className="mt-6 rounded-full bg-[var(--brand)] px-5 py-2.5 text-sm font-semibold !text-white hover:bg-[var(--brand-strong)] disabled:opacity-65"
+        className="btn-primary mt-6 disabled:opacity-65"
         disabled={submitState.status === "submitting"}
         type="submit"
       >
@@ -166,7 +166,7 @@ export function QuoteForm({ productSlug }: QuoteFormProps) {
         </p>
       ) : null}
       {submitState.status === "success" ? (
-        <div className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
+        <div className="mt-3 rounded-[8px] bg-emerald-50 p-3 text-xs text-emerald-900">
           <p className="font-semibold">What happens next</p>
           <p className="mt-1">1) Technical team reviews your request.</p>
           <p>2) You receive recommendation + documentation by email.</p>

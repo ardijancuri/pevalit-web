@@ -70,11 +70,14 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [productsMenuOpen, setProductsMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const [language, setLanguage] = useState<LanguageCode>("en");
-  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const [desktopLanguageMenuOpen, setDesktopLanguageMenuOpen] = useState(false);
+  const [mobileLanguageMenuOpen, setMobileLanguageMenuOpen] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
   const mobileMenuRef = useRef<HTMLElement | null>(null);
-  const languageMenuRef = useRef<HTMLDivElement | null>(null);
+  const desktopLanguageMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileLanguageMenuRef = useRef<HTMLDivElement | null>(null);
 
   function openProductsMenu() {
     if (closeTimeoutRef.current) {
@@ -102,11 +105,13 @@ export function SiteHeader() {
 
   function closeMobileMenu() {
     setMobileMenuOpen(false);
+    setMobileCategoriesOpen(false);
   }
 
   function onLanguageChange(nextLanguage: LanguageCode) {
     setLanguage(nextLanguage);
-    setLanguageMenuOpen(false);
+    setDesktopLanguageMenuOpen(false);
+    setMobileLanguageMenuOpen(false);
     if (typeof window !== "undefined") {
       window.localStorage.setItem("site-language", nextLanguage);
     }
@@ -175,8 +180,10 @@ export function SiteHeader() {
 
   useEffect(() => {
     function onPointerDown(event: MouseEvent) {
-      if (!languageMenuRef.current?.contains(event.target as Node)) {
-        setLanguageMenuOpen(false);
+      const targetNode = event.target as Node;
+      if (!desktopLanguageMenuRef.current?.contains(targetNode) && !mobileLanguageMenuRef.current?.contains(targetNode)) {
+        setDesktopLanguageMenuOpen(false);
+        setMobileLanguageMenuOpen(false);
       }
     }
     window.addEventListener("mousedown", onPointerDown);
@@ -184,32 +191,78 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-transparent pt-4">
-      <div className="mx-auto w-[min(1285px,calc(100%-2rem))] rounded-md border border-[#d4dbe1] bg-white text-[var(--text)]">
+    <header className="sticky top-0 z-40 w-full border-b border-[var(--line)] bg-white">
+      <div className="site-container text-[var(--text)]">
         <div className="flex items-stretch justify-between gap-3 py-0">
           <div className="flex items-stretch">
             <span className="hidden w-16 bg-[var(--brand)] lg:block" />
-            <Link href="/" aria-label={siteData.companyName} className="inline-flex items-center bg-white px-4 md:px-5">
+            <Link href="/" aria-label={siteData.companyName} className="inline-flex items-center bg-white pl-0 pr-3 md:px-5">
               <Image
                 src="/images/imported/logo.svg"
                 alt={siteData.companyName}
                 width={228}
                 height={46}
-                className="h-8 w-auto"
+                className="h-7 w-auto md:h-8"
               />
             </Link>
           </div>
 
-          <button
-            type="button"
-            aria-label="Open menu"
-            aria-controls="mobile-menu"
-            aria-expanded={mobileMenuOpen}
-            className="my-2 rounded-lg border border-[#c7ced6] bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text)] md:hidden"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            {headerCopy.menu}
-          </button>
+          <div className="flex items-center gap-1 md:hidden">
+            <div className="relative" ref={mobileLanguageMenuRef}>
+              <button
+                type="button"
+                aria-label="Change language"
+                aria-expanded={mobileLanguageMenuOpen}
+                className="inline-flex h-10 items-center justify-center px-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
+                onClick={() => setMobileLanguageMenuOpen((prev) => !prev)}
+              >
+                {selectedLanguage.short}
+              </button>
+              <ul
+                className={`absolute right-0 mt-2 min-w-[11rem] rounded-[8px] border border-[var(--line)] bg-white p-1 transition ${
+                  mobileLanguageMenuOpen ? "visible opacity-100" : "invisible opacity-0"
+                }`}
+              >
+                {LANGUAGE_OPTIONS.map((option) => (
+                  <li key={option.code}>
+                    <button
+                      type="button"
+                      onClick={() => onLanguageChange(option.code)}
+                      className={`w-full rounded-[6px] px-3 py-2 text-left text-xs font-semibold ${
+                        option.code === language ? "bg-[var(--brand)] !text-white" : "text-[var(--text)] hover:bg-[var(--accent)]"
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              type="button"
+              aria-label="Open menu"
+              aria-controls="mobile-menu"
+              aria-expanded={mobileMenuOpen}
+              className="my-2 inline-flex h-10 w-10 items-center justify-center bg-transparent text-[var(--text)]"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-6 w-6"
+              >
+                <path d="M4 7h16" />
+                <path d="M4 12h16" />
+                <path d="M4 17h16" />
+              </svg>
+            </button>
+          </div>
 
           <div className="hidden min-w-0 flex-1 items-center justify-between pr-6 md:flex">
             <nav aria-label="Main navigation" className="relative min-w-0 pl-5">
@@ -218,7 +271,7 @@ export function SiteHeader() {
                   const baseClass = `inline-flex border-b-2 px-0.5 py-5 text-[0.72rem] font-semibold uppercase tracking-[0.08em] transition ${
                     isActive(item.href)
                       ? "border-[var(--brand)] text-[var(--text)]"
-                      : "border-transparent text-[#5b6570] hover:border-[#97a1ac] hover:text-[var(--text)]"
+                      : "border-transparent text-[#5b6570] hover:text-[var(--text)]"
                   }`;
                   const translatedLabel = headerCopy.nav[item.href] || item.label;
 
@@ -235,7 +288,7 @@ export function SiteHeader() {
                   return (
                     <li
                       key={item.href}
-                      className="static"
+                      className="relative"
                       onMouseEnter={openProductsMenu}
                       onMouseLeave={closeProductsMenu}
                       onFocus={openProductsMenu}
@@ -245,33 +298,24 @@ export function SiteHeader() {
                         {translatedLabel}
                       </Link>
                       <div
-                        className={`absolute left-1/2 top-full z-40 mt-2 w-[min(1040px,calc(100vw-2rem))] -translate-x-1/2 rounded-xl border border-[var(--line)] bg-white shadow-2xl transition ${
+                        className={`absolute left-0 top-full z-40 mt-0 min-w-[16rem] border-x border-b border-[var(--line)] bg-white py-2 transition ${
                           productsMenuOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
                         }`}
                         onMouseEnter={openProductsMenu}
                         onMouseLeave={closeProductsMenu}
                       >
-                        <div className="p-4">
-                          <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
-                            {productsByCategory.slice(0, 10).map(({ category, products }) => (
+                        <ul className="space-y-0.5">
+                          {productsByCategory.map(({ category }) => (
+                            <li key={category.slug}>
                               <Link
-                                key={category.slug}
                                 href={`/products/${category.slug}`}
-                                className="overflow-hidden rounded-lg border border-[var(--line)] bg-white hover:border-[var(--brand)]"
+                                className="block px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)] hover:bg-[var(--bg-soft)]"
                               >
-                                <Image
-                                  src={products[0]?.imageUrl || category.heroImage || "/images/imported/Pevalit-Catalogue-DE.jpg"}
-                                  alt={category.name}
-                                  width={600}
-                                  height={600}
-                                  className="aspect-square w-full border-b border-[var(--line)] object-cover"
-                                  loading="lazy"
-                                />
-                                <p className="p-2 text-xs font-semibold text-[var(--text)]">{category.name}</p>
+                                {category.name}
                               </Link>
-                            ))}
-                          </div>
-                        </div>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </li>
                   );
@@ -280,19 +324,19 @@ export function SiteHeader() {
             </nav>
 
             <div className="flex shrink-0 items-center gap-4">
-              <div className="relative" ref={languageMenuRef}>
+              <div className="relative" ref={desktopLanguageMenuRef}>
                 <button
                   type="button"
                   aria-label="Change language"
-                  aria-expanded={languageMenuOpen}
-                  className="rounded-full border border-[#c7ced6] bg-white px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
-                  onClick={() => setLanguageMenuOpen((prev) => !prev)}
+                  aria-expanded={desktopLanguageMenuOpen}
+                  className="rounded-[8px] border border-[var(--line)] bg-white px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
+                  onClick={() => setDesktopLanguageMenuOpen((prev) => !prev)}
                 >
                   {selectedLanguage.short}
                 </button>
                 <ul
-                  className={`absolute right-0 mt-2 min-w-[12rem] rounded-xl border border-[var(--line)] bg-white p-1 shadow-xl transition ${
-                    languageMenuOpen ? "visible opacity-100" : "invisible opacity-0"
+                  className={`absolute right-0 mt-2 min-w-[12rem] rounded-[8px] border border-[var(--line)] bg-white p-1 transition ${
+                    desktopLanguageMenuOpen ? "visible opacity-100" : "invisible opacity-0"
                   }`}
                 >
                   {LANGUAGE_OPTIONS.map((option) => (
@@ -300,7 +344,7 @@ export function SiteHeader() {
                       <button
                         type="button"
                         onClick={() => onLanguageChange(option.code)}
-                        className={`w-full rounded-lg px-3 py-2 text-left text-xs font-semibold ${
+                        className={`w-full rounded-[6px] px-3 py-2 text-left text-xs font-semibold ${
                           option.code === language ? "bg-[var(--brand)] !text-white" : "text-[var(--text)] hover:bg-[var(--accent)]"
                         }`}
                       >
@@ -322,83 +366,109 @@ export function SiteHeader() {
         aria-modal="true"
         aria-label="Mobile navigation"
         aria-hidden={!mobileMenuOpen}
-        className={`fixed inset-0 z-50 h-dvh w-full overflow-y-auto bg-white p-5 shadow-2xl transition-all md:hidden ${
+        className={`fixed inset-0 z-50 h-dvh w-full overflow-y-auto bg-white p-5 transition-all md:hidden ${
           mobileMenuOpen ? "visible translate-y-0 opacity-100" : "invisible pointer-events-none translate-y-4 opacity-0"
         }`}
       >
-        <div className="mb-5 flex items-center justify-between">
+        <div className="mb-5 flex items-center justify-between border-b border-[var(--line)] pb-3">
           <Image
             src="/images/imported/logo.svg"
             alt={siteData.companyName}
-            width={228}
-            height={46}
-            className="h-7 w-auto"
+            width={180}
+            height={36}
+            className="h-6 w-auto"
           />
           <button
             type="button"
             aria-label="Close menu"
-            className="rounded-lg border border-[var(--line)] px-3 py-1.5 text-sm font-semibold"
+            className="inline-flex h-9 w-9 items-center justify-center text-[var(--text)]"
             onClick={closeMobileMenu}
           >
-            {headerCopy.close}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-5 w-5"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
           </button>
         </div>
 
-        <div className="mb-4 rounded-xl border border-[var(--line)] p-3">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">Language</p>
-          <div className="grid grid-cols-2 gap-2">
-            {LANGUAGE_OPTIONS.map((option) => (
-              <button
-                key={option.code}
-                type="button"
-                onClick={() => onLanguageChange(option.code)}
-                className={`rounded-lg border px-3 py-2 text-xs font-semibold ${
-                  option.code === language
-                    ? "border-[var(--brand)] bg-[var(--brand)] !text-white"
-                    : "border-[var(--line)] text-[var(--text)]"
-                }`}
-              >
-                {option.short}
-              </button>
-            ))}
-          </div>
-        </div>
-
         <ul className="space-y-2">
-          {siteData.navigation.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                onClick={closeMobileMenu}
-                className={`block rounded-lg border px-3 py-2 text-sm font-semibold ${
-                  isActive(item.href)
-                    ? "border-[var(--brand)] bg-[var(--brand)] !text-white"
-                    : "border-[var(--line)] text-[var(--text)]"
-                }`}
-              >
-                {headerCopy.nav[item.href] || item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+          {siteData.navigation.map((item) => {
+            const translatedLabel = headerCopy.nav[item.href] || item.label;
 
-        <div className="mt-6">
-          <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">{headerCopy.productCategories}</p>
-          <ul className="mt-3 space-y-2">
-            {productsByCategory.slice(0, 10).map(({ category }) => (
-              <li key={category.slug}>
+            if (item.href === "/products") {
+              return (
+                <li key={item.href}>
+                  <button
+                    type="button"
+                    className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm font-semibold ${
+                      isActive(item.href) ? "bg-[var(--brand)] !text-white" : "text-[var(--text)]"
+                    }`}
+                    aria-expanded={mobileCategoriesOpen}
+                    onClick={() => setMobileCategoriesOpen((prev) => !prev)}
+                  >
+                    <span>{translatedLabel}</span>
+                    <span className={`inline-flex h-5 w-5 items-center justify-center transition-transform ${mobileCategoriesOpen ? "rotate-180" : ""}`}><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="m6 9 6 6 6-6" /></svg></span>
+                  </button>
+
+                  {mobileCategoriesOpen ? (
+                    <div className="bg-[var(--bg-soft)] p-2">
+                      <ul className="space-y-1">
+                        <li>
+                          <Link
+                            href="/products"
+                            onClick={closeMobileMenu}
+                            className="block px-2 py-2 text-sm font-semibold text-[var(--text)] hover:bg-white"
+                          >
+                            {translatedLabel}
+                          </Link>
+                        </li>
+                        {productsByCategory.map(({ category }) => (
+                          <li key={category.slug}>
+                            <Link
+                              href={`/products/${category.slug}`}
+                              onClick={closeMobileMenu}
+                              className="block px-2 py-2 text-sm text-[var(--text)] hover:bg-white"
+                            >
+                              {category.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </li>
+              );
+            }
+
+            return (
+              <li key={item.href}>
                 <Link
-                  href={`/products/${category.slug}`}
+                  href={item.href}
                   onClick={closeMobileMenu}
-                  className="block rounded-lg border border-[var(--line)] px-3 py-2 text-sm text-[var(--text)]"
+                  className={`block px-3 py-2 text-sm font-semibold ${
+                    isActive(item.href)
+                      ? "bg-[var(--brand)] !text-white"
+                      : "text-[var(--text)]"
+                  }`}
                 >
-                  {category.name}
+                  {translatedLabel}
                 </Link>
               </li>
-            ))}
-          </ul>
-        </div>
+            );
+          })}
+        </ul>
+
       </aside>
     </header>
   );
 }
+

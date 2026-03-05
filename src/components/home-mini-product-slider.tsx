@@ -228,7 +228,7 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
 
   return (
     <section className="site-container pb-10">
-      <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4 sm:p-5">
+      <div className="rounded-[8px] bg-[var(--surface)] p-4 sm:p-5">
         <div className="mb-3 flex items-center justify-between gap-2">
           <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">More Products</p>
           <p className="text-[0.68rem] uppercase tracking-[0.1em] text-[var(--muted)]">Grab to slide</p>
@@ -258,9 +258,9 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
               key={product.slug}
               href={`/product/${product.slug}`}
               data-mini-card="true"
-              className="group shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] overflow-hidden rounded-xl border border-[var(--line)] bg-white sm:basis-[calc((100%-2.25rem)/4)]"
+              className="group shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] overflow-hidden rounded-[8px] bg-white sm:basis-[calc((100%-2.25rem)/4)]"
             >
-              <div className="relative h-28 overflow-hidden border-b border-[var(--line)] bg-[#f7f8f8] sm:h-32">
+              <div className="relative h-28 overflow-hidden bg-[#f7f8f8] sm:h-32">
                 <Image
                   src={product.imageUrl || FALLBACK_IMAGE}
                   alt={product.name}

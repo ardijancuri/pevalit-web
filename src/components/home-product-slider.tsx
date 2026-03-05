@@ -148,7 +148,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
   return (
     <section className="site-container pt-6 pb-1">
       <div
-        className={`w-full touch-pan-y select-none overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] ${
+        className={`w-full touch-pan-y select-none overflow-hidden rounded-[8px] bg-[var(--surface)] ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         onPointerDown={handlePointerDown}
@@ -198,12 +198,12 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 border-t border-[var(--line)] bg-[var(--surface)] px-5 py-3 sm:px-7">
+        <div className="flex flex-wrap items-center gap-2 bg-[var(--surface)] px-5 py-3 sm:px-7">
           <button
             type="button"
             aria-label="Previous product"
             onClick={() => setActiveIndex((current) => (current - 1 + products.length) % products.length)}
-            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)] hover:border-[var(--brand)]"
+            className="rounded-[8px] border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)] hover:border-[var(--brand)]"
           >
             &larr;
           </button>
@@ -211,7 +211,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
             type="button"
             aria-label="Next product"
             onClick={() => setActiveIndex((current) => (current + 1) % products.length)}
-            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)] hover:border-[var(--brand)]"
+            className="rounded-[8px] border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)] hover:border-[var(--brand)]"
           >
             &rarr;
           </button>
@@ -230,7 +230,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
           </div>
           <Link
             href={`/product/${activeProduct.slug}`}
-            className="ml-auto rounded-full bg-[var(--brand)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] !text-white hover:bg-[var(--brand-strong)]"
+            className="ml-auto rounded-[8px] bg-[var(--brand)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] !text-white hover:bg-[var(--brand-strong)]"
           >
             View product
           </Link>

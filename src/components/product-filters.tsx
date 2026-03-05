@@ -39,7 +39,8 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
   }, [category, products, query]);
 
   return (
-    <section className="site-container pb-20">
+    <section className="section-block bg-white">
+      <div className="site-container">
       <div className="card p-4 md:p-6">
         <div className="grid gap-4 md:grid-cols-[1fr_auto]">
           <label className="flex flex-col gap-2 text-sm text-[var(--muted)]">
@@ -47,7 +48,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              className="rounded-xl border border-[var(--line)] bg-white px-4 py-3 text-base text-[var(--text)]"
+              className="rounded-[8px] border border-[var(--line)] bg-white px-4 py-3 text-base text-[var(--text)]"
               placeholder="Type application, feature, or product name"
             />
           </label>
@@ -56,7 +57,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
             <select
               value={category}
               onChange={(event) => setCategory(event.target.value)}
-              className="rounded-xl border border-[var(--line)] bg-white px-4 py-3 text-base text-[var(--text)]"
+              className="rounded-[8px] border border-[var(--line)] bg-white px-4 py-3 text-base text-[var(--text)]"
             >
               <option value="all">All categories</option>
               {categories.map((item) => (
@@ -69,29 +70,29 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
         {filtered.map((product) => (
-          <article className="card overflow-hidden p-0" key={product.slug}>
+          <article className="card overflow-hidden border border-[var(--line)] bg-[var(--bg-soft)] p-0 text-[var(--text)]" key={product.slug}>
             <Image
               src={product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg"}
               alt={product.name}
               width={700}
               height={700}
-              className="aspect-square w-full border-b border-[var(--line)] object-cover"
+              className="aspect-square w-full object-cover"
               loading="lazy"
             />
-            <div className="p-6">
-            <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">{product.categorySlug}</p>
-            <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
-            <p className="mt-3 text-sm text-[var(--muted)]">{displaySummary(product)}</p>
-            <TrackedLink
-              className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-medium !text-white hover:bg-[var(--brand-strong)]"
-              href={`/product/${product.slug}`}
-              trackingLabel={`View Product - ${product.name}`}
-              trackingLocation="products_filters"
-            >
-              View Product
-            </TrackedLink>
+            <div className="p-5 md:p-6">
+              <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">{product.categorySlug}</p>
+              <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
+              <p className="mt-3 text-sm text-[var(--muted)]">{displaySummary(product)}</p>
+              <TrackedLink
+                className="btn-primary mt-4"
+                href={`/product/${product.slug}`}
+                trackingLabel={`View Product - ${product.name}`}
+                trackingLocation="products_filters"
+              >
+                View Product
+              </TrackedLink>
             </div>
           </article>
         ))}
@@ -102,6 +103,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
           No matching products found. Try a broader search or switch category.
         </p>
       ) : null}
+      </div>
     </section>
   );
 }

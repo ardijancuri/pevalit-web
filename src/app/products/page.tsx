@@ -11,54 +11,47 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <>
+    <div className="bg-[var(--bg)]">
       <PageIntro
         eyebrow="Products"
         title="Browse Products By Category."
         description="Clean category navigation with direct access to full product lists and technical details."
+        surface="white"
       />
-      <section className="site-container pb-20">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className="section-block bg-[var(--bg)]">
+        <div className="site-container grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {productsByCategory.map(({ category, products }) => (
-            <article className="overflow-hidden rounded-2xl border border-[var(--line)] bg-white" key={category.slug}>
+            <article className="flex h-full flex-col overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)]" key={category.slug}>
               <Image
                 src={products[0]?.imageUrl || category.heroImage || "/images/imported/Pevalit-Catalogue-DE.jpg"}
                 alt={category.name}
                 width={800}
                 height={640}
-                className="aspect-[1.2/1] w-full border-b border-[var(--line)] object-cover"
+                className="aspect-[1.2/1] w-full object-cover"
                 loading="lazy"
               />
-              <div className="p-5">
+              <div className="flex flex-1 flex-col p-5">
                 <h2 className="text-xl font-semibold">{category.name}</h2>
-                <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
+                <p className="mt-2 text-sm text-[var(--charcoal-muted)]">{category.description}</p>
                 <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand)]">
                   {products.length} {products.length === 1 ? "product" : "products"}
                 </p>
 
-                {products.length ? (
-                  <ul className="mt-3 space-y-1 text-sm text-[var(--text)]">
-                    {products.slice(0, 3).map((product) => (
-                      <li key={product.slug}>{product.name}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="mt-3 text-sm text-[var(--muted)]">No products currently listed.</p>
-                )}
-
-                <TrackedLink
-                  href={`/products/${category.slug}`}
-                  className="mt-4 inline-block rounded-full bg-[var(--brand)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] !text-white hover:bg-[var(--brand-strong)]"
-                  trackingLabel={`View All - ${category.name}`}
-                  trackingLocation="products_category_card"
-                >
-                  View Category
-                </TrackedLink>
+                <div className="mt-auto pt-4">
+                  <TrackedLink
+                    href={`/products/${category.slug}`}
+                    className="btn-primary"
+                    trackingLabel={`View All - ${category.name}`}
+                    trackingLocation="products_category_card"
+                  >
+                    View Category
+                  </TrackedLink>
+                </div>
               </div>
             </article>
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }

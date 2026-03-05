@@ -1,18 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f2f5f4;
+  --bg: #f3f4f6;
+  --bg-soft: #f7f8fa;
   --surface: #ffffff;
-  --text: #132322;
-  --muted: #506460;
+  --text: #111827;
+  --muted: #596273;
+  --charcoal: #1f2329;
+  --charcoal-soft: #2a3038;
+  --charcoal-text: #f5f7fa;
+  --charcoal-muted: #c5ced8;
   --brand: #F37136;
   --brand-strong: #D85D26;
-  --accent: #d7efe8;
-  --line: #d5dfdc;
+  --accent: #fde7dc;
+  --line: #d7dce3;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  border-radius: 0 !important;
 }
 
 body {
@@ -32,7 +40,66 @@ a {
 }
 
 .card {
-  border: 1px solid var(--line);
-  border-radius: 1rem;
+  border: 0;
+  border-radius: 0;
   background: var(--surface);
+}
+
+.section-block {
+  padding-block: clamp(2.75rem, 5vw, 4.5rem);
+}
+
+.section-muted {
+  background: var(--bg-soft);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--brand);
+  border-radius: 0;
+  background: var(--brand);
+  padding: 0.625rem 1.125rem;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.btn-primary:hover {
+  border-color: var(--brand-strong);
+  background: var(--brand-strong);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--charcoal);
+  border-radius: 0;
+  background: var(--charcoal);
+  padding: 0.625rem 1.125rem;
+  color: var(--charcoal-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--charcoal-soft);
+  background: var(--charcoal-soft);
+  color: var(--charcoal-text);
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand);
 }
