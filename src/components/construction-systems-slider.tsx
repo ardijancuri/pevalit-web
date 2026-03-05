@@ -33,7 +33,7 @@ export function ConstructionSystemsSlider({ images, className = "", intervalMs =
 
   return (
     <div className={className}>
-      <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-white">
+      <div className="relative aspect-square w-full overflow-hidden bg-white">
         {images.map((image, index) => (
           <Image
             key={image.src}

@@ -163,17 +163,39 @@ export function HomeCategorySlider({ categories, className = "", ariaLabel = "So
           type="button"
           aria-label="Previous category"
           onClick={() => step(-1)}
-          className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)] hover:border-[var(--brand)]"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] bg-white text-[var(--text)] hover:border-[var(--brand)]"
         >
-          &larr;
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
         </button>
         <button
           type="button"
           aria-label="Next category"
           onClick={() => step(1)}
-          className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)] hover:border-[var(--brand)]"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] bg-white text-[var(--text)] hover:border-[var(--brand)]"
         >
-          &rarr;
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4"
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
         </button>
       </div>
 

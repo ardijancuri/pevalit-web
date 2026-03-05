@@ -7,21 +7,14 @@ import { catalogs, categories, corporate, getCategoryNameBySlug, getProductSumma
 
 export default function HomePage() {
   const about = corporate.about;
-  const constructionSystemSlides = [
-    { src: "/images/imported/construction-systems-slider/slide-01.jpg", alt: "PEVALIT construction systems slide 1" },
-    { src: "/images/imported/construction-systems-slider/slide-02.jpg", alt: "PEVALIT construction systems slide 2" },
-    { src: "/images/imported/construction-systems-slider/slide-03.jpg", alt: "PEVALIT construction systems slide 3" },
-    { src: "/images/imported/construction-systems-slider/slide-04.jpg", alt: "PEVALIT construction systems slide 4" },
-    { src: "/images/imported/construction-systems-slider/slide-05.jpg", alt: "PEVALIT construction systems slide 5" },
-    { src: "/images/imported/construction-systems-slider/slide-06.jpg", alt: "PEVALIT construction systems slide 6" },
-    { src: "/images/imported/construction-systems-slider/slide-07.jpg", alt: "PEVALIT construction systems slide 7" },
-    { src: "/images/imported/construction-systems-slider/slide-08.jpg", alt: "PEVALIT construction systems slide 8" },
-    { src: "/images/imported/construction-systems-slider/slide-09.jpg", alt: "PEVALIT construction systems slide 9" },
-    { src: "/images/imported/construction-systems-slider/slide-10.jpg", alt: "PEVALIT construction systems slide 10" },
-    { src: "/images/imported/construction-systems-slider/slide-11.jpg", alt: "PEVALIT construction systems slide 11" },
-    { src: "/images/imported/construction-systems-slider/slide-12.jpg", alt: "PEVALIT construction systems slide 12" },
-    { src: "/images/imported/construction-systems-slider/slide-13.jpg", alt: "PEVALIT construction systems slide 13" }
-  ];
+  const constructionSystemSlideCount = 30;
+  const constructionSystemSlides = Array.from({ length: constructionSystemSlideCount }, (_, index) => {
+    const slideNumber = String(index + 1).padStart(2, "0");
+    return {
+      src: `/images/imported/construction-systems-slider/slide-${slideNumber}.jpg`,
+      alt: `PEVALIT construction systems slide ${index + 1}`
+    };
+  });
   const highlightedCatalogs = catalogs.slice(0, 3);
   const highlightedProducts = products.slice(0, 4);
   const reasons = [
@@ -30,34 +23,11 @@ export default function HomePage() {
     "Fast technical guidance for specification and application.",
     "Regional and export coverage with practical support."
   ];
-  const insulationFaqs = [
-    {
-      question: "Fire performance: what matters in practice?",
-      answer:
-        "Expanded polystyrene used in facade systems is specified with complete assembly behavior in mind. When paired with reinforcing layers and finishing plaster, systems are designed to support required reaction-to-fire classifications according to project standards."
-    },
-    {
-      question: "Is EPS suitable for schools, public buildings, and stations?",
-      answer:
-        "Yes, when selected and installed according to local code requirements. The key factors are certified system components, tested assembly details, and proper execution on site."
-    },
-    {
-      question: "Are EPS panels resistant to moisture?",
-      answer:
-        "EPS does not absorb moisture like open-structure materials. Good detailing, sealed joints, and proper facade layers remain essential to prevent water entry and preserve long-term thermal performance."
-    },
-    {
-      question: "Does insulation stop walls from breathing?",
-      answer:
-        "Indoor humidity control depends mainly on ventilation and airtight window detailing. External insulation supports thermal stability, while indoor air management should be solved through balanced ventilation strategy."
-    }
-  ];
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[linear-gradient(112deg,#f3f4f6_0%,#e8ebee_52%,#dde2e8_100%)] text-[var(--text)]">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(255,255,255,0.75),transparent_45%)]" />
-        <div className="relative ml-auto mr-4 w-[min(1540px,calc(100%-2rem))] py-7 lg:py-8">
+      <section className="relative overflow-hidden bg-white pt-2 text-[var(--text)]">
+        <div className="relative mx-auto w-[min(1285px,calc(100%-2rem))] py-7 lg:py-8">
           <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.22em] text-[#626d79]">Construction Systems</p>
@@ -86,10 +56,9 @@ export default function HomePage() {
             </div>
 
             <div className="relative">
-              <div className="absolute inset-x-10 bottom-4 h-24 rounded-full bg-[#9aa4af]/35 blur-3xl" />
               <ConstructionSystemsSlider
                 images={constructionSystemSlides}
-                className="relative z-10 ml-auto w-full max-w-[690px] drop-shadow-[0_20px_26px_rgba(46,56,67,0.25)]"
+                className="relative z-10 w-full"
                 intervalMs={2000}
               />
             </div>
@@ -97,7 +66,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="ml-auto mr-4 w-[min(1600px,calc(100%-2rem))] pt-12 pb-14">
+      <section className="mx-auto w-[min(1285px,calc(100%-2rem))] pt-12 pb-14">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
@@ -120,12 +89,12 @@ export default function HomePage() {
 
         <HomeCategorySlider
           categories={categories}
-          className="mt-2 ml-auto w-full max-w-[1285px]"
+          className="mt-2 w-full"
           ariaLabel="Solutions portfolio category slider"
         />
       </section>
 
-      <section className="site-container ml-auto mr-4 py-14">
+      <section className="mx-auto w-[min(1285px,calc(100%-2rem))] py-14">
         <div className="rounded-2xl border border-[var(--line)] bg-white p-6 md:p-7">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -155,7 +124,7 @@ export default function HomePage() {
                   alt={catalog.title}
                   width={700}
                   height={980}
-                  className="h-52 w-full border-b border-[var(--line)] object-cover"
+                  className="aspect-[1/1.42] w-full border-b border-[var(--line)] object-cover"
                   loading="lazy"
                 />
                 <div className="p-3">
@@ -176,7 +145,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-container ml-auto mr-4 pb-14">
+      <section className="mx-auto w-[min(1285px,calc(100%-2rem))] pb-14">
         <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
           <div className="max-w-4xl">
             <p className="text-xs uppercase tracking-[0.19em] text-[var(--brand)]">About Us</p>
@@ -214,55 +183,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#eceef1] py-14">
-        <div className="site-container ml-auto mr-4 grid gap-8 lg:grid-cols-[1fr_1fr]">
-          <article>
-            <h2 className="max-w-2xl text-4xl leading-tight font-semibold text-[#2a2f36] md:text-5xl" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-              How do insulated walls stay dry and durable over time?
-            </h2>
-            <div className="mt-4 flex items-center gap-2">
-              <span className="text-[#1f6db8]">...</span>
-              <span className="h-1 w-24 rounded-full bg-[#1f6db8]" />
-            </div>
-            <div className="mt-5 space-y-3 text-base leading-relaxed text-[#4c535c]">
-              <p>
-                Wall moisture issues are often caused by poor ventilation and airtight windows without proper air exchange, not by the insulation layer itself.
-              </p>
-              <p>
-                In renovation projects, vapor generated indoors from cooking, drying, and daily use can be several times greater than outward diffusion through facade walls.
-              </p>
-              <p>
-                Well-designed facade systems combine thermal insulation, reinforcement, and finishing layers to help control temperature stress, reduce condensation risk, and keep wall performance stable.
-              </p>
-              <p>
-                Selecting tested components and applying them correctly on site is the decisive factor for long-term durability.
-              </p>
-            </div>
-          </article>
-
-          <div className="space-y-3">
-            {insulationFaqs.map((item, index) => (
-              <details
-                key={item.question}
-                open={index === 0}
-                className="group border border-[#dde2e8] bg-[#f4f6f8] open:bg-white"
-              >
-                <summary className="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 text-xl font-semibold text-[#2d333b]">
-                  <span>{item.question}</span>
-                  <span className="text-[var(--brand)] transition group-open:rotate-180">v</span>
-                </summary>
-                <div className="border-t border-[#e3e8ed] px-4 py-4">
-                  <p className="text-base leading-relaxed text-[#4d5460]">{item.answer}</p>
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="site-container ml-auto mr-4 pb-20">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <article className="rounded-2xl border border-[var(--line)] bg-white p-6 md:p-7">
+      <section className="mx-auto w-[min(1285px,calc(100%-2rem))] pt-12 pb-20">
+        <div className="grid items-start gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <article className="self-start rounded-2xl border border-[var(--line)] bg-white p-6 md:p-7 lg:sticky lg:top-24">
             <div>
               <p className="text-xs uppercase tracking-[0.19em] text-[var(--brand)]">Why PEVALIT</p>
               <h2 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
@@ -308,7 +231,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-container ml-auto mr-4 pb-24">
+      <section className="mx-auto w-[min(1285px,calc(100%-2rem))] pb-24">
         <div className="rounded-2xl border border-[var(--line)] bg-[var(--text)] p-8 text-white">
           <p className="text-xs uppercase tracking-[0.18em] text-[var(--brand)]">Technical + Commercial Support</p>
           <h2 className="mt-3 max-w-2xl text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>

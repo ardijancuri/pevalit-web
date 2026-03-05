@@ -184,9 +184,9 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-transparent px-2 pt-2">
-      <div className="rounded-md border border-[#d4dbe1] bg-[linear-gradient(90deg,#eff2f5_0%,#e6eaee_100%)] text-[var(--text)] shadow-[0_8px_20px_rgba(24,39,56,0.12)]">
-        <div className="mx-auto flex w-[min(1540px,calc(100%-1rem))] items-stretch justify-between gap-3 py-0">
+    <header className="sticky top-0 z-40 bg-transparent pt-4">
+      <div className="mx-auto w-[min(1285px,calc(100%-2rem))] rounded-md border border-[#d4dbe1] bg-white text-[var(--text)]">
+        <div className="flex items-stretch justify-between gap-3 py-0">
           <div className="flex items-stretch">
             <span className="hidden w-16 bg-[var(--brand)] lg:block" />
             <Link href="/" aria-label={siteData.companyName} className="inline-flex items-center bg-white px-4 md:px-5">
@@ -211,8 +211,8 @@ export function SiteHeader() {
             {headerCopy.menu}
           </button>
 
-          <div className="hidden min-w-0 flex-1 items-center justify-between md:flex">
-            <nav aria-label="Main navigation" className="min-w-0 pl-5">
+          <div className="hidden min-w-0 flex-1 items-center justify-between pr-6 md:flex">
+            <nav aria-label="Main navigation" className="relative min-w-0 pl-5">
               <ul className="flex flex-wrap items-center gap-x-5 text-sm">
                 {siteData.navigation.map((item) => {
                   const baseClass = `inline-flex border-b-2 px-0.5 py-5 text-[0.72rem] font-semibold uppercase tracking-[0.08em] transition ${
@@ -235,7 +235,7 @@ export function SiteHeader() {
                   return (
                     <li
                       key={item.href}
-                      className="relative"
+                      className="static"
                       onMouseEnter={openProductsMenu}
                       onMouseLeave={closeProductsMenu}
                       onFocus={openProductsMenu}
@@ -309,15 +309,6 @@ export function SiteHeader() {
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              <div className="hidden flex-col text-right text-[0.76rem] leading-tight font-semibold lg:flex">
-                <a href={`tel:${siteData.contact.phone}`} className="text-[#4f5964] hover:text-[var(--text)]">
-                  {siteData.contact.phone}
-                </a>
-                <a href={`mailto:${siteData.contact.email}`} className="mt-1 text-[#4f5964] hover:text-[var(--text)]">
-                  {siteData.contact.email}
-                </a>
               </div>
             </div>
           </div>

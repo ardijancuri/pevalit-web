@@ -18,7 +18,7 @@
 body {
   margin: 0;
   color: var(--text);
-  background: #f2f2f2;
+  background: #ffffff;
 }
 
 a {
@@ -27,7 +27,7 @@ a {
 }
 
 .site-container {
-  width: min(1100px, calc(100% - 2rem));
+  width: min(1285px, calc(100% - 2rem));
   margin-inline: auto;
 }
 
