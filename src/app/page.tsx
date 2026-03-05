@@ -107,7 +107,7 @@ export default function HomePage() {
 
         <HomeCategorySlider
           categories={categories}
-          className="mt-2 ml-auto w-full max-w-[1500px]"
+          className="mt-2 ml-auto w-full max-w-[1285px]"
           ariaLabel="Solutions portfolio category slider"
         />
       </section>

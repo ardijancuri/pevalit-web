@@ -69,7 +69,7 @@ export function ProductFilters({ categories, products, initialCategory = "all" }
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
         {filtered.map((product) => (
           <article className="card overflow-hidden p-0" key={product.slug}>
             <Image
