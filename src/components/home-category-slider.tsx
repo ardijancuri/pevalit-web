@@ -181,7 +181,7 @@ export function HomeCategorySlider({ categories, className = "", ariaLabel = "So
               key={category.slug}
               href={`/products/${category.slug}`}
               data-category-slide="true"
-              className="group block shrink-0 basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)] transition"
+              className="product-card group block shrink-0 basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)] transition"
             >
               <Image
                 src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : FALLBACK_IMAGE}

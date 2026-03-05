@@ -24,7 +24,7 @@ export function HomeCatalogMobileSlider({ catalogs }: HomeCatalogMobileSliderPro
     <div className="md:hidden">
       <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {catalogs.map((catalog) => (
-          <article key={catalog.slug} className="shrink-0 snap-start basis-[86%] overflow-hidden bg-white">
+          <article key={catalog.slug} className="catalog-card shrink-0 snap-start basis-[86%] overflow-hidden bg-white">
             <Image
               src={catalog.previewImage}
               alt={catalog.title}

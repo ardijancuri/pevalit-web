@@ -21,7 +21,7 @@ export default function CatalogsPage() {
       <section className="section-block bg-[var(--bg)]">
         <div className="site-container grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {catalogs.map((catalog) => (
-            <article className="overflow-hidden bg-white" key={catalog.slug}>
+            <article className="catalog-card overflow-hidden bg-white" key={catalog.slug}>
               <Image
                 src={catalog.previewImage}
                 alt={catalog.title}

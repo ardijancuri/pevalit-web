@@ -258,7 +258,7 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
               key={product.slug}
               href={`/product/${product.slug}`}
               data-mini-card="true"
-              className="group shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] overflow-hidden rounded-[8px] bg-white sm:basis-[calc((100%-2.25rem)/4)]"
+              className="product-card group shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] overflow-hidden rounded-[8px] bg-white sm:basis-[calc((100%-2.25rem)/4)]"
             >
               <div className="relative h-28 overflow-hidden bg-[#f7f8f8] sm:h-32">
                 <Image

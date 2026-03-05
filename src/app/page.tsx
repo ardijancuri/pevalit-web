@@ -83,16 +83,16 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-x-3 lg:gap-y-0">
             {categories.slice(0, 4).map((category) => (
-              <article key={category.slug} className="relative overflow-visible bg-[var(--charcoal)] text-[var(--charcoal-text)]">
+              <article key={category.slug} className="product-card solutions-card relative overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)] lg:overflow-visible">
                 <Image
                   src={category.heroImage}
                   alt={category.name}
                   width={640}
                   height={640}
-                  className="aspect-square w-full object-cover"
+                  className="solutions-card-media aspect-square w-full object-cover"
                   loading="lazy"
                 />
-                <div className="p-3 lg:absolute lg:top-full lg:left-0 lg:z-10 lg:min-h-[132px] lg:w-full lg:bg-[var(--charcoal)] lg:p-4">
+                <div className="solutions-card-content p-3 lg:absolute lg:top-full lg:left-0 lg:z-10 lg:min-h-[132px] lg:w-full lg:bg-[var(--charcoal)] lg:p-4">
                   <h3 className="text-sm font-semibold md:text-base">{category.name}</h3>
                   <p className="mt-1 text-xs text-[var(--charcoal-muted)] md:mt-2 md:text-sm">{category.description}</p>
                 </div>
@@ -128,7 +128,7 @@ export default function HomePage() {
 
           <div className="hidden gap-3 md:grid md:grid-cols-3">
             {highlightedCatalogs.map((catalog) => (
-              <article key={catalog.slug} className="group relative overflow-hidden bg-white">
+              <article key={catalog.slug} className="catalog-card group relative overflow-hidden bg-white">
                 <Image
                   src={catalog.previewImage}
                   alt={catalog.title}

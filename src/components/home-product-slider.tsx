@@ -230,7 +230,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
           </div>
           <Link
             href={`/product/${activeProduct.slug}`}
-            className="ml-auto rounded-[8px] bg-[var(--brand)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] !text-white hover:bg-[var(--brand-strong)]"
+            className="btn-ui ml-auto bg-[var(--brand)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] !text-white hover:bg-[var(--brand-strong)]"
           >
             View product
           </Link>

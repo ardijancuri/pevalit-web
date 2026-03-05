@@ -11,28 +11,28 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <div className="bg-[var(--bg)]">
+    <div className="bg-white">
       <PageIntro
         eyebrow="Products"
         title="Browse Products By Category."
         description="Clean category navigation with direct access to full product lists and technical details."
-        surface="white"
+        surface="muted"
       />
-      <section className="section-block bg-[var(--bg)]">
+      <section className="section-block bg-white">
         <div className="site-container grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {productsByCategory.map(({ category, products }) => (
-            <article className="flex h-full flex-col overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)]" key={category.slug}>
+            <article className="product-card flex h-full flex-col overflow-hidden border border-[var(--line)] bg-[var(--bg-soft)] text-[var(--text)]" key={category.slug}>
               <Image
                 src={products[0]?.imageUrl || category.heroImage || "/images/imported/Pevalit-Catalogue-DE.jpg"}
                 alt={category.name}
                 width={800}
                 height={640}
-                className="aspect-[1.2/1] w-full object-cover"
+                className="aspect-square w-full object-cover"
                 loading="lazy"
               />
               <div className="flex flex-1 flex-col p-5">
                 <h2 className="text-xl font-semibold">{category.name}</h2>
-                <p className="mt-2 text-sm text-[var(--charcoal-muted)]">{category.description}</p>
+                <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
                 <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand)]">
                   {products.length} {products.length === 1 ? "product" : "products"}
                 </p>

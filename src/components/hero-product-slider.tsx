@@ -219,7 +219,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
             key={product.slug}
             href={`/product/${product.slug}`}
             data-slider-item="true"
-            className="group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden rounded-[8px] bg-white transition"
+            className="product-card group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden rounded-[8px] bg-white transition"
             draggable={false}
           >
             <Image
