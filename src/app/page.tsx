@@ -1,11 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
+import { ConstructionSystemsSlider } from "@/components/construction-systems-slider";
 import { HomeCategorySlider } from "@/components/home-category-slider";
 import { catalogs, categories, corporate, getCategoryNameBySlug, getProductSummary, products, siteData } from "@/lib/content";
 
 export default function HomePage() {
   const about = corporate.about;
+  const constructionSystemSlides = [
+    { src: "/images/imported/construction-systems-slider/slide-01.jpg", alt: "PEVALIT construction systems slide 1" },
+    { src: "/images/imported/construction-systems-slider/slide-02.jpg", alt: "PEVALIT construction systems slide 2" },
+    { src: "/images/imported/construction-systems-slider/slide-03.jpg", alt: "PEVALIT construction systems slide 3" },
+    { src: "/images/imported/construction-systems-slider/slide-04.jpg", alt: "PEVALIT construction systems slide 4" },
+    { src: "/images/imported/construction-systems-slider/slide-05.jpg", alt: "PEVALIT construction systems slide 5" },
+    { src: "/images/imported/construction-systems-slider/slide-06.jpg", alt: "PEVALIT construction systems slide 6" },
+    { src: "/images/imported/construction-systems-slider/slide-07.jpg", alt: "PEVALIT construction systems slide 7" },
+    { src: "/images/imported/construction-systems-slider/slide-08.jpg", alt: "PEVALIT construction systems slide 8" },
+    { src: "/images/imported/construction-systems-slider/slide-09.jpg", alt: "PEVALIT construction systems slide 9" },
+    { src: "/images/imported/construction-systems-slider/slide-10.jpg", alt: "PEVALIT construction systems slide 10" },
+    { src: "/images/imported/construction-systems-slider/slide-11.jpg", alt: "PEVALIT construction systems slide 11" },
+    { src: "/images/imported/construction-systems-slider/slide-12.jpg", alt: "PEVALIT construction systems slide 12" },
+    { src: "/images/imported/construction-systems-slider/slide-13.jpg", alt: "PEVALIT construction systems slide 13" }
+  ];
   const highlightedCatalogs = catalogs.slice(0, 3);
   const highlightedProducts = products.slice(0, 4);
   const reasons = [
@@ -41,7 +57,7 @@ export default function HomePage() {
     <>
       <section className="relative overflow-hidden bg-[linear-gradient(112deg,#f3f4f6_0%,#e8ebee_52%,#dde2e8_100%)] text-[var(--text)]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(255,255,255,0.75),transparent_45%)]" />
-        <div className="relative mx-auto w-[min(1540px,calc(100%-2rem))] py-7 lg:py-8">
+        <div className="relative ml-auto mr-4 w-[min(1540px,calc(100%-2rem))] py-7 lg:py-8">
           <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.22em] text-[#626d79]">Construction Systems</p>
@@ -71,20 +87,17 @@ export default function HomePage() {
 
             <div className="relative">
               <div className="absolute inset-x-10 bottom-4 h-24 rounded-full bg-[#9aa4af]/35 blur-3xl" />
-              <Image
-                src="/images/imported/3-2-1024x974.jpg"
-                alt="PEVALIT EPS systems"
-                width={1100}
-                height={1048}
-                className="relative z-10 ml-auto w-full max-w-[690px] object-contain drop-shadow-[0_20px_26px_rgba(46,56,67,0.25)]"
-                priority
+              <ConstructionSystemsSlider
+                images={constructionSystemSlides}
+                className="relative z-10 ml-auto w-full max-w-[690px] drop-shadow-[0_20px_26px_rgba(46,56,67,0.25)]"
+                intervalMs={2000}
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto w-[min(1600px,calc(100%-2rem))] pt-12 pb-14">
+      <section className="ml-auto mr-4 w-[min(1600px,calc(100%-2rem))] pt-12 pb-14">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--brand)]">Solutions Portfolio</p>
@@ -112,7 +125,7 @@ export default function HomePage() {
         />
       </section>
 
-      <section className="site-container py-14">
+      <section className="site-container ml-auto mr-4 py-14">
         <div className="rounded-2xl border border-[var(--line)] bg-white p-6 md:p-7">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -163,7 +176,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-container pb-14">
+      <section className="site-container ml-auto mr-4 pb-14">
         <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
           <div className="max-w-4xl">
             <p className="text-xs uppercase tracking-[0.19em] text-[var(--brand)]">About Us</p>
@@ -202,7 +215,7 @@ export default function HomePage() {
       </section>
 
       <section className="bg-[#eceef1] py-14">
-        <div className="site-container grid gap-8 lg:grid-cols-[1fr_1fr]">
+        <div className="site-container ml-auto mr-4 grid gap-8 lg:grid-cols-[1fr_1fr]">
           <article>
             <h2 className="max-w-2xl text-4xl leading-tight font-semibold text-[#2a2f36] md:text-5xl" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
               How do insulated walls stay dry and durable over time?
@@ -247,7 +260,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-container pb-20">
+      <section className="site-container ml-auto mr-4 pb-20">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <article className="rounded-2xl border border-[var(--line)] bg-white p-6 md:p-7">
             <div>
@@ -295,7 +308,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="site-container pb-24">
+      <section className="site-container ml-auto mr-4 pb-24">
         <div className="rounded-2xl border border-[var(--line)] bg-[var(--text)] p-8 text-white">
           <p className="text-xs uppercase tracking-[0.18em] text-[var(--brand)]">Technical + Commercial Support</p>
           <h2 className="mt-3 max-w-2xl text-3xl font-semibold" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
@@ -327,3 +340,4 @@ export default function HomePage() {
     </>
   );
 }
+
