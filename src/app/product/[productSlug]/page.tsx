@@ -121,12 +121,19 @@ export default async function ProductPage({ params }: Props) {
 
             <h2 className="mt-8 text-xl font-semibold">{ui.productPage.technicalSpecs}</h2>
             <dl className="mt-4 grid gap-3 rounded-[8px] bg-[var(--bg-soft)] p-4">
-              {product.technicalSpecs.map((spec) => (
-                <div key={spec.label} className="grid grid-cols-1 gap-1 pb-3 sm:grid-cols-2 sm:gap-3 last:pb-0">
-                  <dt className="text-sm text-[var(--muted)]">{spec.label}</dt>
-                  <dd className="text-sm font-medium">{spec.value}</dd>
-                </div>
-              ))}
+              {product.technicalSpecs.map((spec, index) => {
+                const hasLabel = spec.label.trim().length > 0;
+
+                return (
+                  <div
+                    key={`${spec.label || "value"}-${index}`}
+                    className={hasLabel ? "grid grid-cols-1 gap-1 pb-3 sm:grid-cols-2 sm:gap-3 last:pb-0" : "pb-3 last:pb-0"}
+                  >
+                    {hasLabel ? <dt className="text-sm text-[var(--muted)]">{spec.label}</dt> : null}
+                    <dd className="text-sm font-medium">{spec.value}</dd>
+                  </div>
+                );
+              })}
             </dl>
 
             <h2 className="mt-8 text-xl font-semibold">{ui.productPage.documents}</h2>

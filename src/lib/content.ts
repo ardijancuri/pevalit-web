@@ -34,6 +34,45 @@ import {
 } from "@/lib/types";
 
 const baseProducts = productSchema.array().parse(enProductsJson);
+type BaseProduct = (typeof baseProducts)[number];
+
+function normalizeProductBenefit(benefit: string) {
+  if (benefit === "Legacy product application and technical parameter content imported from pevalit.com.") {
+    return "Imported product data from legacy website.";
+  }
+
+  return benefit;
+}
+
+function normalizeTechnicalSpecs(technicalSpecs: BaseProduct["technicalSpecs"]) {
+  if (technicalSpecs.every((spec) => spec.label === "Details")) {
+    return technicalSpecs.map((spec) => ({ ...spec, label: "" }));
+  }
+
+  const normalized: BaseProduct["technicalSpecs"] = [];
+
+  for (const spec of technicalSpecs) {
+    if (spec.label === "Details") {
+      const previousIndex = normalized.length - 1;
+      const previousSpec = normalized[previousIndex];
+
+      if (previousSpec && previousSpec.label.trim().length > 0) {
+        normalized[previousIndex] = {
+          ...previousSpec,
+          value: `${previousSpec.value} ${spec.value}`.trim()
+        };
+        continue;
+      }
+
+      normalized.push({ ...spec, label: "" });
+      continue;
+    }
+
+    normalized.push({ ...spec });
+  }
+
+  return normalized;
+}
 
 const contentSourceByLanguage = {
   en: {
@@ -130,8 +169,8 @@ function buildLocalizedContent(language: LanguageCode) {
 
       return `${getCategoryApplicationPrefix(language)}: ${categoryNameBySlug.get(product.categorySlug) ?? product.categorySlug}`;
     }),
-    benefits: product.benefits.map((benefit) => translateProductBenefit(language, benefit)),
-    technicalSpecs: product.technicalSpecs.map((spec) => ({
+    benefits: product.benefits.map((benefit) => translateProductBenefit(language, normalizeProductBenefit(benefit))),
+    technicalSpecs: normalizeTechnicalSpecs(product.technicalSpecs).map((spec) => ({
       ...spec,
       label: translateTechnicalSpecLabel(language, spec.label)
     }))
