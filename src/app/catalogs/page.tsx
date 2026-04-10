@@ -26,7 +26,7 @@ export default async function CatalogsPage() {
       <PageIntro
         eyebrow={ui.catalogsPage.eyebrow}
         title={ui.catalogsPage.title}
-        description={ui.catalogsPage.description}
+        description=""
         surface="white"
       />
       <section className="section-block bg-[var(--bg)]">
