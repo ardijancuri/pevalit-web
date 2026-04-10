@@ -60,9 +60,6 @@ export default async function ProductPage({ params }: Props) {
 
   const heroImage = product.imageUrl || "/images/imported/Pevalit-Catalogue-DE.jpg";
   const summary = getProductSummary(language, content, product);
-  const relatedProducts = content.products
-    .filter((item) => item.categorySlug === product.categorySlug && item.slug !== product.slug)
-    .slice(0, 3);
   const localizedCategoryName = getCategoryNameBySlug(content, product.categorySlug);
   const homeLabel = content.siteData.navigation.find((item) => item.href === "/")?.label || "Home";
   const productsLabel = content.siteData.navigation.find((item) => item.href === "/products")?.label || "Products";
@@ -142,19 +139,6 @@ export default async function ProductPage({ params }: Props) {
                 </li>
               ))}
             </ul>
-
-            {relatedProducts.length ? (
-              <>
-                <h2 className="mt-8 text-xl font-semibold">{ui.productPage.relatedProducts}</h2>
-                <div className="mt-4 grid gap-3 md:grid-cols-3">
-                  {relatedProducts.map((item) => (
-                    <Link key={item.slug} href={`/product/${item.slug}`} className="bg-[var(--charcoal)] p-3 text-[var(--charcoal-text)]">
-                      <p className="text-sm font-semibold">{item.name}</p>
-                    </Link>
-                  ))}
-                </div>
-              </>
-            ) : null}
           </article>
 
           <aside className="lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:self-start lg:overflow-y-auto lg:pr-1">
