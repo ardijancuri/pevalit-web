@@ -130,11 +130,30 @@ export default async function ProductPage({ params }: Props) {
             </dl>
 
             <h2 className="mt-8 text-xl font-semibold">{ui.productPage.documents}</h2>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 flex flex-wrap gap-3">
               {product.documents.map((document) => (
                 <li key={document.url}>
-                  <Link href={document.url} className="text-sm font-medium text-[var(--brand)] underline underline-offset-4">
-                    {document.title}
+                  <Link
+                    href={document.url}
+                    aria-label={`${ui.productPage.technicalParameters} - ${document.title}`}
+                    title={document.title}
+                    className="inline-flex items-center gap-2 rounded-[8px] bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4"
+                    >
+                      <path d="M12 3v12" />
+                      <path d="m7 10 5 5 5-5" />
+                      <path d="M5 21h14" />
+                    </svg>
+                    {ui.productPage.technicalParameters}
                   </Link>
                 </li>
               ))}

@@ -23,9 +23,10 @@
     { "label": "Kontakti", "href": "/contact" }
   ],
   "footerLinks": [
-    { "label": "Rreth Nesh", "href": "/corporate/about" },
+    { "label": "Korporata", "href": "/corporate/about" },
     { "label": "Politika e Cilësisë", "href": "/corporate/quality-policy" },
     { "label": "Produktet", "href": "/products" },
-    { "label": "Katalogët", "href": "/catalogs" }
+    { "label": "Katalogët", "href": "/catalogs" },
+    { "label": "Kontakti", "href": "/contact" }
   ]
 }

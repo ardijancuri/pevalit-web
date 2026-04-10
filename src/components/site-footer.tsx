@@ -51,23 +51,34 @@ export function SiteFooter({ siteData, language, labels }: SiteFooterProps) {
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">{labels.contact}</p>
             <ul className="mt-3 space-y-2 text-sm text-[var(--charcoal-muted)]">
               <li>
-                <a href={`mailto:${siteData.contact.email}`} className="hover:text-[var(--charcoal-text)]">
-                  {siteData.contact.email}
+                <a href="mailto:info@pevalit.com" className="hover:text-[var(--charcoal-text)]">
+                  info@pevalit.com
                 </a>
               </li>
               <li>
-                <a href={`tel:${siteData.contact.phone}`} className="hover:text-[var(--charcoal-text)]">
-                  {siteData.contact.phone}
+                <a href="tel:+38946708520" className="hover:text-[var(--charcoal-text)]">
+                  Tel: +389 46 70 85 20
                 </a>
               </li>
-              <li>{siteData.contact.address}</li>
+              <li>Fax: +389 46 70 91 98</li>
+              <li>Livadhi Strugë 6338 Macedonia</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-center text-xs text-[var(--charcoal-muted)] md:justify-between md:text-left">
           <p>{formatFooterCopyright(language, year)}</p>
-          <p>{labels.certifiedSupport}</p>
+          <p>
+            Developed by{" "}
+            <a
+              href="https://oninova.net"
+              target="_blank"
+              rel="noreferrer"
+              className="!text-[var(--brand)] underline decoration-[var(--brand)] underline-offset-4"
+            >
+              Oninova
+            </a>
+          </p>
         </div>
       </div>
     </footer>

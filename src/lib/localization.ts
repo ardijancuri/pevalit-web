@@ -90,6 +90,7 @@ type LocaleCopy = {
     typicalApplications: string;
     technicalSpecs: string;
     documents: string;
+    technicalParameters: string;
     relatedProducts: string;
   };
   productFilters: {
@@ -214,6 +215,7 @@ const UI_COPY = {
       typicalApplications: "Typical Applications",
       technicalSpecs: "Technical Specs",
       documents: "Documents",
+      technicalParameters: "Technical Parameters",
       relatedProducts: "Related Products"
     },
     productFilters: {
@@ -340,6 +342,7 @@ const UI_COPY = {
       typicalApplications: "Aplikimet tipike",
       technicalSpecs: "Specifikimet teknike",
       documents: "Dokumente",
+      technicalParameters: "Parametrat Teknikë",
       relatedProducts: "Produkte të ngjashme"
     },
     productFilters: {
@@ -463,6 +466,7 @@ const UI_COPY = {
       typicalApplications: "Типични примени",
       technicalSpecs: "Технички спецификации",
       documents: "Документи",
+      technicalParameters: "Технички параметри",
       relatedProducts: "Поврзани производи"
     },
     productFilters: {
@@ -586,6 +590,7 @@ const UI_COPY = {
       typicalApplications: "Typische Anwendungen",
       technicalSpecs: "Technische Daten",
       documents: "Dokumente",
+      technicalParameters: "Technische Parameter",
       relatedProducts: "Ähnliche Produkte"
     },
     productFilters: {

@@ -23,9 +23,10 @@
     { "label": "Контакт", "href": "/contact" }
   ],
   "footerLinks": [
-    { "label": "За Нас", "href": "/corporate/about" },
+    { "label": "Корпоративно", "href": "/corporate/about" },
     { "label": "Политика за Квалитет", "href": "/corporate/quality-policy" },
     { "label": "Производи", "href": "/products" },
-    { "label": "Каталози", "href": "/catalogs" }
+    { "label": "Каталози", "href": "/catalogs" },
+    { "label": "Контакт", "href": "/contact" }
   ]
 }

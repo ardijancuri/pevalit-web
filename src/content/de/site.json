@@ -23,9 +23,10 @@
     { "label": "Kontakt", "href": "/contact" }
   ],
   "footerLinks": [
-    { "label": "Über Uns", "href": "/corporate/about" },
+    { "label": "Unternehmen", "href": "/corporate/about" },
     { "label": "Qualitätspolitik", "href": "/corporate/quality-policy" },
     { "label": "Produkte", "href": "/products" },
-    { "label": "Kataloge", "href": "/catalogs" }
+    { "label": "Kataloge", "href": "/catalogs" },
+    { "label": "Kontakt", "href": "/contact" }
   ]
 }
