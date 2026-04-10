@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 import crypto from "node:crypto";
+import { getUiCopy, resolveLanguage } from "@/lib/localization";
 
 const requestSchema = z.object({
   name: z.string().min(2),
@@ -11,6 +12,7 @@ const requestSchema = z.object({
   country: z.string().min(2),
   message: z.string().min(10),
   productSlug: z.string().optional(),
+  language: z.string().optional(),
   captchaToken: z.string().optional(),
   website: z.string().optional(),
   startedAt: z.string().optional()
@@ -38,29 +40,35 @@ async function verifyHCaptcha(captchaToken?: string) {
 
 export async function POST(request: Request) {
   const body = await request.json();
+  const language = resolveLanguage(typeof body?.language === "string" ? body.language : null);
+  const copy = getUiCopy(language);
   const parsed = requestSchema.safeParse(body);
+
   if (!parsed.success) {
-    return NextResponse.json({ success: false, message: "Invalid form data.", fieldErrors: parsed.error.flatten() }, { status: 400 });
+    return NextResponse.json(
+      { success: false, message: copy.api.invalidFormData, fieldErrors: parsed.error.flatten() },
+      { status: 400 }
+    );
   }
 
   const data = parsed.data;
   if (data.website) {
-    return NextResponse.json({ success: true, message: "Request submitted." });
+    return NextResponse.json({ success: true, message: copy.api.requestSubmitted });
   }
 
   const startedAt = Number(data.startedAt ?? Date.now());
   if (!Number.isFinite(startedAt) || Date.now() - startedAt < 2000) {
-    return NextResponse.json({ success: false, message: "Please retry your request." }, { status: 429 });
+    return NextResponse.json({ success: false, message: copy.api.retryRequest }, { status: 429 });
   }
 
   const captchaValid = await verifyHCaptcha(data.captchaToken);
   if (!captchaValid) {
-    return NextResponse.json({ success: false, message: "Captcha verification failed." }, { status: 400 });
+    return NextResponse.json({ success: false, message: copy.api.captchaFailed }, { status: 400 });
   }
 
   if (!resendKey) {
     return NextResponse.json(
-      { success: false, message: "Email service is not configured. Set RESEND_API_KEY." },
+      { success: false, message: copy.api.emailNotConfigured },
       { status: 500 }
     );
   }
@@ -89,23 +97,23 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: sender,
       to: data.email,
-      subject: `We received your request (${requestId})`,
+      subject: `${copy.api.autoReplySubject} (${requestId})`,
       text: [
-        `Hi ${data.name},`,
+        `${copy.api.autoReplyGreeting} ${data.name},`,
         "",
-        "Thanks for contacting PEVALIT.",
-        "Our team has received your request and will reply with technical feedback and the next steps.",
+        copy.api.autoReplyThanks,
+        copy.api.autoReplyReceived,
         "",
-        `Reference ID: ${requestId}`,
+        `${copy.api.autoReplyReference}: ${requestId}`,
         "",
-        "PEVALIT Team"
+        copy.api.autoReplySignature
       ].join("\n")
     });
   }
 
   return NextResponse.json({
     success: true,
-    message: "Thanks. Your request has been sent successfully.",
+    message: copy.quoteForm.success,
     requestId
   });
 }

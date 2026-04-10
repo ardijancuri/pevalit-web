@@ -1,35 +1,46 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
 import { QuoteForm } from "@/components/quote-form";
-import { siteData } from "@/lib/content";
+import { getLocalizedContent } from "@/lib/content";
+import { getUiCopy } from "@/lib/localization";
+import { getCurrentLanguage } from "@/lib/server-language";
 
-export const metadata: Metadata = {
-  title: "Contact | PEVALIT",
-  description: "Contact PEVALIT for technical assistance, product recommendations, and quotation requests."
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const language = await getCurrentLanguage();
+  const ui = getUiCopy(language);
 
-export default function ContactPage() {
+  return {
+    title: ui.contactPage.eyebrow,
+    description: ui.contactPage.description
+  };
+}
+
+export default async function ContactPage() {
+  const language = await getCurrentLanguage();
+  const { siteData } = getLocalizedContent(language);
+  const ui = getUiCopy(language);
+
   return (
     <>
       <PageIntro
-        eyebrow="Contact"
-        title="Talk to our team about your production requirements."
-        description="Use the form to send your request and include your application details for a faster technical response."
+        eyebrow={ui.contactPage.eyebrow}
+        title={ui.contactPage.title}
+        description={ui.contactPage.description}
       />
       <section className="section-block bg-white">
         <div className="site-container grid gap-8 lg:grid-cols-[1.2fr_1fr]">
-          <QuoteForm />
+          <QuoteForm key={language} language={language} labels={ui.quoteForm} />
           <aside className="card p-4 md:p-6">
-            <h2 className="text-xl font-semibold">Direct Contact</h2>
-            <p className="mt-4 text-sm text-[var(--muted)]">Email</p>
+            <h2 className="text-xl font-semibold">{ui.contactPage.directContact}</h2>
+            <p className="mt-4 text-sm text-[var(--muted)]">{ui.contactPage.email}</p>
             <p className="text-sm font-medium">{siteData.contact.email}</p>
-            <p className="mt-4 text-sm text-[var(--muted)]">Phone</p>
+            <p className="mt-4 text-sm text-[var(--muted)]">{ui.contactPage.phone}</p>
             <p className="text-sm font-medium">{siteData.contact.phone}</p>
-            <p className="mt-4 text-sm text-[var(--muted)]">Address</p>
+            <p className="mt-4 text-sm text-[var(--muted)]">{ui.contactPage.address}</p>
             <p className="text-sm font-medium">{siteData.contact.address}</p>
             <div className="mt-6 rounded-[8px] bg-[var(--bg-soft)] p-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">Response Promise</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">Technical response within one business day for complete quote requests.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">{ui.contactPage.responsePromise}</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">{ui.contactPage.responsePromiseBody}</p>
             </div>
           </aside>
         </div>

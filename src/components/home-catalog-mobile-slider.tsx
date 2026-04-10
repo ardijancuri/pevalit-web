@@ -13,9 +13,10 @@ type MobileCatalog = {
 
 type HomeCatalogMobileSliderProps = {
   catalogs: MobileCatalog[];
+  downloadLabel: string;
 };
 
-export function HomeCatalogMobileSlider({ catalogs }: HomeCatalogMobileSliderProps) {
+export function HomeCatalogMobileSlider({ catalogs, downloadLabel }: HomeCatalogMobileSliderProps) {
   if (!catalogs.length) {
     return null;
   }
@@ -39,10 +40,10 @@ export function HomeCatalogMobileSlider({ catalogs }: HomeCatalogMobileSliderPro
               <TrackedLink
                 href={catalog.fileUrl}
                 className="btn-primary mt-3"
-                trackingLabel={`Download PDF - ${catalog.title}`}
+                trackingLabel={`${downloadLabel} - ${catalog.title}`}
                 trackingLocation="home_catalogs"
               >
-                Download PDF
+                {downloadLabel}
               </TrackedLink>
             </div>
           </article>

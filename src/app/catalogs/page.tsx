@@ -2,20 +2,31 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
 import { PageIntro } from "@/components/page-intro";
-import { catalogs } from "@/lib/content";
+import { getLocalizedContent } from "@/lib/content";
+import { getUiCopy } from "@/lib/localization";
+import { getCurrentLanguage } from "@/lib/server-language";
 
-export const metadata: Metadata = {
-  title: "Catalogs | PEVALIT",
-  description: "Browse PEVALIT catalogs with inline preview and direct download links."
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const language = await getCurrentLanguage();
+  const ui = getUiCopy(language);
 
-export default function CatalogsPage() {
+  return {
+    title: ui.catalogsPage.eyebrow,
+    description: ui.catalogsPage.description
+  };
+}
+
+export default async function CatalogsPage() {
+  const language = await getCurrentLanguage();
+  const { catalogs } = getLocalizedContent(language);
+  const ui = getUiCopy(language);
+
   return (
     <div className="bg-[var(--bg)]">
       <PageIntro
-        eyebrow="Catalogs"
-        title="Technical Catalogues, Ready To Download."
-        description="Open the latest PEVALIT catalogues and download PDF versions directly."
+        eyebrow={ui.catalogsPage.eyebrow}
+        title={ui.catalogsPage.title}
+        description={ui.catalogsPage.description}
         surface="white"
       />
       <section className="section-block bg-[var(--bg)]">
@@ -36,10 +47,10 @@ export default function CatalogsPage() {
                 <TrackedLink
                   href={catalog.fileUrl}
                   className="btn-primary mt-4"
-                  trackingLabel={`Download PDF - ${catalog.title}`}
+                  trackingLabel={`${ui.catalogsPage.downloadPdf} - ${catalog.title}`}
                   trackingLocation="catalogs_grid"
                 >
-                  Download PDF
+                  {ui.catalogsPage.downloadPdf}
                 </TrackedLink>
               </div>
             </article>

@@ -1,8 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import { siteData } from "@/lib/content";
+import { formatFooterCopyright, type LanguageCode, type UiCopy } from "@/lib/localization";
 
-export function SiteFooter() {
+type SiteFooterProps = {
+  siteData: {
+    companyName: string;
+    description: string;
+    footerLinks: Array<{ label: string; href: string }>;
+    contact: { email: string; phone: string; address: string };
+  };
+  language: LanguageCode;
+  labels: UiCopy["footer"];
+};
+
+export function SiteFooter({ siteData, language, labels }: SiteFooterProps) {
   const year = new Date().getFullYear();
 
   return (
@@ -19,12 +30,12 @@ export function SiteFooter() {
             />
             <p className="mt-3 max-w-md text-sm text-[var(--charcoal-muted)]">{siteData.description}</p>
             <Link href="/contact" className="btn-primary mt-5">
-              Contact Team
+              {labels.contactTeam}
             </Link>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">Explore</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">{labels.explore}</p>
             <ul className="mt-3 space-y-2 text-sm text-[var(--charcoal-muted)]">
               {siteData.footerLinks.map((link) => (
                 <li key={link.href}>
@@ -37,7 +48,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">Contact</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">{labels.contact}</p>
             <ul className="mt-3 space-y-2 text-sm text-[var(--charcoal-muted)]">
               <li>
                 <a href={`mailto:${siteData.contact.email}`} className="hover:text-[var(--charcoal-text)]">
@@ -55,8 +66,8 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-center text-xs text-[var(--charcoal-muted)] md:justify-between md:text-left">
-          <p>(c) {year}. All rights reserved.</p>
-          <p>Certified systems with practical technical support.</p>
+          <p>{formatFooterCopyright(language, year)}</p>
+          <p>{labels.certifiedSupport}</p>
         </div>
       </div>
     </footer>

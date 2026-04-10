@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "aquastop",
+    "name": "Aquastop",
+    "description": "Gama e produkteve Aquastop.",
+    "heroImage": "/images/imported/1-3-1024x974.jpg"
+  },
+  {
+    "slug": "decorative-plasters",
+    "name": "Suvate dekorative",
+    "description": "Gama e produkteve të suvave dekorative.",
+    "heroImage": "/images/imported/BUNSTE-1024x974.jpg"
+  },
+  {
+    "slug": "eps-polystyrene-sheets",
+    "name": "Pllaka EPS-Polistireni",
+    "description": "Gama e produkteve të pllakave EPS-Polistireni.",
+    "heroImage": "/images/imported/3-2-1024x974.jpg"
+  },
+  {
+    "slug": "facade-adhesives",
+    "name": "Ngjitës fasade",
+    "description": "Gama e produkteve të ngjitësve të fasadës.",
+    "heroImage": "/images/imported/24-1024x974.jpg"
+  },
+  {
+    "slug": "grouts",
+    "name": "Fugatues",
+    "description": "Gama e produkteve të fugatuesve.",
+    "heroImage": "/images/imported/2-1-1024x974.jpg"
+  },
+  {
+    "slug": "paints",
+    "name": "Bojëra",
+    "description": "Gama e produkteve të bojërave.",
+    "heroImage": "/images/imported/10-1024x974.jpg"
+  },
+  {
+    "slug": "plasters",
+    "name": "Suvatë",
+    "description": "Gama e produkteve të suvave.",
+    "heroImage": "/images/imported/G220-1024x974.jpg"
+  },
+  {
+    "slug": "polyurethane-adhesive-foam",
+    "name": "Shkumë poliuretani ngjitëse",
+    "description": "Gama e produkteve të shkumës poliuretani ngjitëse.",
+    "heroImage": "/images/imported/2-2-1024x974.jpg"
+  },
+  {
+    "slug": "silicone-sealants",
+    "name": "Mastikë silikoni",
+    "description": "Gama e produkteve të mastikës së silikonit.",
+    "heroImage": "/images/imported/3-1-1024x974.jpg"
+  },
+  {
+    "slug": "tile-adhesives",
+    "name": "Ngjitës për pllaka",
+    "description": "Gama e produkteve të ngjitësve për pllaka.",
+    "heroImage": "/images/imported/09-1024x974.jpg"
+  }
+]

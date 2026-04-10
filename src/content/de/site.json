@@ -1,0 +1,31 @@
+{
+  "companyName": "PEVALIT",
+  "tagline": "Hochleistungsadditive und Compounds für die moderne Kunststoffverarbeitung.",
+  "description": "PEVALIT entwickelt und liefert Additivkonzentrate und Compounds für Verarbeiter, die reproduzierbare Qualität, Prozesseffizienz und technische Unterstützung benötigen.",
+  "primaryCta": {
+    "label": "Produkte entdecken",
+    "href": "/products"
+  },
+  "secondaryCta": {
+    "label": "Angebot anfordern",
+    "href": "/contact"
+  },
+  "contact": {
+    "email": "sales@pevalit.com",
+    "phone": "+389 00 000 000",
+    "address": "Skopje, Nordmazedonien"
+  },
+  "navigation": [
+    { "label": "Startseite", "href": "/" },
+    { "label": "Produkte", "href": "/products" },
+    { "label": "Kataloge", "href": "/catalogs" },
+    { "label": "Unternehmen", "href": "/corporate/about" },
+    { "label": "Kontakt", "href": "/contact" }
+  ],
+  "footerLinks": [
+    { "label": "Über Uns", "href": "/corporate/about" },
+    { "label": "Qualitätspolitik", "href": "/corporate/quality-policy" },
+    { "label": "Produkte", "href": "/products" },
+    { "label": "Kataloge", "href": "/catalogs" }
+  ]
+}

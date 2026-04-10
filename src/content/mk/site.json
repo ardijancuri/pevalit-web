@@ -1,0 +1,31 @@
+{
+  "companyName": "PEVALIT",
+  "tagline": "Високоефикасни адитиви и соединенија за современо производство на пластика.",
+  "description": "PEVALIT развива и снабдува концентрати на адитиви и соединенија за преработувачи на кои им се потребни повторлива квалитет, ефикасност на процесот и техничка поддршка.",
+  "primaryCta": {
+    "label": "Истражи производи",
+    "href": "/products"
+  },
+  "secondaryCta": {
+    "label": "Побарај понуда",
+    "href": "/contact"
+  },
+  "contact": {
+    "email": "sales@pevalit.com",
+    "phone": "+389 00 000 000",
+    "address": "Скопје, Северна Македонија"
+  },
+  "navigation": [
+    { "label": "Почетна", "href": "/" },
+    { "label": "Производи", "href": "/products" },
+    { "label": "Каталози", "href": "/catalogs" },
+    { "label": "Корпоративно", "href": "/corporate/about" },
+    { "label": "Контакт", "href": "/contact" }
+  ],
+  "footerLinks": [
+    { "label": "За Нас", "href": "/corporate/about" },
+    { "label": "Политика за Квалитет", "href": "/corporate/quality-policy" },
+    { "label": "Производи", "href": "/products" },
+    { "label": "Каталози", "href": "/catalogs" }
+  ]
+}

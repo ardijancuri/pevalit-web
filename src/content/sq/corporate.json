@@ -1,0 +1,36 @@
+{
+  "about": {
+    "title": "Korporata",
+    "intro": "Pevalit specializohet në sisteme të avancuara termoizoluese, duke ofruar produkte cilësore si izolim me polistiren dhe lesh mineral për ndërtesa rezidenciale dhe komerciale. Zgjidhjet tona prioritizojnë efikasitetin energjetik, qëndrueshmërinë dhe lehtësinë e përdorimit, duke ndihmuar në uljen e kostove të energjisë dhe duke mbështetur ndërtimin e qëndrueshëm. Ne jemi të përkushtuar të ofrojmë materiale miqësore me mjedisin që plotësojnë standardet moderne të industrisë.",
+    "heroImage": "/images/imported/corporate-copy.jpg",
+    "sections": [
+      {
+        "heading": "Themelimi dhe prodhimi i hershëm",
+        "body": "Në vitin 1998, kompania filloi të zbatojë një strategji prodhimi për ngjitëset ndërtimore dhe komponimet për vendosjen e pllakave. Produktet e para u prezantuan në korrik 1999, duke arritur rreth 10 tonë në ditë."
+      },
+      {
+        "heading": "Rritja dhe zgjerimi i tregut",
+        "body": "Nga viti 2000 e tutje, shitjet u zgjeruan në Kosovë ndërsa kërkesa vendase vazhdoi të rritet. Deri në vitin 2005, produktet plotësonin kërkesat EN 12004 të certifikuara nga Instituti i Akredituar ZAG - Ljubljana, duke hapur mundësi eksporti drejt Gjermanisë dhe Zvicrës."
+      },
+      {
+        "heading": "Investime në teknologji dhe kapacitet",
+        "body": "Për të mbështetur kërkesën në rritje, në vitin 2009 u ndërtua një fabrikë e dytë, e fokusuar në materiale fasadash termoizoluese. Në vitin 2011, kompania mori certifikatat e sistemit ETAG 004 nga ZAG - Ljubljana dhe përmbushi kriteret e monitorimit të vazhdueshëm."
+      },
+      {
+        "heading": "Pozicioni aktual dhe drejtimi",
+        "body": "Sot, Ing - Luli është prezent në Maqedoni dhe në tregjet ndërkombëtare, përfshirë Kosovën, Gjermaninë, Zvicrën, Austrinë dhe Francën. Misioni i vazhdueshëm është të zgjerojë kapacitetin prodhues, të investojë në teknologji moderne dhe të ofrojë zgjidhje praktike në të gjitha fazat e ndërtimit."
+      }
+    ]
+  },
+  "qualityPolicy": {
+    "title": "Politika e Cilësisë",
+    "intro": "Cilësia ndërtohet mbi sisteme të certifikuara, prodhim të kontrolluar dhe përputhshmëri të vazhdueshme me standardet evropiane.",
+    "points": [
+      "Ruajtja e proceseve të standardizuara të prodhimit në përputhje me normat evropiane.",
+      "Mbajtja e certifikimit të produkteve sipas kërkesave EN 12004 dhe ETAG 004.",
+      "Mbështetja e monitorimit të vazhdueshëm dhe kontrolleve të përputhshmërisë nga institucione të akredituara.",
+      "Investimi në teknologji moderne, staf të kualifikuar dhe kontrolle të qëndrueshme të cilësisë.",
+      "Ofrimi i mbështetjes së besueshme teknike dhe shërbimit të qëndrueshëm për tregjet rajonale dhe të eksportit."
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+[
+  {
+    "slug": "catalog-en",
+    "title": "PEVALIT Каталог (англиски)",
+    "description": "Комплетно портфолио на производи на англиски.",
+    "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf",
+    "previewImage": "/images/imported/EN.jpg"
+  },
+  {
+    "slug": "catalog-al",
+    "title": "PEVALIT Каталог (албански)",
+    "description": "Комплетно портфолио на производи на албански.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-AL-FINAL.pdf",
+    "previewImage": "/images/imported/AL.jpg"
+  },
+  {
+    "slug": "catalog-de",
+    "title": "PEVALIT Каталог (германски)",
+    "description": "Комплетно портфолио на производи на германски.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-DE-2024.pdf",
+    "previewImage": "/images/imported/Pevalit-Catalogue-DE.jpg"
+  },
+  {
+    "slug": "catalog-fr",
+    "title": "PEVALIT Каталог (француски)",
+    "description": "Комплетно портфолио на производи на француски.",
+    "fileUrl": "/catalogs/imported/Pevalit-FR-2023.pdf",
+    "previewImage": "/images/imported/Pevalit-Catalogue-FR.jpg"
+  },
+  {
+    "slug": "catalog-mk",
+    "title": "PEVALIT Каталог (македонски)",
+    "description": "Комплетно портфолио на производи на македонски.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-MK-1.pdf",
+    "previewImage": "/images/imported/MK-1.jpg"
+  },
+  {
+    "slug": "catalog-gr",
+    "title": "PEVALIT Каталог (грчки)",
+    "description": "Комплетно портфолио на производи на грчки.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-GR-FINAL.pdf",
+    "previewImage": "/images/imported/GR.jpg"
+  },
+  {
+    "slug": "catalog-nl",
+    "title": "PEVALIT Каталог (холандски)",
+    "description": "Комплетно портфолио на производи на холандски.",
+    "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20Dutch.pdf",
+    "previewImage": "/images/imported/Dutch-Cover.jpg"
+  }
+]

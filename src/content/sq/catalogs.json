@@ -1,0 +1,51 @@
+[
+  {
+    "slug": "catalog-en",
+    "title": "Katalogu PEVALIT (Anglisht)",
+    "description": "Portofoli i plotë i produkteve në anglisht.",
+    "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf",
+    "previewImage": "/images/imported/EN.jpg"
+  },
+  {
+    "slug": "catalog-al",
+    "title": "Katalogu PEVALIT (Shqip)",
+    "description": "Portofoli i plotë i produkteve në shqip.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-AL-FINAL.pdf",
+    "previewImage": "/images/imported/AL.jpg"
+  },
+  {
+    "slug": "catalog-de",
+    "title": "Katalogu PEVALIT (Gjermanisht)",
+    "description": "Portofoli i plotë i produkteve në gjermanisht.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-DE-2024.pdf",
+    "previewImage": "/images/imported/Pevalit-Catalogue-DE.jpg"
+  },
+  {
+    "slug": "catalog-fr",
+    "title": "Katalogu PEVALIT (Frëngjisht)",
+    "description": "Portofoli i plotë i produkteve në frëngjisht.",
+    "fileUrl": "/catalogs/imported/Pevalit-FR-2023.pdf",
+    "previewImage": "/images/imported/Pevalit-Catalogue-FR.jpg"
+  },
+  {
+    "slug": "catalog-mk",
+    "title": "Katalogu PEVALIT (Maqedonisht)",
+    "description": "Portofoli i plotë i produkteve në maqedonisht.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-MK-1.pdf",
+    "previewImage": "/images/imported/MK-1.jpg"
+  },
+  {
+    "slug": "catalog-gr",
+    "title": "Katalogu PEVALIT (Greqisht)",
+    "description": "Portofoli i plotë i produkteve në greqisht.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-GR-FINAL.pdf",
+    "previewImage": "/images/imported/GR.jpg"
+  },
+  {
+    "slug": "catalog-nl",
+    "title": "Katalogu PEVALIT (Holandisht)",
+    "description": "Portofoli i plotë i produkteve në holandisht.",
+    "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20Dutch.pdf",
+    "previewImage": "/images/imported/Dutch-Cover.jpg"
+  }
+]

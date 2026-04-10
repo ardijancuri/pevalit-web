@@ -1,16 +1,27 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
-import { corporate } from "@/lib/content";
+import { getLocalizedContent } from "@/lib/content";
+import { getUiCopy } from "@/lib/localization";
+import { getCurrentLanguage } from "@/lib/server-language";
 
-export const metadata: Metadata = {
-  title: "About | PEVALIT",
-  description: corporate.about.intro
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const language = await getCurrentLanguage();
+  const { corporate } = getLocalizedContent(language);
 
-export default function AboutPage() {
+  return {
+    title: corporate.about.title,
+    description: corporate.about.intro
+  };
+}
+
+export default async function AboutPage() {
+  const language = await getCurrentLanguage();
+  const { corporate } = getLocalizedContent(language);
+  const ui = getUiCopy(language);
+
   return (
     <>
-      <PageIntro eyebrow="Corporate" title={corporate.about.title} description={corporate.about.intro} />
+      <PageIntro eyebrow={ui.corporatePage.eyebrow} title={corporate.about.title} description={corporate.about.intro} />
       <section className="section-block section-muted">
         <div className="site-container grid gap-4 md:grid-cols-2">
           {corporate.about.sections.map((section) => (

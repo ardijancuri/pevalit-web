@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "aquastop",
+    "name": "Aquastop",
+    "description": "Асортиман на производи Aquastop.",
+    "heroImage": "/images/imported/1-3-1024x974.jpg"
+  },
+  {
+    "slug": "decorative-plasters",
+    "name": "Декоративни малтери",
+    "description": "Асортиман на декоративни малтери.",
+    "heroImage": "/images/imported/BUNSTE-1024x974.jpg"
+  },
+  {
+    "slug": "eps-polystyrene-sheets",
+    "name": "EPS полистиренски плочи",
+    "description": "Асортиман на EPS полистиренски плочи.",
+    "heroImage": "/images/imported/3-2-1024x974.jpg"
+  },
+  {
+    "slug": "facade-adhesives",
+    "name": "Фасадни лепила",
+    "description": "Асортиман на фасадни лепила.",
+    "heroImage": "/images/imported/24-1024x974.jpg"
+  },
+  {
+    "slug": "grouts",
+    "name": "Фуги",
+    "description": "Асортиман на производи за фугирање.",
+    "heroImage": "/images/imported/2-1-1024x974.jpg"
+  },
+  {
+    "slug": "paints",
+    "name": "Бои",
+    "description": "Асортиман на бои.",
+    "heroImage": "/images/imported/10-1024x974.jpg"
+  },
+  {
+    "slug": "plasters",
+    "name": "Малтери",
+    "description": "Асортиман на малтери.",
+    "heroImage": "/images/imported/G220-1024x974.jpg"
+  },
+  {
+    "slug": "polyurethane-adhesive-foam",
+    "name": "Полиуретанска леплива пена",
+    "description": "Асортиман на полиуретанска леплива пена.",
+    "heroImage": "/images/imported/2-2-1024x974.jpg"
+  },
+  {
+    "slug": "silicone-sealants",
+    "name": "Силиконски заптивки",
+    "description": "Асортиман на силиконски заптивки.",
+    "heroImage": "/images/imported/3-1-1024x974.jpg"
+  },
+  {
+    "slug": "tile-adhesives",
+    "name": "Лепила за плочки",
+    "description": "Асортиман на лепила за плочки.",
+    "heroImage": "/images/imported/09-1024x974.jpg"
+  }
+]

@@ -2,20 +2,31 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
 import { PageIntro } from "@/components/page-intro";
-import { productsByCategory } from "@/lib/content";
+import { getLocalizedContent } from "@/lib/content";
+import { formatProductCount, getUiCopy } from "@/lib/localization";
+import { getCurrentLanguage } from "@/lib/server-language";
 
-export const metadata: Metadata = {
-  title: "Products | PEVALIT",
-  description: "Explore PEVALIT product categories, review technical product families, and navigate to detailed product documentation."
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const language = await getCurrentLanguage();
+  const ui = getUiCopy(language);
 
-export default function ProductsPage() {
+  return {
+    title: ui.productsPage.eyebrow,
+    description: ui.productsPage.description
+  };
+}
+
+export default async function ProductsPage() {
+  const language = await getCurrentLanguage();
+  const { productsByCategory } = getLocalizedContent(language);
+  const ui = getUiCopy(language);
+
   return (
     <div className="bg-white">
       <PageIntro
-        eyebrow="Products"
-        title="Browse Products By Category."
-        description="Clean category navigation with direct access to full product lists and technical details."
+        eyebrow={ui.productsPage.eyebrow}
+        title={ui.productsPage.title}
+        description={ui.productsPage.description}
         surface="muted"
       />
       <section className="section-block bg-white">
@@ -34,17 +45,17 @@ export default function ProductsPage() {
                 <h2 className="text-xl font-semibold">{category.name}</h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
                 <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand)]">
-                  {products.length} {products.length === 1 ? "product" : "products"}
+                  {formatProductCount(language, products.length)}
                 </p>
 
                 <div className="mt-auto pt-4">
                   <TrackedLink
                     href={`/products/${category.slug}`}
                     className="btn-primary"
-                    trackingLabel={`View All - ${category.name}`}
+                    trackingLabel={`${ui.productsPage.viewCategory} - ${category.name}`}
                     trackingLocation="products_category_card"
                   >
-                    View Category
+                    {ui.productsPage.viewCategory}
                   </TrackedLink>
                 </div>
               </div>

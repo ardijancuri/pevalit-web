@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
-import { categories, products } from "@/lib/content";
+import { defaultContent } from "@/lib/content";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pevalit.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/products", "/catalogs", "/corporate/about", "/corporate/quality-policy", "/contact"];
 
-  const categoryRoutes = categories.map((category) => `/products/${category.slug}`);
-  const productRoutes = products.map((product) => `/product/${product.slug}`);
+  const categoryRoutes = defaultContent.categories.map((category) => `/products/${category.slug}`);
+  const productRoutes = defaultContent.products.map((product) => `/product/${product.slug}`);
 
   return [...staticRoutes, ...categoryRoutes, ...productRoutes].map((route) => ({
     url: `${baseUrl}${route}`,

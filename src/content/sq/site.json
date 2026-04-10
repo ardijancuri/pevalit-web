@@ -1,0 +1,31 @@
+{
+  "companyName": "PEVALIT",
+  "tagline": "Aditivë dhe komponime me performancë të lartë për prodhimin modern të plastikës.",
+  "description": "PEVALIT zhvillon dhe furnizon koncentrate aditivësh dhe komponime për përpunues që kërkojnë cilësi të përsëritshme, efikasitet procesi dhe mbështetje teknike.",
+  "primaryCta": {
+    "label": "Eksploro Produktet",
+    "href": "/products"
+  },
+  "secondaryCta": {
+    "label": "Kërko një Ofertë",
+    "href": "/contact"
+  },
+  "contact": {
+    "email": "sales@pevalit.com",
+    "phone": "+389 00 000 000",
+    "address": "Shkup, Maqedonia e Veriut"
+  },
+  "navigation": [
+    { "label": "Kreu", "href": "/" },
+    { "label": "Produktet", "href": "/products" },
+    { "label": "Katalogët", "href": "/catalogs" },
+    { "label": "Korporata", "href": "/corporate/about" },
+    { "label": "Kontakti", "href": "/contact" }
+  ],
+  "footerLinks": [
+    { "label": "Rreth Nesh", "href": "/corporate/about" },
+    { "label": "Politika e Cilësisë", "href": "/corporate/quality-policy" },
+    { "label": "Produktet", "href": "/products" },
+    { "label": "Katalogët", "href": "/catalogs" }
+  ]
+}

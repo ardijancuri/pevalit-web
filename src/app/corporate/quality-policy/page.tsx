@@ -1,17 +1,28 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
-import { corporate } from "@/lib/content";
+import { getLocalizedContent } from "@/lib/content";
+import { getUiCopy } from "@/lib/localization";
+import { getCurrentLanguage } from "@/lib/server-language";
 
-export const metadata: Metadata = {
-  title: "Quality Policy | PEVALIT",
-  description: corporate.qualityPolicy.intro
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const language = await getCurrentLanguage();
+  const { corporate } = getLocalizedContent(language);
 
-export default function QualityPolicyPage() {
+  return {
+    title: corporate.qualityPolicy.title,
+    description: corporate.qualityPolicy.intro
+  };
+}
+
+export default async function QualityPolicyPage() {
+  const language = await getCurrentLanguage();
+  const { corporate } = getLocalizedContent(language);
+  const ui = getUiCopy(language);
+
   return (
     <>
       <PageIntro
-        eyebrow="Corporate"
+        eyebrow={ui.corporatePage.eyebrow}
         title={corporate.qualityPolicy.title}
         description={corporate.qualityPolicy.intro}
       />
