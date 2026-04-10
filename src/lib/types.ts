@@ -11,7 +11,7 @@ export const siteSchema = z.object({
   description: z.string(),
   primaryCta: z.object({ label: z.string(), href: z.string() }),
   secondaryCta: z.object({ label: z.string(), href: z.string() }),
-  contact: z.object({ email: z.string().email(), phone: z.string(), address: z.string() }),
+  contact: z.object({ email: z.string().email(), phone: z.string(), fax: z.string(), address: z.string() }),
   navigation: z.array(navItemSchema),
   footerLinks: z.array(navItemSchema)
 });

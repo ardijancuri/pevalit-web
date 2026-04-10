@@ -7,7 +7,7 @@ type SiteFooterProps = {
     companyName: string;
     description: string;
     footerLinks: Array<{ label: string; href: string }>;
-    contact: { email: string; phone: string; address: string };
+    contact: { email: string; phone: string; fax: string; address: string };
   };
   language: LanguageCode;
   labels: UiCopy["footer"];
@@ -51,17 +51,17 @@ export function SiteFooter({ siteData, language, labels }: SiteFooterProps) {
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">{labels.contact}</p>
             <ul className="mt-3 space-y-2 text-sm text-[var(--charcoal-muted)]">
               <li>
-                <a href="mailto:info@pevalit.com" className="hover:text-[var(--charcoal-text)]">
-                  info@pevalit.com
+                <a href={`mailto:${siteData.contact.email}`} className="hover:text-[var(--charcoal-text)]">
+                  {siteData.contact.email}
                 </a>
               </li>
               <li>
-                <a href="tel:+38946708520" className="hover:text-[var(--charcoal-text)]">
-                  Tel: +389 46 70 85 20
+                <a href={`tel:${siteData.contact.phone.replace(/\s+/g, "")}`} className="hover:text-[var(--charcoal-text)]">
+                  Tel: {siteData.contact.phone}
                 </a>
               </li>
-              <li>Fax: +389 46 70 91 98</li>
-              <li>Livadhi Strugë 6338 Macedonia</li>
+              <li>Fax: {siteData.contact.fax}</li>
+              <li>{siteData.contact.address}</li>
             </ul>
           </div>
         </div>

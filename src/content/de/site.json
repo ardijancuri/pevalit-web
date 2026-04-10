@@ -11,9 +11,10 @@
     "href": "/contact"
   },
   "contact": {
-    "email": "sales@pevalit.com",
-    "phone": "+389 00 000 000",
-    "address": "Skopje, Nordmazedonien"
+    "email": "info@pevalit.com",
+    "phone": "+389 46 70 85 20",
+    "fax": "+389 46 70 91 98",
+    "address": "Livadhi Strugë 6338 Macedonia"
   },
   "navigation": [
     { "label": "Startseite", "href": "/" },

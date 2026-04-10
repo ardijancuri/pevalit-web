@@ -75,6 +75,7 @@ type LocaleCopy = {
     directContact: string;
     email: string;
     phone: string;
+    fax: string;
     address: string;
     responsePromise: string;
     responsePromiseBody: string;
@@ -200,6 +201,7 @@ const UI_COPY = {
       directContact: "Direct Contact",
       email: "Email",
       phone: "Phone",
+      fax: "Fax",
       address: "Address",
       responsePromise: "Response Promise",
       responsePromiseBody: "Technical response within one business day for complete quote requests."
@@ -327,6 +329,7 @@ const UI_COPY = {
       directContact: "Kontakt i drejtpërdrejtë",
       email: "Email",
       phone: "Telefon",
+      fax: "Faks",
       address: "Adresa",
       responsePromise: "Premtimi i përgjigjes",
       responsePromiseBody: "Përgjigje teknike brenda një dite pune për kërkesat e plota për ofertë."
@@ -451,6 +454,7 @@ const UI_COPY = {
       directContact: "Директен контакт",
       email: "Е-пошта",
       phone: "Телефон",
+      fax: "Факс",
       address: "Адреса",
       responsePromise: "Ветување за одговор",
       responsePromiseBody: "Технички одговор во рок од еден работен ден за целосни барања за понуда."
@@ -575,6 +579,7 @@ const UI_COPY = {
       directContact: "Direkter Kontakt",
       email: "E-Mail",
       phone: "Telefon",
+      fax: "Fax",
       address: "Adresse",
       responsePromise: "Antwortversprechen",
       responsePromiseBody: "Technische Rückmeldung innerhalb eines Werktages bei vollständigen Angebotsanfragen."

@@ -33,15 +33,21 @@ export default async function ContactPage() {
           <aside className="card p-4 md:p-6">
             <h2 className="text-xl font-semibold">{ui.contactPage.directContact}</h2>
             <p className="mt-4 text-sm text-[var(--muted)]">{ui.contactPage.email}</p>
-            <p className="text-sm font-medium">{siteData.contact.email}</p>
+            <p className="text-sm font-medium">
+              <a href={`mailto:${siteData.contact.email}`} className="hover:text-[var(--brand)]">
+                {siteData.contact.email}
+              </a>
+            </p>
             <p className="mt-4 text-sm text-[var(--muted)]">{ui.contactPage.phone}</p>
-            <p className="text-sm font-medium">{siteData.contact.phone}</p>
+            <p className="text-sm font-medium">
+              <a href={`tel:${siteData.contact.phone.replace(/\s+/g, "")}`} className="hover:text-[var(--brand)]">
+                {siteData.contact.phone}
+              </a>
+            </p>
+            <p className="mt-4 text-sm text-[var(--muted)]">{ui.contactPage.fax}</p>
+            <p className="text-sm font-medium">{siteData.contact.fax}</p>
             <p className="mt-4 text-sm text-[var(--muted)]">{ui.contactPage.address}</p>
             <p className="text-sm font-medium">{siteData.contact.address}</p>
-            <div className="mt-6 rounded-[8px] bg-[var(--bg-soft)] p-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">{ui.contactPage.responsePromise}</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">{ui.contactPage.responsePromiseBody}</p>
-            </div>
           </aside>
         </div>
       </section>
