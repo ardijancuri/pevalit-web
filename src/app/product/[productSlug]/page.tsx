@@ -103,13 +103,6 @@ export default async function ProductPage({ params }: Props) {
             </h1>
             <p className="mt-4 text-base text-[var(--muted)] md:text-lg">{summary}</p>
 
-            <h2 className="mt-8 text-xl font-semibold">{ui.productPage.keyBenefits}</h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-              {product.benefits.map((benefit) => (
-                <li key={benefit}>{benefit}</li>
-              ))}
-            </ul>
-
             <h2 className="mt-8 text-xl font-semibold">{ui.productPage.typicalApplications}</h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {product.applications.map((application) => (

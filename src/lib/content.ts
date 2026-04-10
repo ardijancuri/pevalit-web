@@ -5,14 +5,17 @@ import enCatalogsJson from "@/content/en/catalogs.json";
 import enCorporateJson from "@/content/en/corporate.json";
 import sqSiteJson from "@/content/sq/site.json";
 import sqCategoriesJson from "@/content/sq/categories.json";
+import sqProductsJson from "@/content/sq/products.json";
 import sqCatalogsJson from "@/content/sq/catalogs.json";
 import sqCorporateJson from "@/content/sq/corporate.json";
 import mkSiteJson from "@/content/mk/site.json";
 import mkCategoriesJson from "@/content/mk/categories.json";
+import mkProductsJson from "@/content/mk/products.json";
 import mkCatalogsJson from "@/content/mk/catalogs.json";
 import mkCorporateJson from "@/content/mk/corporate.json";
 import deSiteJson from "@/content/de/site.json";
 import deCategoriesJson from "@/content/de/categories.json";
+import deProductsJson from "@/content/de/products.json";
 import deCatalogsJson from "@/content/de/catalogs.json";
 import deCorporateJson from "@/content/de/corporate.json";
 import {
@@ -25,6 +28,7 @@ import {
   type Catalog,
   type Category,
   type Corporate,
+  type Product,
   type SiteData,
   catalogSchema,
   categorySchema,
@@ -33,8 +37,12 @@ import {
   siteSchema
 } from "@/lib/types";
 
-const baseProducts = productSchema.array().parse(enProductsJson);
-type BaseProduct = (typeof baseProducts)[number];
+const productsByLanguage = {
+  en: productSchema.array().parse(enProductsJson),
+  sq: productSchema.array().parse(sqProductsJson),
+  mk: productSchema.array().parse(mkProductsJson),
+  de: productSchema.array().parse(deProductsJson)
+} satisfies Record<LanguageCode, Product[]>;
 
 function normalizeProductBenefit(benefit: string) {
   if (benefit === "Legacy product application and technical parameter content imported from pevalit.com.") {
@@ -44,12 +52,12 @@ function normalizeProductBenefit(benefit: string) {
   return benefit;
 }
 
-function normalizeTechnicalSpecs(technicalSpecs: BaseProduct["technicalSpecs"]) {
+function normalizeTechnicalSpecs(technicalSpecs: Product["technicalSpecs"]) {
   if (technicalSpecs.every((spec) => spec.label === "Details")) {
     return technicalSpecs.map((spec) => ({ ...spec, label: "" }));
   }
 
-  const normalized: BaseProduct["technicalSpecs"] = [];
+  const normalized: Product["technicalSpecs"] = [];
 
   for (const spec of technicalSpecs) {
     if (spec.label === "Details") {
@@ -78,24 +86,28 @@ const contentSourceByLanguage = {
   en: {
     siteData: siteSchema.parse(enSiteJson),
     categories: categorySchema.array().parse(enCategoriesJson),
+    products: productsByLanguage.en,
     catalogs: catalogSchema.array().parse(enCatalogsJson),
     corporate: corporateSchema.parse(enCorporateJson)
   },
   sq: {
     siteData: siteSchema.parse(sqSiteJson),
     categories: categorySchema.array().parse(sqCategoriesJson),
+    products: productsByLanguage.sq,
     catalogs: catalogSchema.array().parse(sqCatalogsJson),
     corporate: corporateSchema.parse(sqCorporateJson)
   },
   mk: {
     siteData: siteSchema.parse(mkSiteJson),
     categories: categorySchema.array().parse(mkCategoriesJson),
+    products: productsByLanguage.mk,
     catalogs: catalogSchema.array().parse(mkCatalogsJson),
     corporate: corporateSchema.parse(mkCorporateJson)
   },
   de: {
     siteData: siteSchema.parse(deSiteJson),
     categories: categorySchema.array().parse(deCategoriesJson),
+    products: productsByLanguage.de,
     catalogs: catalogSchema.array().parse(deCatalogsJson),
     corporate: corporateSchema.parse(deCorporateJson)
   }
@@ -104,6 +116,7 @@ const contentSourceByLanguage = {
   {
     siteData: SiteData;
     categories: Category[];
+    products: Product[];
     catalogs: Catalog[];
     corporate: Corporate;
   }
@@ -160,7 +173,7 @@ function buildLocalizedContent(language: LanguageCode) {
   const content = contentSourceByLanguage[language];
   const categoryNameBySlug = new Map(content.categories.map((category) => [category.slug, category.name]));
 
-  const products = baseProducts.map((product) => ({
+  const products = content.products.map((product) => ({
     ...product,
     applications: product.applications.map((application) => {
       if (!application.startsWith("Category: ")) {
