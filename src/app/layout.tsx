@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { getLocalizedContent } from "@/lib/content";
 import { getUiCopy, OPEN_GRAPH_LOCALE } from "@/lib/localization";
+import { getSeoConfig } from "@/lib/seo";
 import { getCurrentLanguage } from "@/lib/server-language";
 
 const headingFont = Space_Grotesk({
@@ -25,9 +26,9 @@ const gaId = process.env.NEXT_PUBLIC_GA_ID;
 export async function generateMetadata(): Promise<Metadata> {
   const language = await getCurrentLanguage();
   const { siteData } = getLocalizedContent(language);
-  const ui = getUiCopy(language);
+  const seo = getSeoConfig(language);
   const baseUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pevalit.com");
-  const defaultTitle = `${siteData.companyName} | ${ui.metadata.defaultTitleSuffix}`;
+  const defaultTitle = seo.title;
 
   return {
     metadataBase: baseUrl,
@@ -35,15 +36,8 @@ export async function generateMetadata(): Promise<Metadata> {
       default: defaultTitle,
       template: `%s | ${siteData.companyName}`
     },
-    description: siteData.description,
-    keywords: [
-      "polymer additives",
-      "construction chemistry",
-      "tile adhesive additives",
-      "drymix mortar",
-      "technical compounds",
-      "PEVALIT"
-    ],
+    description: seo.description,
+    keywords: seo.keywords,
     authors: [{ name: siteData.companyName }],
     creator: siteData.companyName,
     publisher: siteData.companyName,
@@ -59,7 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title: defaultTitle,
-      description: siteData.description,
+      description: seo.description,
       type: "website",
       url: "/",
       siteName: siteData.companyName,
@@ -76,7 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: defaultTitle,
-      description: siteData.description,
+      description: seo.description,
       images: [socialImage]
     }
   };
