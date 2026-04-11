@@ -1,0 +1,64 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 1 /Kids [5 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 753 >>
+stream
+BT
+/F1 12 Tf
+50 780 Td
+16 TL
+(PEVALIT Technical Parameters) Tj
+T*
+(EGALISATIONSFABRE) Tj
+T*
+() Tj
+T*
+(Material density: approx. 1.6 g/cm3.) Tj
+T*
+(Steam permeability coefficient: Class V1 \(high\), sd-value: down 0,14 m.) Tj
+T*
+(Purpose and Water absorption: Class W3 \(low\), w-value down 0,1 kg/\(m2h0,5\)) Tj
+T*
+(Work temperatures: +5 deg C - +30 deg C.) Tj
+T*
+(Spending: approx. 150-200 ml/m2. / 200-250 ml/m2.) Tj
+T*
+(Drying: 12-15 hours based on temp. approx. 20 deg C. and 65% air humidity.) Tj
+T*
+(Mixing with water: 5-10%.) Tj
+T*
+(Cleaning of tools: After finishing work with water.) Tj
+T*
+(Material color: White.) Tj
+T*
+(Packaging: 5 l, 15 l.) Tj
+T*
+(Best before: In the original packaging 12 months, in a warehouse without moisture.) Tj
+T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000989 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1115
+%%EOF

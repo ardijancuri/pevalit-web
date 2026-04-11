@@ -135,6 +135,8 @@ export default async function ProductPage({ params }: Props) {
                 <li key={document.url}>
                   <Link
                     href={document.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={`${ui.productPage.technicalParameters} - ${document.title}`}
                     title={document.title}
                     className="inline-flex items-center gap-2 rounded-[8px] bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
