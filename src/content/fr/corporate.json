@@ -1,0 +1,40 @@
+{
+  "about": {
+    "title": "Entreprise",
+    "intro": "Ing - Luli a ete fondee en 1994 comme societe commerciale specialisee dans la vente en gros et au detail de materiaux de construction locaux et importes.",
+    "heroImage": "/images/imported/corporate-copy.jpg",
+    "sections": [
+      {
+        "heading": "Lancement de la production",
+        "body": "Depuis 1998, l'entreprise a commence a mettre en oeuvre son plan de developpement avec la production de colles de construction et de mortiers pour carrelage. Les premiers produits ont ete lances en juillet 1999, lorsque le programme de production a atteint une capacite de 10 tonnes par jour."
+      },
+      {
+        "heading": "Production standardisee et expansion du marche",
+        "body": "La production standardisee, les recettes fournies par des producteurs allemands d'additifs de base, la qualite conforme aux normes europeennes et une gestion commerciale efficace ont soutenu la croissance. Les certifications EN 12004 et l'expansion vers le Kosovo, l'Allemagne et la Suisse ont renforce la presence de l'entreprise sur les marches regionaux et europeens."
+      },
+      {
+        "heading": "Investissements et certification ETAG 004",
+        "body": "En 2009, l'entreprise a construit une seconde usine dediee aux materiaux pour facades thermo-isolantes. Grace a une technologie moderne et a une equipe qualifiee, elle a obtenu en 2011 la certification systeme ETAG 004 delivree par l'institut accredite ZAG Ljubljana."
+      },
+      {
+        "heading": "Presence sur le marche",
+        "body": "Aujourd'hui, l'entreprise est reconnue pour sa croissance continue en Macedoine, au Kosovo, en Allemagne, en Suisse, en Autriche, en France et sur d'autres marches."
+      },
+      {
+        "heading": "Ing - Luli, leader du secteur",
+        "body": "Ing - Luli propose une large gamme de produits couvrant les etapes essentielles de la construction, avec technologie moderne, management professionnel, personnel qualifie et accompagnement technique pour les clients."
+      }
+    ]
+  },
+  "qualityPolicy": {
+    "title": "Politique qualite",
+    "intro": "La qualite repose sur des systemes certifies, une production controlee et une conformite continue aux normes europeennes.",
+    "points": [
+      "Maintenir des processus de production standardises conformes aux normes europeennes.",
+      "Preserver les certifications produit selon les exigences EN 12004 et ETAG 004.",
+      "Soutenir la surveillance continue et les controles par des institutions accreditees.",
+      "Investir dans la technologie moderne, le personnel qualifie et le controle qualite.",
+      "Fournir une assistance technique fiable et un service coherent aux marches regionaux et d'exportation."
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 export const DEFAULT_LANGUAGE = "en";
-export const LANGUAGES = ["en", "sq", "mk", "de"] as const;
+export const LANGUAGES = ["en", "sq", "mk", "de", "fr", "nl"] as const;
 
 export type LanguageCode = (typeof LANGUAGES)[number];
 

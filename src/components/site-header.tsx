@@ -9,6 +9,7 @@ import {
   localizePath,
   stripLocaleFromPath,
   switchLocalePath,
+  type LanguageOption,
   type LanguageCode
 } from "@/lib/localization";
 
@@ -24,6 +25,18 @@ type SiteHeaderProps = {
     mobileNavigation: string;
   };
 };
+
+function LanguageFlag({ option }: { option: LanguageOption }) {
+  return (
+    <Image
+      src={option.flagSrc}
+      alt={option.flagAlt}
+      width={20}
+      height={14}
+      className="h-3.5 w-5 shrink-0 rounded-[2px] border border-black/10 object-cover"
+    />
+  );
+}
 
 export function SiteHeader({
   companyName,
@@ -174,10 +187,11 @@ export function SiteHeader({
                 type="button"
                 aria-label={labels.changeLanguage}
                 aria-expanded={mobileLanguageMenuOpen}
-                className="inline-flex h-10 items-center justify-center px-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
+                className="inline-flex h-10 items-center justify-center gap-1.5 px-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
                 onClick={() => setMobileLanguageMenuOpen((prev) => !prev)}
               >
-                {selectedLanguage.short}
+                <LanguageFlag option={selectedLanguage} />
+                <span>{selectedLanguage.short}</span>
               </button>
               <ul
                 className={`absolute right-0 mt-2 min-w-[11rem] rounded-[8px] border border-[var(--line)] bg-white p-1 transition ${
@@ -189,11 +203,12 @@ export function SiteHeader({
                     <button
                       type="button"
                       onClick={() => onLanguageChange(option.code)}
-                      className={`w-full rounded-[6px] px-3 py-2 text-left text-xs font-semibold ${
+                      className={`flex w-full items-center gap-2 rounded-[6px] px-3 py-2 text-left text-xs font-semibold ${
                         option.code === language ? "bg-[var(--brand)] !text-white" : "text-[var(--text)] hover:bg-[var(--accent)]"
                       }`}
                     >
-                      {option.label}
+                      <LanguageFlag option={option} />
+                      <span>{option.label}</span>
                     </button>
                   </li>
                 ))}
@@ -289,10 +304,11 @@ export function SiteHeader({
                   type="button"
                   aria-label={labels.changeLanguage}
                   aria-expanded={desktopLanguageMenuOpen}
-                  className="rounded-[8px] border border-[var(--line)] bg-white px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
+                  className="inline-flex items-center gap-2 rounded-[8px] border border-[var(--line)] bg-white px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)]"
                   onClick={() => setDesktopLanguageMenuOpen((prev) => !prev)}
                 >
-                  {selectedLanguage.short}
+                  <LanguageFlag option={selectedLanguage} />
+                  <span>{selectedLanguage.short}</span>
                 </button>
                 <ul
                   className={`absolute right-0 mt-2 min-w-[12rem] rounded-[8px] border border-[var(--line)] bg-white p-1 transition ${
@@ -304,11 +320,12 @@ export function SiteHeader({
                       <button
                         type="button"
                         onClick={() => onLanguageChange(option.code)}
-                        className={`w-full rounded-[6px] px-3 py-2 text-left text-xs font-semibold ${
+                        className={`flex w-full items-center gap-2 rounded-[6px] px-3 py-2 text-left text-xs font-semibold ${
                           option.code === language ? "bg-[var(--brand)] !text-white" : "text-[var(--text)] hover:bg-[var(--accent)]"
                         }`}
                       >
-                        {option.label}
+                        <LanguageFlag option={option} />
+                        <span>{option.label}</span>
                       </button>
                     </li>
                   ))}

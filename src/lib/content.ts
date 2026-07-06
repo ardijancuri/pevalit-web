@@ -18,6 +18,16 @@ import deCategoriesJson from "@/content/de/categories.json";
 import deProductsJson from "@/content/de/products.json";
 import deCatalogsJson from "@/content/de/catalogs.json";
 import deCorporateJson from "@/content/de/corporate.json";
+import frSiteJson from "@/content/fr/site.json";
+import frCategoriesJson from "@/content/fr/categories.json";
+import frProductsJson from "@/content/fr/products.json";
+import frCatalogsJson from "@/content/fr/catalogs.json";
+import frCorporateJson from "@/content/fr/corporate.json";
+import nlSiteJson from "@/content/nl/site.json";
+import nlCategoriesJson from "@/content/nl/categories.json";
+import nlProductsJson from "@/content/nl/products.json";
+import nlCatalogsJson from "@/content/nl/catalogs.json";
+import nlCorporateJson from "@/content/nl/corporate.json";
 import {
   DEFAULT_LANGUAGE,
   type LanguageCode,
@@ -41,7 +51,9 @@ const productsByLanguage = {
   en: productSchema.array().parse(enProductsJson),
   sq: productSchema.array().parse(sqProductsJson),
   mk: productSchema.array().parse(mkProductsJson),
-  de: productSchema.array().parse(deProductsJson)
+  de: productSchema.array().parse(deProductsJson),
+  fr: productSchema.array().parse(frProductsJson),
+  nl: productSchema.array().parse(nlProductsJson)
 } satisfies Record<LanguageCode, Product[]>;
 
 function normalizeProductBenefit(benefit: string) {
@@ -110,6 +122,20 @@ const contentSourceByLanguage = {
     products: productsByLanguage.de,
     catalogs: catalogSchema.array().parse(deCatalogsJson),
     corporate: corporateSchema.parse(deCorporateJson)
+  },
+  fr: {
+    siteData: siteSchema.parse(frSiteJson),
+    categories: categorySchema.array().parse(frCategoriesJson),
+    products: productsByLanguage.fr,
+    catalogs: catalogSchema.array().parse(frCatalogsJson),
+    corporate: corporateSchema.parse(frCorporateJson)
+  },
+  nl: {
+    siteData: siteSchema.parse(nlSiteJson),
+    categories: categorySchema.array().parse(nlCategoriesJson),
+    products: productsByLanguage.nl,
+    catalogs: catalogSchema.array().parse(nlCatalogsJson),
+    corporate: corporateSchema.parse(nlCorporateJson)
   }
 } satisfies Record<
   LanguageCode,
@@ -130,6 +156,10 @@ function getCategoryApplicationPrefix(language: LanguageCode) {
       return "Категорија";
     case "de":
       return "Kategorie";
+    case "fr":
+      return "Categorie";
+    case "nl":
+      return "Categorie";
     default:
       return "Category";
   }
@@ -147,6 +177,10 @@ function translateProductBenefit(language: LanguageCode, benefit: string) {
       return "Увезени податоци за производот од старата веб-страница.";
     case "de":
       return "Importierte Produktdaten von der früheren Website.";
+    case "fr":
+      return "Donnees produit importees de l'ancien site web.";
+    case "nl":
+      return "Productgegevens geimporteerd van de vorige website.";
     default:
       return benefit;
   }
@@ -164,6 +198,10 @@ function translateTechnicalSpecLabel(language: LanguageCode, label: string) {
       return "Извор";
     case "de":
       return "Quelle";
+    case "fr":
+      return "Source";
+    case "nl":
+      return "Bron";
     default:
       return label;
   }
@@ -206,7 +244,9 @@ const localizedContentByLanguage = {
   en: buildLocalizedContent("en"),
   sq: buildLocalizedContent("sq"),
   mk: buildLocalizedContent("mk"),
-  de: buildLocalizedContent("de")
+  de: buildLocalizedContent("de"),
+  fr: buildLocalizedContent("fr"),
+  nl: buildLocalizedContent("nl")
 } satisfies Record<LanguageCode, LocalizedContent>;
 
 export const defaultContent = localizedContentByLanguage[DEFAULT_LANGUAGE];

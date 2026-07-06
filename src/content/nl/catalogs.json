@@ -1,0 +1,51 @@
+[
+  {
+    "slug": "catalog-en",
+    "title": "PEVALIT catalogus (Engels)",
+    "description": "Volledig productassortiment in het Engels.",
+    "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20English.pdf",
+    "previewImage": "/images/imported/EN.jpg"
+  },
+  {
+    "slug": "catalog-al",
+    "title": "PEVALIT catalogus (Albanees)",
+    "description": "Volledig productassortiment in het Albanees.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-AL-FINAL.pdf",
+    "previewImage": "/images/imported/AL.jpg"
+  },
+  {
+    "slug": "catalog-de",
+    "title": "PEVALIT catalogus (Duits)",
+    "description": "Volledig productassortiment in het Duits.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-DE-2024.pdf",
+    "previewImage": "/images/imported/Pevalit-Catalogue-DE.jpg"
+  },
+  {
+    "slug": "catalog-fr",
+    "title": "PEVALIT catalogus (Frans)",
+    "description": "Volledig productassortiment in het Frans.",
+    "fileUrl": "/catalogs/imported/Pevalit-FR-2023.pdf",
+    "previewImage": "/images/imported/Pevalit-Catalogue-FR.jpg"
+  },
+  {
+    "slug": "catalog-mk",
+    "title": "PEVALIT catalogus (Macedonisch)",
+    "description": "Volledig productassortiment in het Macedonisch.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-MK-1.pdf",
+    "previewImage": "/images/imported/MK-1.jpg"
+  },
+  {
+    "slug": "catalog-gr",
+    "title": "PEVALIT catalogus (Grieks)",
+    "description": "Volledig productassortiment in het Grieks.",
+    "fileUrl": "/catalogs/imported/Pevalit-Catalogue-GR-FINAL.pdf",
+    "previewImage": "/images/imported/GR.jpg"
+  },
+  {
+    "slug": "catalog-nl",
+    "title": "PEVALIT catalogus (Nederlands)",
+    "description": "Volledig productassortiment in het Nederlands.",
+    "fileUrl": "/catalogs/imported/Pevalit-20Catalogue-20Dutch.pdf",
+    "previewImage": "/images/imported/Dutch-Cover.jpg"
+  }
+]

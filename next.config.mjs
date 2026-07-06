@@ -19,7 +19,7 @@ const nextConfig = {
         permanent: true
       },
       {
-        source: "/:language(en|sq|mk|de)/product-category/:slug",
+        source: "/:language(en|sq|mk|de|fr|nl)/product-category/:slug",
         destination: "/:language/products/:slug",
         permanent: true
       }

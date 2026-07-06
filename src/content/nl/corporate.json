@@ -1,0 +1,40 @@
+{
+  "about": {
+    "title": "Bedrijf",
+    "intro": "Ing - Luli werd in 1994 opgericht als handelsbedrijf voor groot- en detailhandel in lokaal geproduceerde en geimporteerde bouwmaterialen.",
+    "heroImage": "/images/imported/corporate-copy.jpg",
+    "sections": [
+      {
+        "heading": "Start van de productie",
+        "body": "Vanaf 1998 begon het bedrijf zijn ontwikkelingsplan uit te voeren met de productie van bouwlijmen en tegelzetmortels. De eerste producten werden in juli 1999 geentroduceerd, toen het productieprogramma een capaciteit van 10 ton per dag bereikte."
+      },
+      {
+        "heading": "Gestandaardiseerde productie en marktuitbreiding",
+        "body": "Gestandaardiseerde productie, recepten van Duitse producenten van basisadditieven, kwaliteit volgens Europese normen en sterke verkooporganisatie ondersteunden de groei. EN 12004-certificering en uitbreiding naar Kosovo, Duitsland en Zwitserland versterkten de positie op regionale en Europese markten."
+      },
+      {
+        "heading": "Investeringen en ETAG 004-certificering",
+        "body": "In 2009 bouwde het bedrijf een tweede fabriek met focus op materialen voor thermisch geisoleerde gevels. Met moderne technologie en een gespecialiseerd team behaalde het in 2011 de ETAG 004-systeemcertificering van het geaccrediteerde instituut ZAG Ljubljana."
+      },
+      {
+        "heading": "Marktaanwezigheid",
+        "body": "Vandaag staat het bedrijf bekend om voortdurende groei in Macedonie, Kosovo, Duitsland, Zwitserland, Oostenrijk, Frankrijk en andere markten."
+      },
+      {
+        "heading": "Ing - Luli, leider in de sector",
+        "body": "Ing - Luli biedt een breed productassortiment voor belangrijke bouwfasen, met moderne technologie, professioneel management, gekwalificeerd personeel en technische ondersteuning voor klanten."
+      }
+    ]
+  },
+  "qualityPolicy": {
+    "title": "Kwaliteitsbeleid",
+    "intro": "Kwaliteit is gebaseerd op gecertificeerde systemen, gecontroleerde productie en voortdurende naleving van Europese normen.",
+    "points": [
+      "Gestandaardiseerde productieprocessen handhaven volgens Europese normen.",
+      "Productcertificering volgens EN 12004- en ETAG 004-eisen behouden.",
+      "Continue monitoring en controles door geaccrediteerde instellingen ondersteunen.",
+      "Investeren in moderne technologie, gekwalificeerd personeel en stabiele kwaliteitscontrole.",
+      "Betrouwbare technische ondersteuning en consistente service leveren aan regionale en exportmarkten."
+    ]
+  }
+}

@@ -74,6 +74,40 @@ const SEO_BY_LANGUAGE: Record<LanguageCode, SeoConfig> = {
       "Fugenmassen",
       "Dichtstoffe"
     ]
+  },
+  fr: {
+    title: "PEVALIT | Produits de construction et systemes techniques",
+    description:
+      "PEVALIT fournit des produits de construction comme colles a carrelage, colles de facade, enduits, peintures, joints, systemes d'etancheite, panneaux EPS, mastics et documentation technique produit.",
+    keywords: [
+      "PEVALIT",
+      "produits de construction",
+      "systemes techniques",
+      "colles a carrelage",
+      "colles de facade",
+      "enduits decoratifs",
+      "systemes d'etancheite",
+      "panneaux EPS",
+      "joints",
+      "mastics"
+    ]
+  },
+  nl: {
+    title: "PEVALIT | Bouwproducten en technische systemen",
+    description:
+      "PEVALIT levert bouwproducten zoals tegellijmen, gevelkleefstoffen, pleisters, verven, voegmiddelen, waterdichtingssystemen, EPS-platen, kitten en technische productdocumentatie.",
+    keywords: [
+      "PEVALIT",
+      "bouwproducten",
+      "technische systemen",
+      "tegellijmen",
+      "gevelkleefstoffen",
+      "sierpleisters",
+      "waterdichting",
+      "EPS-platen",
+      "voegmiddelen",
+      "kitten"
+    ]
   }
 };
 

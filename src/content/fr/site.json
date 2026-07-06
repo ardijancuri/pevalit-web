@@ -1,0 +1,63 @@
+{
+  "companyName": "PEVALIT",
+  "tagline": "Produits de construction haute performance et systemes techniques.",
+  "description": "PEVALIT developpe et fournit des produits de construction, des systemes certifies et une assistance technique pour des resultats fiables sur chantier.",
+  "primaryCta": {
+    "label": "Explorer les produits",
+    "href": "/products"
+  },
+  "secondaryCta": {
+    "label": "Demander un devis",
+    "href": "/contact"
+  },
+  "contact": {
+    "email": "info@pevalit.com",
+    "phone": "+389 46 70 85 20",
+    "fax": "+389 46 70 91 98",
+    "address": "Livadhi Strugë 6338 Macedonia"
+  },
+  "navigation": [
+    {
+      "label": "Accueil",
+      "href": "/"
+    },
+    {
+      "label": "Produits",
+      "href": "/products"
+    },
+    {
+      "label": "Catalogues",
+      "href": "/catalogs"
+    },
+    {
+      "label": "Entreprise",
+      "href": "/corporate/about"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "footerLinks": [
+    {
+      "label": "Entreprise",
+      "href": "/corporate/about"
+    },
+    {
+      "label": "Politique qualite",
+      "href": "/corporate/quality-policy"
+    },
+    {
+      "label": "Produits",
+      "href": "/products"
+    },
+    {
+      "label": "Catalogues",
+      "href": "/catalogs"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ]
+}

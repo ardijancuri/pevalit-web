@@ -12,18 +12,30 @@ export {
 } from "@/lib/languages";
 export type { LanguageCode } from "@/lib/languages";
 
-export const LANGUAGE_OPTIONS: Array<{ code: LanguageCode; label: string; short: string }> = [
-  { code: "en", label: "English (US)", short: "EN" },
-  { code: "sq", label: "Shqip (AL)", short: "SQ" },
-  { code: "mk", label: "Македонски (MK)", short: "MK" },
-  { code: "de", label: "Deutsch (DE)", short: "DE" }
+export type LanguageOption = {
+  code: LanguageCode;
+  label: string;
+  short: string;
+  flagSrc: string;
+  flagAlt: string;
+};
+
+export const LANGUAGE_OPTIONS: LanguageOption[] = [
+  { code: "en", label: "English (US)", short: "EN", flagSrc: "/images/flags/en.svg", flagAlt: "United States flag" },
+  { code: "sq", label: "Shqip (AL)", short: "SQ", flagSrc: "/images/flags/sq.svg", flagAlt: "Albania flag" },
+  { code: "mk", label: "Македонски (MK)", short: "MK", flagSrc: "/images/flags/mk.svg", flagAlt: "North Macedonia flag" },
+  { code: "de", label: "Deutsch (DE)", short: "DE", flagSrc: "/images/flags/de.svg", flagAlt: "Germany flag" },
+  { code: "fr", label: "Francais (FR)", short: "FR", flagSrc: "/images/flags/fr.svg", flagAlt: "France flag" },
+  { code: "nl", label: "Nederlands (NL)", short: "NL", flagSrc: "/images/flags/nl.svg", flagAlt: "Netherlands flag" }
 ];
 
 export const OPEN_GRAPH_LOCALE: Record<LanguageCode, string> = {
   en: "en_US",
   sq: "sq_AL",
   mk: "mk_MK",
-  de: "de_DE"
+  de: "de_DE",
+  fr: "fr_FR",
+  nl: "nl_NL"
 };
 
 type LocaleCopy = {
@@ -652,6 +664,256 @@ const UI_COPY = {
       autoReplyReference: "Referenz-ID",
       autoReplySignature: "PEVALIT Team"
     }
+  },
+  fr: {
+    languageSwitcher: {
+      changeLanguage: "Changer de langue",
+      openMenu: "Ouvrir le menu",
+      closeMenu: "Fermer le menu",
+      mobileNavigation: "Navigation mobile"
+    },
+    footer: {
+      contactTeam: "Contacter l'equipe",
+      explore: "Explorer",
+      contact: "Contact",
+      allRightsReserved: "Tous droits reserves.",
+      certifiedSupport: "Systemes certifies avec assistance technique pratique."
+    },
+    home: {
+      constructionSystems: "Systemes de construction",
+      heroTitle: "Produits de construction fiables.",
+      heroDescription: "Systemes fiables pour des performances constantes sur les projets de construction modernes.",
+      solutionsPortfolio: "Portefeuille de solutions",
+      findProductsTitle: "Trouver les produits par categorie",
+      findProductsDescription: "Explorez les categories principales et ouvrez les listes completes de produits en un clic.",
+      viewAllProducts: "Voir tous les produits",
+      catalogsEyebrow: "Catalogues",
+      downloadCatalogsTitle: "Telecharger les catalogues techniques",
+      downloadCatalogsDescription: "Ouvrez la documentation produit la plus recente et telechargez directement les versions PDF.",
+      viewAllCatalogs: "Voir tous les catalogues",
+      aboutUs: "A propos",
+      builtOnStoryTitle: "Construit sur une histoire industrielle eprouvee",
+      readMore: "Lire la suite",
+      supportEyebrow: "Support technique + commercial",
+      supportTitle: "Envoyez votre objectif de formulation et recevez une recommandation produit avec documents.",
+      supportDescription:
+        "Partagez le support, le climat, la methode d'application et les performances souhaitees. Notre equipe repond avec des options produit adaptees et les prochaines etapes de devis.",
+      requestTechnicalQuote: "Demander un devis technique",
+      viewCatalogs: "Voir les catalogues",
+      aboutImageAlt: "Usine et operations PEVALIT"
+    },
+    productsPage: {
+      eyebrow: "Produits",
+      title: "Parcourir les produits par categorie.",
+      description: "Navigation claire par categorie avec acces direct aux listes completes de produits et aux details techniques.",
+      productSingular: "produit",
+      productPlural: "produits",
+      viewCategory: "Voir la categorie"
+    },
+    catalogsPage: {
+      eyebrow: "Catalogues",
+      title: "Catalogues techniques prets a telecharger.",
+      description: "Ouvrez les catalogues PEVALIT les plus recents et telechargez directement les versions PDF.",
+      downloadPdf: "Telecharger PDF"
+    },
+    contactPage: {
+      eyebrow: "Contact",
+      title: "Parlez a notre equipe de vos exigences de production.",
+      description:
+        "Utilisez le formulaire pour envoyer votre demande et ajoutez les details d'application pour une reponse technique plus rapide.",
+      directContact: "Contact direct",
+      email: "Email",
+      phone: "Telephone",
+      fax: "Fax",
+      address: "Adresse",
+      responsePromise: "Engagement de reponse",
+      responsePromiseBody: "Reponse technique sous un jour ouvrable pour les demandes de devis completes."
+    },
+    corporatePage: {
+      eyebrow: "Entreprise"
+    },
+    categoryPage: {
+      eyebrow: "Categorie"
+    },
+    productPage: {
+      keyBenefits: "Avantages cles",
+      typicalApplications: "Applications typiques",
+      technicalSpecs: "Specifications techniques",
+      documents: "Documents",
+      technicalParameters: "Parametres techniques",
+      relatedProducts: "Produits associes"
+    },
+    productFilters: {
+      searchProducts: "Rechercher des produits",
+      searchPlaceholder: "Saisir une application, caracteristique ou nom de produit",
+      category: "Categorie",
+      allCategories: "Toutes les categories",
+      viewProduct: "Voir le produit",
+      noResults: "Aucun produit correspondant. Essayez une recherche plus large ou changez de categorie."
+    },
+    quoteForm: {
+      title: "Demander un devis",
+      description: "Partagez les details de votre application et notre equipe repondra avec la recommandation la plus adaptee.",
+      name: "Nom",
+      email: "Email",
+      company: "Entreprise",
+      phone: "Telephone",
+      country: "Pays",
+      message: "Message",
+      sendingRequest: "Envoi de votre demande...",
+      submitting: "Envoi...",
+      sendRequest: "Envoyer la demande",
+      success: "Merci. Votre demande a ete envoyee avec succes.",
+      unableToSubmit: "Impossible d'envoyer votre demande pour le moment.",
+      networkError: "Erreur reseau. Veuillez reessayer dans un instant.",
+      nextStepsTitle: "Prochaines etapes",
+      nextStep1: "1) L'equipe technique examine votre demande.",
+      nextStep2: "2) Vous recevez une recommandation et la documentation par email.",
+      nextStep3: "3) Le devis commercial suit apres confirmation.",
+      reference: "Reference"
+    },
+    metadata: {
+      defaultTitleSuffix: "Additifs et composes"
+    },
+    api: {
+      invalidFormData: "Donnees de formulaire invalides.",
+      requestSubmitted: "Demande envoyee.",
+      retryRequest: "Veuillez renvoyer votre demande.",
+      captchaFailed: "La verification captcha a echoue.",
+      emailNotConfigured: "Le service email n'est pas configure. Definissez RESEND_API_KEY.",
+      autoReplySubject: "Nous avons recu votre demande",
+      autoReplyGreeting: "Bonjour",
+      autoReplyThanks: "Merci d'avoir contacte PEVALIT.",
+      autoReplyReceived:
+        "Notre equipe a recu votre demande et repondra avec un retour technique et les prochaines etapes.",
+      autoReplyReference: "ID de reference",
+      autoReplySignature: "Equipe PEVALIT"
+    }
+  },
+  nl: {
+    languageSwitcher: {
+      changeLanguage: "Taal wijzigen",
+      openMenu: "Menu openen",
+      closeMenu: "Menu sluiten",
+      mobileNavigation: "Mobiele navigatie"
+    },
+    footer: {
+      contactTeam: "Team contacteren",
+      explore: "Verkennen",
+      contact: "Contact",
+      allRightsReserved: "Alle rechten voorbehouden.",
+      certifiedSupport: "Gecertificeerde systemen met praktische technische ondersteuning."
+    },
+    home: {
+      constructionSystems: "Bouwsystemen",
+      heroTitle: "Betrouwbare bouwproducten.",
+      heroDescription: "Betrouwbare systemen voor consistente prestaties op moderne bouwprojecten.",
+      solutionsPortfolio: "Oplossingenportfolio",
+      findProductsTitle: "Producten vinden per categorie",
+      findProductsDescription: "Verken de hoofdcategorieen en open volledige productlijsten met een klik.",
+      viewAllProducts: "Alle producten bekijken",
+      catalogsEyebrow: "Catalogi",
+      downloadCatalogsTitle: "Technische catalogi downloaden",
+      downloadCatalogsDescription: "Open de nieuwste productdocumentatie en download PDF-versies direct.",
+      viewAllCatalogs: "Alle catalogi bekijken",
+      aboutUs: "Over ons",
+      builtOnStoryTitle: "Gebouwd op een bewezen industrieel verhaal",
+      readMore: "Lees meer",
+      supportEyebrow: "Technische + commerciele ondersteuning",
+      supportTitle: "Stuur uw formulatiedoel en ontvang een productadvies met documenten.",
+      supportDescription:
+        "Deel ondergrond, klimaat, applicatiemethode en gewenste prestaties. Ons team reageert met passende productopties en vervolgstappen voor de offerte.",
+      requestTechnicalQuote: "Technische offerte aanvragen",
+      viewCatalogs: "Catalogi bekijken",
+      aboutImageAlt: "PEVALIT fabriek en activiteiten"
+    },
+    productsPage: {
+      eyebrow: "Producten",
+      title: "Producten per categorie bekijken.",
+      description: "Heldere categorienavigatie met directe toegang tot volledige productlijsten en technische details.",
+      productSingular: "product",
+      productPlural: "producten",
+      viewCategory: "Categorie bekijken"
+    },
+    catalogsPage: {
+      eyebrow: "Catalogi",
+      title: "Technische catalogi, klaar om te downloaden.",
+      description: "Open de nieuwste PEVALIT-catalogi en download PDF-versies direct.",
+      downloadPdf: "PDF downloaden"
+    },
+    contactPage: {
+      eyebrow: "Contact",
+      title: "Praat met ons team over uw productievereisten.",
+      description:
+        "Gebruik het formulier om uw aanvraag te versturen en voeg applicatiedetails toe voor een snellere technische reactie.",
+      directContact: "Direct contact",
+      email: "Email",
+      phone: "Telefoon",
+      fax: "Fax",
+      address: "Adres",
+      responsePromise: "Reactiebelofte",
+      responsePromiseBody: "Technische reactie binnen een werkdag voor volledige offerteaanvragen."
+    },
+    corporatePage: {
+      eyebrow: "Bedrijf"
+    },
+    categoryPage: {
+      eyebrow: "Categorie"
+    },
+    productPage: {
+      keyBenefits: "Belangrijkste voordelen",
+      typicalApplications: "Typische toepassingen",
+      technicalSpecs: "Technische specificaties",
+      documents: "Documenten",
+      technicalParameters: "Technische parameters",
+      relatedProducts: "Gerelateerde producten"
+    },
+    productFilters: {
+      searchProducts: "Producten zoeken",
+      searchPlaceholder: "Voer toepassing, kenmerk of productnaam in",
+      category: "Categorie",
+      allCategories: "Alle categorieen",
+      viewProduct: "Product bekijken",
+      noResults: "Geen overeenkomende producten gevonden. Probeer een bredere zoekopdracht of wissel van categorie."
+    },
+    quoteForm: {
+      title: "Offerte aanvragen",
+      description: "Deel uw applicatiedetails en ons team reageert met de best passende aanbeveling.",
+      name: "Naam",
+      email: "Email",
+      company: "Bedrijf",
+      phone: "Telefoon",
+      country: "Land",
+      message: "Bericht",
+      sendingRequest: "Uw aanvraag wordt verzonden...",
+      submitting: "Verzenden...",
+      sendRequest: "Aanvraag verzenden",
+      success: "Bedankt. Uw aanvraag is succesvol verzonden.",
+      unableToSubmit: "Uw aanvraag kan momenteel niet worden verzonden.",
+      networkError: "Netwerkfout. Probeer het zo opnieuw.",
+      nextStepsTitle: "Wat gebeurt er nu",
+      nextStep1: "1) Het technische team beoordeelt uw aanvraag.",
+      nextStep2: "2) U ontvangt advies en documentatie per email.",
+      nextStep3: "3) De commerciele offerte volgt na bevestiging.",
+      reference: "Referentie"
+    },
+    metadata: {
+      defaultTitleSuffix: "Additieven en compounds"
+    },
+    api: {
+      invalidFormData: "Ongeldige formuliergegevens.",
+      requestSubmitted: "Aanvraag verzonden.",
+      retryRequest: "Dien uw aanvraag opnieuw in.",
+      captchaFailed: "Captcha-verificatie mislukt.",
+      emailNotConfigured: "Emailservice is niet geconfigureerd. Stel RESEND_API_KEY in.",
+      autoReplySubject: "Wij hebben uw aanvraag ontvangen",
+      autoReplyGreeting: "Hallo",
+      autoReplyThanks: "Bedankt dat u contact heeft opgenomen met PEVALIT.",
+      autoReplyReceived:
+        "Ons team heeft uw aanvraag ontvangen en reageert met technisch advies en de volgende stappen.",
+      autoReplyReference: "Referentie-ID",
+      autoReplySignature: "PEVALIT Team"
+    }
   }
 } satisfies Record<LanguageCode, LocaleCopy>;
 
@@ -674,6 +936,10 @@ export function getConstructionSlideAlt(language: LanguageCode, slideNumber: num
       return `PEVALIT слајд ${slideNumber} за градежни системи`;
     case "de":
       return `PEVALIT Bausysteme Folie ${slideNumber}`;
+    case "fr":
+      return `PEVALIT systemes de construction diapositive ${slideNumber}`;
+    case "nl":
+      return `PEVALIT bouwsystemen dia ${slideNumber}`;
     default:
       return `PEVALIT construction systems slide ${slideNumber}`;
   }
@@ -687,6 +953,10 @@ export function getProductSummaryFallback(language: LanguageCode, productName: s
       return `${productName} со стабилни перформанси и техничка поддршка за примени во категоријата ${categoryName}.`;
     case "de":
       return `${productName} mit stabiler Leistung und technischer Unterstützung für Anwendungen in der Kategorie ${categoryName}.`;
+    case "fr":
+      return `${productName} avec performances stables et assistance technique pour les applications de la categorie ${categoryName}.`;
+    case "nl":
+      return `${productName} met stabiele prestaties en technische ondersteuning voor toepassingen in de categorie ${categoryName}.`;
     default:
       return `${productName} with stable performance and technical support for ${categoryName} applications.`;
   }
@@ -700,6 +970,10 @@ export function getProductSeoDescriptionFallback(language: LanguageCode, product
       return `${productName} од PEVALIT со техничка документација, примени по категории и поддршка за понуда.`;
     case "de":
       return `${productName} von PEVALIT mit technischer Dokumentation, kategoriespezifischen Anwendungen und Angebotsunterstützung.`;
+    case "fr":
+      return `${productName} par PEVALIT avec documentation technique, applications par categorie et support devis.`;
+    case "nl":
+      return `${productName} van PEVALIT met technische documentatie, categoriespecifieke toepassingen en offerteondersteuning.`;
     default:
       return `${productName} by PEVALIT with technical documentation, category-specific applications, and quote support.`;
   }
@@ -713,6 +987,10 @@ export function getCategorySeoDescription(language: LanguageCode, categoryName: 
       return `Производи од категоријата ${categoryName} од PEVALIT со техничка документација и поддршка за понуда.`;
     case "de":
       return `Produkte der Kategorie ${categoryName} von PEVALIT mit technischer Dokumentation und Angebotsunterstützung.`;
+    case "fr":
+      return `Produits de la categorie ${categoryName} par PEVALIT avec documentation technique et support devis.`;
+    case "nl":
+      return `Producten in de categorie ${categoryName} van PEVALIT met technische documentatie en offerteondersteuning.`;
     default:
       return `${categoryName} category products by PEVALIT with technical documentation and quote support.`;
   }
