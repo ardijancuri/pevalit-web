@@ -1,21 +1,31 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
 import { getLocalizedContent } from "@/lib/content";
-import { getUiCopy } from "@/lib/localization";
-import { getCurrentLanguage } from "@/lib/server-language";
+import { getLanguageAlternates, getUiCopy, localizePath } from "@/lib/localization";
+import { getRouteLanguage } from "@/lib/server-language";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const language = await getCurrentLanguage();
+type Props = {
+  params: Promise<{ language: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const { corporate } = getLocalizedContent(language);
 
   return {
     title: corporate.about.title,
-    description: corporate.about.intro
+    description: corporate.about.intro,
+    alternates: {
+      canonical: localizePath("/corporate/about", language),
+      languages: getLanguageAlternates("/corporate/about")
+    }
   };
 }
 
-export default async function AboutPage() {
-  const language = await getCurrentLanguage();
+export default async function AboutPage({ params }: Props) {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const { corporate } = getLocalizedContent(language);
   const ui = getUiCopy(language);
 

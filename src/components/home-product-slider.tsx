@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { localizePath, type LanguageCode } from "@/lib/localization";
 
 type FeaturedProduct = {
   slug: string;
@@ -17,6 +18,7 @@ type FeaturedProduct = {
 
 type HomeProductSliderProps = {
   products: FeaturedProduct[];
+  language: LanguageCode;
 };
 
 const FALLBACK_IMAGE = "/images/imported/Pevalit-Catalogue-DE.jpg";
@@ -33,7 +35,7 @@ function getSlideMetrics(product: FeaturedProduct) {
   ];
 }
 
-export function HomeProductSlider({ products }: HomeProductSliderProps) {
+export function HomeProductSlider({ products, language }: HomeProductSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -229,7 +231,7 @@ export function HomeProductSlider({ products }: HomeProductSliderProps) {
             ))}
           </div>
           <Link
-            href={`/product/${activeProduct.slug}`}
+            href={localizePath(`/product/${activeProduct.slug}`, language)}
             className="btn-ui ml-auto bg-[var(--brand)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] !text-white hover:bg-[var(--brand-strong)]"
           >
             View product

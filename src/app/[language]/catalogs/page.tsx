@@ -3,21 +3,31 @@ import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
 import { PageIntro } from "@/components/page-intro";
 import { getLocalizedContent } from "@/lib/content";
-import { getUiCopy } from "@/lib/localization";
-import { getCurrentLanguage } from "@/lib/server-language";
+import { getLanguageAlternates, getUiCopy, localizePath } from "@/lib/localization";
+import { getRouteLanguage } from "@/lib/server-language";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const language = await getCurrentLanguage();
+type Props = {
+  params: Promise<{ language: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const ui = getUiCopy(language);
 
   return {
     title: ui.catalogsPage.eyebrow,
-    description: ui.catalogsPage.description
+    description: ui.catalogsPage.description,
+    alternates: {
+      canonical: localizePath("/catalogs", language),
+      languages: getLanguageAlternates("/catalogs")
+    }
   };
 }
 
-export default async function CatalogsPage() {
-  const language = await getCurrentLanguage();
+export default async function CatalogsPage({ params }: Props) {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const { catalogs } = getLocalizedContent(language);
   const ui = getUiCopy(language);
 

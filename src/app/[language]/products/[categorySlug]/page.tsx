@@ -3,21 +3,21 @@ import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
 import { ProductFilters } from "@/components/product-filters";
 import { defaultContent, getCategoryBySlug, getLocalizedContent } from "@/lib/content";
-import { getCategorySeoDescription, getUiCopy } from "@/lib/localization";
-import { getCurrentLanguage } from "@/lib/server-language";
+import { getCategorySeoDescription, getLanguageAlternates, getUiCopy, LANGUAGES, localizePath } from "@/lib/localization";
+import { getRouteLanguage } from "@/lib/server-language";
 
 type Props = {
-  params: Promise<{ categorySlug: string }>;
+  params: Promise<{ language: string; categorySlug: string }>;
 };
 
 export async function generateStaticParams() {
-  return defaultContent.categories.map((category) => ({ categorySlug: category.slug }));
+  return LANGUAGES.flatMap((language) => defaultContent.categories.map((category) => ({ language, categorySlug: category.slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const language = await getCurrentLanguage();
+  const { language: languageParam, categorySlug } = await params;
+  const language = getRouteLanguage(languageParam);
   const content = getLocalizedContent(language);
-  const { categorySlug } = await params;
   const category = getCategoryBySlug(content, categorySlug);
   if (!category) {
     return {};
@@ -28,7 +28,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: category.name,
     description,
-    alternates: { canonical: `/products/${category.slug}` },
+    alternates: {
+      canonical: localizePath(`/products/${category.slug}`, language),
+      languages: getLanguageAlternates(`/products/${category.slug}`)
+    },
     openGraph: {
       title: category.name,
       description,
@@ -38,10 +41,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const language = await getCurrentLanguage();
+  const { language: languageParam, categorySlug } = await params;
+  const language = getRouteLanguage(languageParam);
   const content = getLocalizedContent(language);
   const ui = getUiCopy(language);
-  const { categorySlug } = await params;
   const category = getCategoryBySlug(content, categorySlug);
   if (!category) {
     notFound();

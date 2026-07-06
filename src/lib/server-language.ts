@@ -1,7 +1,10 @@
-import { cookies } from "next/headers";
-import { LANGUAGE_COOKIE_NAME, resolveLanguage } from "@/lib/localization";
+import { notFound } from "next/navigation";
+import { isLanguageCode, type LanguageCode } from "@/lib/localization";
 
-export async function getCurrentLanguage() {
-  const cookieStore = await cookies();
-  return resolveLanguage(cookieStore.get(LANGUAGE_COOKIE_NAME)?.value);
+export function getRouteLanguage(value: string): LanguageCode {
+  if (!isLanguageCode(value)) {
+    notFound();
+  }
+
+  return value;
 }

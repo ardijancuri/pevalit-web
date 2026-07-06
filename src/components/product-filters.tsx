@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
-import { getProductSummaryFallback, type LanguageCode, type UiCopy } from "@/lib/localization";
+import { getProductSummaryFallback, localizePath, type LanguageCode, type UiCopy } from "@/lib/localization";
 import type { Category, Product } from "@/lib/types";
 
 type ProductFiltersProps = {
@@ -99,7 +99,7 @@ export function ProductFilters({
                 <p className="mt-3 text-sm text-[var(--muted)]">{displaySummary(language, product, categoryNameBySlug)}</p>
                 <TrackedLink
                   className="btn-primary mt-4"
-                  href={`/product/${product.slug}`}
+                  href={localizePath(`/product/${product.slug}`, language)}
                   trackingLabel={`${labels.viewProduct} - ${product.name}`}
                   trackingLocation="products_filters"
                 >

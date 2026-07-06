@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
-import "./globals.css";
+import "../globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { getLocalizedContent } from "@/lib/content";
-import { getUiCopy, OPEN_GRAPH_LOCALE } from "@/lib/localization";
+import { getLanguageAlternates, getUiCopy, LANGUAGES, localizePath, OPEN_GRAPH_LOCALE } from "@/lib/localization";
 import { getSeoConfig } from "@/lib/seo";
-import { getCurrentLanguage } from "@/lib/server-language";
+import { getRouteLanguage } from "@/lib/server-language";
 
 const headingFont = Space_Grotesk({
   subsets: ["latin"],
@@ -23,12 +23,23 @@ const bodyFont = Manrope({
 const socialImage = "/images/og/pevalit-og.jpg";
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const language = await getCurrentLanguage();
+type LayoutProps = Readonly<{
+  children: ReactNode;
+  params: Promise<{ language: string }>;
+}>;
+
+export function generateStaticParams() {
+  return LANGUAGES.map((language) => ({ language }));
+}
+
+export async function generateMetadata({ params }: Pick<LayoutProps, "params">): Promise<Metadata> {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const { siteData } = getLocalizedContent(language);
   const seo = getSeoConfig(language);
   const baseUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pevalit.com");
   const defaultTitle = seo.title;
+  const canonical = localizePath("/", language);
 
   return {
     metadataBase: baseUrl,
@@ -41,7 +52,10 @@ export async function generateMetadata(): Promise<Metadata> {
     authors: [{ name: siteData.companyName }],
     creator: siteData.companyName,
     publisher: siteData.companyName,
-    alternates: { canonical: "/" },
+    alternates: {
+      canonical,
+      languages: getLanguageAlternates("/")
+    },
     robots: {
       index: true,
       follow: true
@@ -55,7 +69,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: defaultTitle,
       description: seo.description,
       type: "website",
-      url: "/",
+      url: canonical,
       siteName: siteData.companyName,
       locale: OPEN_GRAPH_LOCALE[language],
       images: [
@@ -76,8 +90,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-  const language = await getCurrentLanguage();
+export default async function RootLayout({ children, params }: LayoutProps) {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const content = getLocalizedContent(language);
   const ui = getUiCopy(language);
   const organizationLd = {

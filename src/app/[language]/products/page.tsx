@@ -3,21 +3,31 @@ import Image from "next/image";
 import { TrackedLink } from "@/components/tracked-link";
 import { PageIntro } from "@/components/page-intro";
 import { getLocalizedContent } from "@/lib/content";
-import { formatProductCount, getUiCopy } from "@/lib/localization";
-import { getCurrentLanguage } from "@/lib/server-language";
+import { formatProductCount, getLanguageAlternates, getUiCopy, localizePath } from "@/lib/localization";
+import { getRouteLanguage } from "@/lib/server-language";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const language = await getCurrentLanguage();
+type Props = {
+  params: Promise<{ language: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const ui = getUiCopy(language);
 
   return {
     title: ui.productsPage.eyebrow,
-    description: ui.productsPage.description
+    description: ui.productsPage.description,
+    alternates: {
+      canonical: localizePath("/products", language),
+      languages: getLanguageAlternates("/products")
+    }
   };
 }
 
-export default async function ProductsPage() {
-  const language = await getCurrentLanguage();
+export default async function ProductsPage({ params }: Props) {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const { productsByCategory } = getLocalizedContent(language);
   const ui = getUiCopy(language);
 
@@ -50,7 +60,7 @@ export default async function ProductsPage() {
 
                 <div className="mt-auto pt-4">
                   <TrackedLink
-                    href={`/products/${category.slug}`}
+                    href={localizePath(`/products/${category.slug}`, language)}
                     className="btn-primary"
                     trackingLabel={`${ui.productsPage.viewCategory} - ${category.name}`}
                     trackingLocation="products_category_card"

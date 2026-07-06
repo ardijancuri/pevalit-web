@@ -11,21 +11,21 @@ import {
   getProductSeoDescription,
   getProductSummary
 } from "@/lib/content";
-import { getUiCopy } from "@/lib/localization";
-import { getCurrentLanguage } from "@/lib/server-language";
+import { getLanguageAlternates, getUiCopy, LANGUAGES, localizePath } from "@/lib/localization";
+import { getRouteLanguage } from "@/lib/server-language";
 
 type Props = {
-  params: Promise<{ productSlug: string }>;
+  params: Promise<{ language: string; productSlug: string }>;
 };
 
 export async function generateStaticParams() {
-  return defaultContent.products.map((product) => ({ productSlug: product.slug }));
+  return LANGUAGES.flatMap((language) => defaultContent.products.map((product) => ({ language, productSlug: product.slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const language = await getCurrentLanguage();
+  const { language: languageParam, productSlug } = await params;
+  const language = getRouteLanguage(languageParam);
   const content = getLocalizedContent(language);
-  const { productSlug } = await params;
   const product = getProductBySlug(content, productSlug);
   if (!product) {
     return {};
@@ -37,7 +37,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: product.name,
     description,
-    alternates: { canonical: `/product/${product.slug}` },
+    alternates: {
+      canonical: localizePath(`/product/${product.slug}`, language),
+      languages: getLanguageAlternates(`/product/${product.slug}`)
+    },
     openGraph: {
       title: product.name,
       description,
@@ -48,10 +51,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: Props) {
-  const language = await getCurrentLanguage();
+  const { language: languageParam, productSlug } = await params;
+  const language = getRouteLanguage(languageParam);
   const content = getLocalizedContent(language);
   const ui = getUiCopy(language);
-  const { productSlug } = await params;
   const product = getProductBySlug(content, productSlug);
 
   if (!product) {
@@ -76,10 +79,10 @@ export default async function ProductPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: homeLabel, item: "/" },
-      { "@type": "ListItem", position: 2, name: productsLabel, item: "/products" },
-      { "@type": "ListItem", position: 3, name: localizedCategoryName, item: `/products/${product.categorySlug}` },
-      { "@type": "ListItem", position: 4, name: product.name, item: `/product/${product.slug}` }
+      { "@type": "ListItem", position: 1, name: homeLabel, item: localizePath("/", language) },
+      { "@type": "ListItem", position: 2, name: productsLabel, item: localizePath("/products", language) },
+      { "@type": "ListItem", position: 3, name: localizedCategoryName, item: localizePath(`/products/${product.categorySlug}`, language) },
+      { "@type": "ListItem", position: 4, name: product.name, item: localizePath(`/product/${product.slug}`, language) }
     ]
   };
 

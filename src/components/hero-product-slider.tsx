@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { localizePath, type LanguageCode } from "@/lib/localization";
 
 type HeroSliderProduct = {
   slug: string;
@@ -14,13 +15,14 @@ type HeroSliderProduct = {
 
 type HeroProductSliderProps = {
   products: HeroSliderProduct[];
+  language: LanguageCode;
   label?: string | null;
   className?: string;
   ariaLabel?: string;
 };
 
 const AUTO_SCROLL_MS = 3000;
-export function HeroProductSlider({ products, label = "Featured Products", className = "mt-6", ariaLabel = "Featured products slider" }: HeroProductSliderProps) {
+export function HeroProductSlider({ products, language, label = "Featured Products", className = "mt-6", ariaLabel = "Featured products slider" }: HeroProductSliderProps) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const dragStartXRef = useRef(0);
   const dragStartScrollRef = useRef(0);
@@ -217,7 +219,7 @@ export function HeroProductSlider({ products, label = "Featured Products", class
         {products.map((product) => (
           <Link
             key={product.slug}
-            href={`/product/${product.slug}`}
+            href={localizePath(`/product/${product.slug}`, language)}
             data-slider-item="true"
             className="product-card group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden rounded-[8px] bg-white transition"
             draggable={false}

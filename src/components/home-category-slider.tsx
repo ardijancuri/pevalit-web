@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { localizePath, type LanguageCode } from "@/lib/localization";
 
 type CategorySlide = {
   slug: string;
@@ -13,6 +14,7 @@ type CategorySlide = {
 
 type HomeCategorySliderProps = {
   categories: CategorySlide[];
+  language: LanguageCode;
   className?: string;
   ariaLabel?: string;
 };
@@ -20,7 +22,7 @@ type HomeCategorySliderProps = {
 const AUTO_SCROLL_MS = 3000;
 const FALLBACK_IMAGE = "/images/imported/Pevalit-Catalogue-DE.jpg";
 
-export function HomeCategorySlider({ categories, className = "", ariaLabel = "Solutions categories slider" }: HomeCategorySliderProps) {
+export function HomeCategorySlider({ categories, language, className = "", ariaLabel = "Solutions categories slider" }: HomeCategorySliderProps) {
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const autoDirectionRef = useRef<1 | -1>(1);
@@ -179,7 +181,7 @@ export function HomeCategorySlider({ categories, className = "", ariaLabel = "So
           {categories.map((category) => (
             <Link
               key={category.slug}
-              href={`/products/${category.slug}`}
+              href={localizePath(`/products/${category.slug}`, language)}
               data-category-slide="true"
               className="product-card group block shrink-0 basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)] transition"
             >

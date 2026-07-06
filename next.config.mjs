@@ -15,7 +15,12 @@ const nextConfig = {
     return [
       {
         source: "/product-category/:slug",
-        destination: "/products/:slug",
+        destination: "/en/products/:slug",
+        permanent: true
+      },
+      {
+        source: "/:language(en|sq|mk|de)/product-category/:slug",
+        destination: "/:language/products/:slug",
         permanent: true
       }
     ];

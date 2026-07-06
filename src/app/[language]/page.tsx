@@ -3,11 +3,16 @@ import { TrackedLink } from "@/components/tracked-link";
 import { ConstructionSystemsSlider } from "@/components/construction-systems-slider";
 import { HomeCatalogMobileSlider } from "@/components/home-catalog-mobile-slider";
 import { getLocalizedContent } from "@/lib/content";
-import { getConstructionSlideAlt, getUiCopy } from "@/lib/localization";
-import { getCurrentLanguage } from "@/lib/server-language";
+import { getConstructionSlideAlt, getUiCopy, localizePath } from "@/lib/localization";
+import { getRouteLanguage } from "@/lib/server-language";
 
-export default async function HomePage() {
-  const language = await getCurrentLanguage();
+type Props = {
+  params: Promise<{ language: string }>;
+};
+
+export default async function HomePage({ params }: Props) {
+  const { language: languageParam } = await params;
+  const language = getRouteLanguage(languageParam);
   const { catalogs, categories, corporate, siteData } = getLocalizedContent(language);
   const ui = getUiCopy(language);
   const about = corporate.about;
@@ -37,7 +42,7 @@ export default async function HomePage() {
               <div className="mt-5 flex flex-wrap gap-3">
                 <TrackedLink
                   className="btn-primary"
-                  href={siteData.primaryCta.href}
+                  href={localizePath(siteData.primaryCta.href, language)}
                   trackingLabel={siteData.primaryCta.label}
                   trackingLocation="home_hero"
                 >
@@ -45,7 +50,7 @@ export default async function HomePage() {
                 </TrackedLink>
                 <TrackedLink
                   className="btn-secondary"
-                  href={siteData.secondaryCta.href}
+                  href={localizePath(siteData.secondaryCta.href, language)}
                   trackingLabel={siteData.secondaryCta.label}
                   trackingLocation="home_hero"
                 >
@@ -78,7 +83,7 @@ export default async function HomePage() {
               </p>
             </div>
             <TrackedLink
-              href="/products"
+              href={localizePath("/products", language)}
               className="btn-secondary"
               trackingLabel={ui.home.viewAllProducts}
               trackingLocation="home_categories"
@@ -120,7 +125,7 @@ export default async function HomePage() {
               </p>
             </div>
             <TrackedLink
-              href="/catalogs"
+              href={localizePath("/catalogs", language)}
               className="btn-secondary"
               trackingLabel={ui.home.viewAllCatalogs}
               trackingLocation="home_catalogs"
@@ -170,7 +175,7 @@ export default async function HomePage() {
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{about.intro}</p>
               <TrackedLink
-                href="/corporate/about"
+                href={localizePath("/corporate/about", language)}
                 className="btn-primary mt-5"
                 trackingLabel={ui.home.readMore}
                 trackingLocation="home_about"
@@ -204,7 +209,7 @@ export default async function HomePage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <TrackedLink
-              href="/contact"
+              href={localizePath("/contact", language)}
               className="btn-primary"
               trackingLabel={ui.home.requestTechnicalQuote}
               trackingLocation="home_conversion"
@@ -212,7 +217,7 @@ export default async function HomePage() {
               {ui.home.requestTechnicalQuote}
             </TrackedLink>
             <TrackedLink
-              href="/catalogs"
+              href={localizePath("/catalogs", language)}
               className="btn-secondary"
               trackingLabel={ui.home.viewCatalogs}
               trackingLocation="home_conversion"

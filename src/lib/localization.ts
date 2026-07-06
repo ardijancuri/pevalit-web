@@ -1,8 +1,16 @@
-export const DEFAULT_LANGUAGE = "en";
-export const LANGUAGE_COOKIE_NAME = "site-language";
-export const LANGUAGES = ["en", "sq", "mk", "de"] as const;
+import type { LanguageCode } from "@/lib/languages";
 
-export type LanguageCode = (typeof LANGUAGES)[number];
+export {
+  DEFAULT_LANGUAGE,
+  LANGUAGES,
+  getLanguageAlternates,
+  isLanguageCode,
+  localizePath,
+  resolveLanguage,
+  stripLocaleFromPath,
+  switchLocalePath
+} from "@/lib/languages";
+export type { LanguageCode } from "@/lib/languages";
 
 export const LANGUAGE_OPTIONS: Array<{ code: LanguageCode; label: string; short: string }> = [
   { code: "en", label: "English (US)", short: "EN" },
@@ -648,14 +656,6 @@ const UI_COPY = {
 } satisfies Record<LanguageCode, LocaleCopy>;
 
 export type UiCopy = (typeof UI_COPY)[LanguageCode];
-
-export function isLanguageCode(value?: string | null): value is LanguageCode {
-  return value ? LANGUAGES.includes(value as LanguageCode) : false;
-}
-
-export function resolveLanguage(value?: string | null): LanguageCode {
-  return isLanguageCode(value) ? value : DEFAULT_LANGUAGE;
-}
 
 export function getUiCopy(language: LanguageCode) {
   return UI_COPY[language];

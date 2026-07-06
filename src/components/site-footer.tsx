@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { formatFooterCopyright, type LanguageCode, type UiCopy } from "@/lib/localization";
+import { formatFooterCopyright, localizePath, type LanguageCode, type UiCopy } from "@/lib/localization";
 
 type SiteFooterProps = {
   siteData: {
@@ -29,7 +29,7 @@ export function SiteFooter({ siteData, language, labels }: SiteFooterProps) {
               className="h-8 w-auto"
             />
             <p className="mt-3 max-w-md text-sm text-[var(--charcoal-muted)]">{siteData.description}</p>
-            <Link href="/contact" className="btn-primary mt-5">
+            <Link href={localizePath("/contact", language)} className="btn-primary mt-5">
               {labels.contactTeam}
             </Link>
           </div>
@@ -39,7 +39,7 @@ export function SiteFooter({ siteData, language, labels }: SiteFooterProps) {
             <ul className="mt-3 space-y-2 text-sm text-[var(--charcoal-muted)]">
               {siteData.footerLinks.map((link) => (
                 <li key={link.href}>
-                  <Link className="hover:text-[var(--charcoal-text)]" href={link.href}>
+                  <Link className="hover:text-[var(--charcoal-text)]" href={localizePath(link.href, language)}>
                     {link.label}
                   </Link>
                 </li>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { localizePath, type LanguageCode } from "@/lib/localization";
 
 type MiniProduct = {
   slug: string;
@@ -14,6 +15,7 @@ type MiniProduct = {
 
 type HomeMiniProductSliderProps = {
   products: MiniProduct[];
+  language: LanguageCode;
 };
 
 const FALLBACK_IMAGE = "/images/imported/Pevalit-Catalogue-DE.jpg";
@@ -35,7 +37,7 @@ function getMiniImageClass(categorySlug: string, slug: string) {
   return "object-cover object-center";
 }
 
-export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) {
+export function HomeMiniProductSlider({ products, language }: HomeMiniProductSliderProps) {
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const autoDirectionRef = useRef<1 | -1>(1);
   const activeIndexRef = useRef(0);
@@ -256,7 +258,7 @@ export function HomeMiniProductSlider({ products }: HomeMiniProductSliderProps) 
           {products.map((product) => (
             <Link
               key={product.slug}
-              href={`/product/${product.slug}`}
+              href={localizePath(`/product/${product.slug}`, language)}
               data-mini-card="true"
               className="product-card group shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] overflow-hidden rounded-[8px] bg-white sm:basis-[calc((100%-2.25rem)/4)]"
             >

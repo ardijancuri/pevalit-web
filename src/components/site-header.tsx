@@ -5,9 +5,10 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
-  isLanguageCode,
-  LANGUAGE_COOKIE_NAME,
   LANGUAGE_OPTIONS,
+  localizePath,
+  stripLocaleFromPath,
+  switchLocalePath,
   type LanguageCode
 } from "@/lib/localization";
 
@@ -23,14 +24,6 @@ type SiteHeaderProps = {
     mobileNavigation: string;
   };
 };
-
-function persistLanguage(nextLanguage: LanguageCode) {
-  if (typeof window !== "undefined") {
-    window.localStorage.setItem(LANGUAGE_COOKIE_NAME, nextLanguage);
-  }
-  document.cookie = `${LANGUAGE_COOKIE_NAME}=${nextLanguage}; path=/; max-age=31536000; samesite=lax`;
-  document.documentElement.lang = nextLanguage;
-}
 
 export function SiteHeader({
   companyName,
@@ -70,10 +63,12 @@ export function SiteHeader({
   }
 
   function isActive(href: string) {
+    const currentPath = stripLocaleFromPath(pathname);
+
     if (href === "/") {
-      return pathname === "/";
+      return currentPath === "/";
     }
-    return pathname === href || pathname.startsWith(`${href}/`);
+    return currentPath === href || currentPath.startsWith(`${href}/`);
   }
 
   function closeMobileMenu() {
@@ -85,8 +80,10 @@ export function SiteHeader({
     setLanguage(nextLanguage);
     setDesktopLanguageMenuOpen(false);
     setMobileLanguageMenuOpen(false);
-    persistLanguage(nextLanguage);
-    router.refresh();
+    const queryString = typeof window === "undefined" ? "" : window.location.search;
+    const hash = typeof window === "undefined" ? "" : window.location.hash;
+    const nextPath = switchLocalePath(pathname, nextLanguage);
+    router.push(`${nextPath}${queryString}${hash}`);
   }
 
   const selectedLanguage = LANGUAGE_OPTIONS.find((item) => item.code === language) || LANGUAGE_OPTIONS[0];
@@ -95,22 +92,6 @@ export function SiteHeader({
     setLanguage(initialLanguage);
     document.documentElement.lang = initialLanguage;
   }, [initialLanguage]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    const savedLanguage = window.localStorage.getItem(LANGUAGE_COOKIE_NAME);
-    if (savedLanguage && isLanguageCode(savedLanguage) && savedLanguage !== initialLanguage) {
-      setLanguage(savedLanguage);
-      persistLanguage(savedLanguage);
-      router.refresh();
-      return;
-    }
-
-    persistLanguage(initialLanguage);
-  }, [initialLanguage, router]);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -176,7 +157,7 @@ export function SiteHeader({
         <div className="flex items-stretch justify-between gap-3 py-0">
           <div className="flex items-stretch">
             <span className="hidden w-16 bg-[var(--brand)] lg:block" />
-            <Link href="/" aria-label={companyName} className="inline-flex items-center bg-white pl-0 pr-3 md:px-5">
+            <Link href={localizePath("/", language)} aria-label={companyName} className="inline-flex items-center bg-white pl-0 pr-3 md:px-5">
               <Image
                 src="/images/imported/logo.svg"
                 alt={companyName}
@@ -257,7 +238,7 @@ export function SiteHeader({
                   if (item.href !== "/products") {
                     return (
                       <li key={item.href}>
-                        <Link className={baseClass} href={item.href}>
+                        <Link className={baseClass} href={localizePath(item.href, language)}>
                           {item.label}
                         </Link>
                       </li>
@@ -273,7 +254,7 @@ export function SiteHeader({
                       onFocus={openProductsMenu}
                       onBlur={closeProductsMenu}
                     >
-                      <Link className={baseClass} href={item.href} aria-expanded={productsMenuOpen} aria-haspopup="menu">
+                      <Link className={baseClass} href={localizePath(item.href, language)} aria-expanded={productsMenuOpen} aria-haspopup="menu">
                         {item.label}
                       </Link>
                       <div
@@ -287,7 +268,7 @@ export function SiteHeader({
                           {productsByCategory.map(({ category }) => (
                             <li key={category.slug}>
                               <Link
-                                href={`/products/${category.slug}`}
+                                href={localizePath(`/products/${category.slug}`, language)}
                                 className="block px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--text)] hover:bg-[var(--bg-soft)]"
                               >
                                 {category.name}
@@ -405,7 +386,7 @@ export function SiteHeader({
                       <ul className="space-y-1">
                         <li>
                           <Link
-                            href="/products"
+                            href={localizePath("/products", language)}
                             onClick={closeMobileMenu}
                             className="block px-2 py-2 text-sm font-semibold text-[var(--text)] hover:bg-white"
                           >
@@ -415,7 +396,7 @@ export function SiteHeader({
                         {productsByCategory.map(({ category }) => (
                           <li key={category.slug}>
                             <Link
-                              href={`/products/${category.slug}`}
+                              href={localizePath(`/products/${category.slug}`, language)}
                               onClick={closeMobileMenu}
                               className="block px-2 py-2 text-sm text-[var(--text)] hover:bg-white"
                             >
@@ -433,7 +414,7 @@ export function SiteHeader({
             return (
               <li key={item.href}>
                 <Link
-                  href={item.href}
+                  href={localizePath(item.href, language)}
                   onClick={closeMobileMenu}
                   className={`block px-3 py-2 text-sm font-semibold ${
                     isActive(item.href)
