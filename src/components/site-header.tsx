@@ -169,7 +169,6 @@ export function SiteHeader({
       <div className="site-container text-[var(--text)]">
         <div className="flex items-stretch justify-between gap-3 py-0">
           <div className="flex items-stretch">
-            <span className="hidden w-16 bg-[var(--brand)] lg:block" />
             <Link href={localizePath("/", language)} aria-label={companyName} className="inline-flex items-center bg-white pl-0 pr-3 md:px-5">
               <Image
                 src="/images/imported/logo.svg"
