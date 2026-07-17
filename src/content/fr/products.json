@@ -1113,10 +1113,10 @@
     }
   },
   {
-    "slug": "quarzgrundierung",
-    "name": "QUARZGRUNDIERUNG",
-    "categorySlug": "paints",
-    "imageUrl": "/images/imported/10.jpg",
+  "slug": "quarzgrundierung",
+  "name": "QUARZGRUNDIERUNG",
+  "categorySlug": "paints",
+  "imageUrl": "/images/products/quarzgrundierung-v2.png",
     "summary": "QUARZGRUNDIERUNG pour les applications de la categorie Peintures, avec performances fiables et documentation technique PEVALIT.",
     "applications": [
       "Category: paints",
@@ -1161,7 +1161,7 @@
     "documents": [
       {
         "title": "QUARZGRUNDIERUNG Parametres techniques",
-        "url": "/catalogs/imported/10.pdf"
+        "url": "/catalogs/imported/quarzgrundierung-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -1222,7 +1222,7 @@
     "documents": [
       {
         "title": "GK-SPERRGRUND Parametres techniques",
-        "url": "/catalogs/imported/9.pdf"
+        "url": "/catalogs/imported/gk-sperrgrund-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -1279,7 +1279,7 @@
     "documents": [
       {
         "title": "BETONKONTAKT Parametres techniques",
-        "url": "/catalogs/imported/8.pdf"
+        "url": "/catalogs/imported/betonkontakt-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -1340,7 +1340,7 @@
     "documents": [
       {
         "title": "TIEFGRUND LF Parametres techniques",
-        "url": "/catalogs/imported/11.pdf"
+        "url": "/catalogs/imported/tiefgrund-lf-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -2312,7 +2312,7 @@
     "documents": [
       {
         "title": "EGALISATIONSFABRE Parametres techniques",
-        "url": "/catalogs/imported/374-technical-parameters.pdf"
+        "url": "/catalogs/imported/egalisationsfabre-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3066,7 +3066,7 @@
     "documents": [
       {
         "title": "G4 Parametres techniques",
-        "url": "/catalogs/imported/Product23.pdf"
+        "url": "/catalogs/imported/g4-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3147,7 +3147,7 @@
     "documents": [
       {
         "title": "G2 Parametres techniques",
-        "url": "/catalogs/imported/Product21.pdf"
+        "url": "/catalogs/imported/g2-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3232,7 +3232,7 @@
     "documents": [
       {
         "title": "G15 Parametres techniques",
-        "url": "/catalogs/imported/Product20.pdf"
+        "url": "/catalogs/imported/g15-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3317,7 +3317,7 @@
     "documents": [
       {
         "title": "G1 Parametres techniques",
-        "url": "/catalogs/imported/Product19.pdf"
+        "url": "/catalogs/imported/g1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3382,7 +3382,7 @@
     "documents": [
       {
         "title": "N XS Parametres techniques",
-        "url": "/catalogs/imported/Product18.pdf"
+        "url": "/catalogs/imported/n-xs-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3447,7 +3447,7 @@
     "documents": [
       {
         "title": "N Parametres techniques",
-        "url": "/catalogs/imported/Product17.pdf"
+        "url": "/catalogs/imported/n-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3521,10 +3521,10 @@
     }
   },
   {
-    "slug": "f-bs",
-    "name": "F bs",
-    "categorySlug": "grouts",
-    "imageUrl": "/images/imported/2-1.jpg",
+  "slug": "f-bs",
+  "name": "F bs",
+  "categorySlug": "grouts",
+  "imageUrl": "/images/products/f-bs.png",
     "summary": "F bs pour les applications de la categorie Joints, avec performances fiables et documentation technique PEVALIT.",
     "applications": [
       "Category: grouts",
@@ -3577,7 +3577,7 @@
     "documents": [
       {
         "title": "F bs Parametres techniques",
-        "url": "/catalogs/imported/Product15.pdf"
+        "url": "/catalogs/imported/f-bs-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3586,10 +3586,10 @@
     }
   },
   {
-    "slug": "f",
-    "name": "F",
-    "categorySlug": "grouts",
-    "imageUrl": "/images/imported/1-1.jpg",
+  "slug": "f",
+  "name": "F",
+  "categorySlug": "grouts",
+  "imageUrl": "/images/products/f.png",
     "summary": "F pour les applications de la categorie Joints, avec performances fiables et documentation technique PEVALIT.",
     "applications": [
       "Category: grouts",
@@ -3642,7 +3642,7 @@
     "documents": [
       {
         "title": "F Parametres techniques",
-        "url": "/catalogs/imported/2.pdf"
+        "url": "/catalogs/imported/f-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3715,7 +3715,7 @@
     "documents": [
       {
         "title": "P XS Parametres techniques",
-        "url": "/catalogs/imported/Product13.pdf"
+        "url": "/catalogs/imported/p-xs-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3788,7 +3788,7 @@
     "documents": [
       {
         "title": "P3w S1 Parametres techniques",
-        "url": "/catalogs/imported/Product12.pdf"
+        "url": "/catalogs/imported/p3w-s1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3861,7 +3861,7 @@
     "documents": [
       {
         "title": "P3 W g&m Parametres techniques",
-        "url": "/catalogs/imported/Product11.pdf"
+        "url": "/catalogs/imported/p3-w-gm-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3934,7 +3934,7 @@
     "documents": [
       {
         "title": "P3 S1 Parametres techniques",
-        "url": "/catalogs/imported/Product10.pdf"
+        "url": "/catalogs/imported/p3-s1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4007,7 +4007,7 @@
     "documents": [
       {
         "title": "P3 Parametres techniques",
-        "url": "/catalogs/imported/Product9.pdf"
+        "url": "/catalogs/imported/p3-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4016,10 +4016,10 @@
     }
   },
   {
-    "slug": "p2w-s1",
-    "name": "P2W S1",
-    "categorySlug": "tile-adhesives",
-    "imageUrl": "/images/imported/11.jpg",
+  "slug": "p2w-s1",
+  "name": "P2W S1",
+  "categorySlug": "tile-adhesives",
+  "imageUrl": "/images/products/p2w-s1.png",
     "summary": "P2W S1 pour les applications de la categorie Colles a carrelage, avec performances fiables et documentation technique PEVALIT.",
     "applications": [
       "Category: tile-adhesives",
@@ -4080,7 +4080,7 @@
     "documents": [
       {
         "title": "P2W S1 Parametres techniques",
-        "url": "/catalogs/imported/Product8.pdf"
+        "url": "/catalogs/imported/p2w-s1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4153,7 +4153,7 @@
     "documents": [
       {
         "title": "P midiflex Parametres techniques",
-        "url": "/catalogs/imported/Product7.pdf"
+        "url": "/catalogs/imported/p-midiflex-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4226,7 +4226,7 @@
     "documents": [
       {
         "title": "P2 S1 Parametres techniques",
-        "url": "/catalogs/imported/Product6.pdf"
+        "url": "/catalogs/imported/p2-s1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4372,7 +4372,7 @@
     "documents": [
       {
         "title": "P1 extra Parametres techniques",
-        "url": "/catalogs/imported/Product4.pdf"
+        "url": "/catalogs/imported/p1-extra-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4445,7 +4445,7 @@
     "documents": [
       {
         "title": "P1 white Parametres techniques",
-        "url": "/catalogs/imported/Product3.pdf"
+        "url": "/catalogs/imported/p1-white-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4518,7 +4518,7 @@
     "documents": [
       {
         "title": "P1 Parametres techniques",
-        "url": "/catalogs/imported/Product2.pdf"
+        "url": "/catalogs/imported/p1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4527,10 +4527,10 @@
     }
   },
   {
-    "slug": "p100",
-    "name": "P100",
-    "categorySlug": "tile-adhesives",
-    "imageUrl": "/images/imported/1.jpg",
+  "slug": "p100",
+  "name": "P100",
+  "categorySlug": "tile-adhesives",
+  "imageUrl": "/images/products/p100.png",
     "summary": "P100 pour les applications de la categorie Colles a carrelage, avec performances fiables et documentation technique PEVALIT.",
     "applications": [
       "Category: tile-adhesives",
@@ -4591,7 +4591,7 @@
     "documents": [
       {
         "title": "P100 Parametres techniques",
-        "url": "/catalogs/imported/Product1.pdf"
+        "url": "/catalogs/imported/p100-technical-parameters.pdf"
       }
     ],
     "seo": {

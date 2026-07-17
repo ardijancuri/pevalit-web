@@ -1140,10 +1140,10 @@
     }
   },
   {
-    "slug": "quarzgrundierung",
-    "name": "QUARZGRUNDIERUNG",
-    "categorySlug": "paints",
-    "imageUrl": "/images/imported/10.jpg",
+  "slug": "quarzgrundierung",
+  "name": "QUARZGRUNDIERUNG",
+  "categorySlug": "paints",
+  "imageUrl": "/images/products/quarzgrundierung-v2.png",
     "summary": "QUARZGRUNDIERUNG",
     "applications": [
       "Lidhës i lëngshëm për hapësirat e jashtme dhe të brendshme.",
@@ -1189,7 +1189,7 @@
     "documents": [
       {
         "title": "QUARZGRUNDIERUNG Technical Parameters",
-        "url": "/catalogs/imported/10.pdf"
+        "url": "/catalogs/imported/quarzgrundierung-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -1252,7 +1252,7 @@
     "documents": [
       {
         "title": "GK-SPERRGRUND Technical Parameters",
-        "url": "/catalogs/imported/9.pdf"
+        "url": "/catalogs/imported/gk-sperrgrund-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -1310,7 +1310,7 @@
     "documents": [
       {
         "title": "BETONKONTAKT Technical Parameters",
-        "url": "/catalogs/imported/8.pdf"
+        "url": "/catalogs/imported/betonkontakt-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -1372,7 +1372,7 @@
     "documents": [
       {
         "title": "TIEFGRUND LF Technical Parameters",
-        "url": "/catalogs/imported/11.pdf"
+        "url": "/catalogs/imported/tiefgrund-lf-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -2417,7 +2417,7 @@
     "documents": [
       {
         "title": "EGALISATIONSFABRE Technical Parameters",
-        "url": "/catalogs/imported/374-technical-parameters.pdf"
+        "url": "/catalogs/imported/egalisationsfabre-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3194,7 +3194,7 @@
     "documents": [
       {
         "title": "G4 Technical Parameters",
-        "url": "/catalogs/imported/Product23.pdf"
+        "url": "/catalogs/imported/g4-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3273,7 +3273,7 @@
     "documents": [
       {
         "title": "G2 Technical Parameters",
-        "url": "/catalogs/imported/Product21.pdf"
+        "url": "/catalogs/imported/g2-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3357,7 +3357,7 @@
     "documents": [
       {
         "title": "G15 Technical Parameters",
-        "url": "/catalogs/imported/Product20.pdf"
+        "url": "/catalogs/imported/g15-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3444,7 +3444,7 @@
     "documents": [
       {
         "title": "G1 Technical Parameters",
-        "url": "/catalogs/imported/Product19.pdf"
+        "url": "/catalogs/imported/g1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3514,7 +3514,7 @@
     "documents": [
       {
         "title": "N XS Technical Parameters",
-        "url": "/catalogs/imported/Product18.pdf"
+        "url": "/catalogs/imported/n-xs-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3584,7 +3584,7 @@
     "documents": [
       {
         "title": "N Technical Parameters",
-        "url": "/catalogs/imported/Product17.pdf"
+        "url": "/catalogs/imported/n-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3663,10 +3663,10 @@
     }
   },
   {
-    "slug": "f-bs",
-    "name": "F bs",
-    "categorySlug": "grouts",
-    "imageUrl": "/images/imported/2-1.jpg",
+  "slug": "f-bs",
+  "name": "F bs",
+  "categorySlug": "grouts",
+  "imageUrl": "/images/products/f-bs.png",
     "summary": "F bs",
     "applications": [
       "Material fleksibël që përdoret për fugimin e pllakave të qeramikës, porcelanit, granitit, mermerit, gurit, mozaik-qelqit, etj.",
@@ -3725,7 +3725,7 @@
     "documents": [
       {
         "title": "F bs Technical Parameters",
-        "url": "/catalogs/imported/Product15.pdf"
+        "url": "/catalogs/imported/f-bs-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3734,10 +3734,10 @@
     }
   },
   {
-    "slug": "f",
-    "name": "F",
-    "categorySlug": "grouts",
-    "imageUrl": "/images/imported/1-1.jpg",
+  "slug": "f",
+  "name": "F",
+  "categorySlug": "grouts",
+  "imageUrl": "/images/products/f.png",
     "summary": "F",
     "applications": [
       "Material fleksibël që përdoret për fugimin e pllakave të qeramikës, porcelanit, granitit, mermerit, gurit, mozaik-qelqit, etj.",
@@ -3796,7 +3796,7 @@
     "documents": [
       {
         "title": "F Technical Parameters",
-        "url": "/catalogs/imported/2.pdf"
+        "url": "/catalogs/imported/f-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3873,7 +3873,7 @@
     "documents": [
       {
         "title": "P XS Technical Parameters",
-        "url": "/catalogs/imported/Product13.pdf"
+        "url": "/catalogs/imported/p-xs-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -3950,7 +3950,7 @@
     "documents": [
       {
         "title": "P3w S1 Technical Parameters",
-        "url": "/catalogs/imported/Product12.pdf"
+        "url": "/catalogs/imported/p3w-s1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4027,7 +4027,7 @@
     "documents": [
       {
         "title": "P3 W g&m Technical Parameters",
-        "url": "/catalogs/imported/Product11.pdf"
+        "url": "/catalogs/imported/p3-w-gm-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4104,7 +4104,7 @@
     "documents": [
       {
         "title": "P3 S1 Technical Parameters",
-        "url": "/catalogs/imported/Product10.pdf"
+        "url": "/catalogs/imported/p3-s1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4182,7 +4182,7 @@
     "documents": [
       {
         "title": "P3 Technical Parameters",
-        "url": "/catalogs/imported/Product9.pdf"
+        "url": "/catalogs/imported/p3-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4191,10 +4191,10 @@
     }
   },
   {
-    "slug": "p2w-s1",
-    "name": "P2W S1",
-    "categorySlug": "tile-adhesives",
-    "imageUrl": "/images/imported/11.jpg",
+  "slug": "p2w-s1",
+  "name": "P2W S1",
+  "categorySlug": "tile-adhesives",
+  "imageUrl": "/images/products/p2w-s1.png",
     "summary": "P2W S1",
     "applications": [
       "Përdoret për ngjitjen e pllakave të porcelanit, granitit artificial, granitit dhe mermerit natyral, pllakave të betonit, gurit, qeramikës, etj.",
@@ -4258,7 +4258,7 @@
     "documents": [
       {
         "title": "P2W S1 Technical Parameters",
-        "url": "/catalogs/imported/Product8.pdf"
+        "url": "/catalogs/imported/p2w-s1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4334,7 +4334,7 @@
     "documents": [
       {
         "title": "P midiflex Technical Parameters",
-        "url": "/catalogs/imported/Product7.pdf"
+        "url": "/catalogs/imported/p-midiflex-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4412,7 +4412,7 @@
     "documents": [
       {
         "title": "P2 S1 Technical Parameters",
-        "url": "/catalogs/imported/Product6.pdf"
+        "url": "/catalogs/imported/p2-s1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4564,7 +4564,7 @@
     "documents": [
       {
         "title": "P1 extra Technical Parameters",
-        "url": "/catalogs/imported/Product4.pdf"
+        "url": "/catalogs/imported/p1-extra-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4638,7 +4638,7 @@
     "documents": [
       {
         "title": "P1 white Technical Parameters",
-        "url": "/catalogs/imported/Product3.pdf"
+        "url": "/catalogs/imported/p1-white-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4712,7 +4712,7 @@
     "documents": [
       {
         "title": "P1 Technical Parameters",
-        "url": "/catalogs/imported/Product2.pdf"
+        "url": "/catalogs/imported/p1-technical-parameters.pdf"
       }
     ],
     "seo": {
@@ -4721,10 +4721,10 @@
     }
   },
   {
-    "slug": "p100",
-    "name": "P100",
-    "categorySlug": "tile-adhesives",
-    "imageUrl": "/images/imported/1.jpg",
+  "slug": "p100",
+  "name": "P100",
+  "categorySlug": "tile-adhesives",
+  "imageUrl": "/images/products/p100.png",
     "summary": "P100",
     "applications": [
       "Përdoret për ngjitjen e pllakave të qeramikës në ambiente të brendshme.",
@@ -4786,7 +4786,7 @@
     "documents": [
       {
         "title": "P100 Technical Parameters",
-        "url": "/catalogs/imported/Product1.pdf"
+        "url": "/catalogs/imported/p100-technical-parameters.pdf"
       }
     ],
     "seo": {
