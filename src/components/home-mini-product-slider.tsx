@@ -260,7 +260,7 @@ export function HomeMiniProductSlider({ products, language }: HomeMiniProductSli
               key={product.slug}
               href={localizePath(`/product/${product.slug}`, language)}
               data-mini-card="true"
-              className="product-card group shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] overflow-hidden rounded-[8px] bg-white sm:basis-[calc((100%-2.25rem)/4)]"
+              className="product-card group shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] overflow-hidden rounded-[8px] border border-[var(--line)] bg-white sm:basis-[calc((100%-2.25rem)/4)]"
             >
               <div className="relative h-28 overflow-hidden bg-[#f7f8f8] sm:h-32">
                 <Image
@@ -272,7 +272,7 @@ export function HomeMiniProductSlider({ products, language }: HomeMiniProductSli
                   draggable={false}
                 />
               </div>
-              <div className="p-3">
+              <div className="product-card-content border-t p-3">
                 <p className="text-[0.62rem] uppercase tracking-[0.14em] text-[var(--brand)]">{product.categoryName}</p>
                 <p className="mt-1 text-sm font-semibold leading-snug text-[var(--text)]">{product.name}</p>
               </div>

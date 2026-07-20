@@ -221,7 +221,7 @@ export function HeroProductSlider({ products, language, label = "Featured Produc
             key={product.slug}
             href={localizePath(`/product/${product.slug}`, language)}
             data-slider-item="true"
-            className="product-card group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden rounded-[8px] bg-white transition"
+            className="product-card group block shrink-0 snap-start basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden rounded-[8px] border border-[var(--line)] bg-white transition"
             draggable={false}
           >
             <Image
@@ -233,7 +233,7 @@ export function HeroProductSlider({ products, language, label = "Featured Produc
               loading="lazy"
               draggable={false}
             />
-            <div className="p-3">
+            <div className="product-card-content border-t p-3">
               <p className="text-[0.62rem] uppercase tracking-[0.14em] text-[#5f6873]">{product.categoryName}</p>
               <p className="mt-1 text-sm font-semibold text-[#212b36]">{product.name}</p>
               <p className="mt-1 text-xs leading-relaxed text-[#5f6873]">{product.summary}</p>

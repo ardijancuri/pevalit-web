@@ -183,7 +183,7 @@ export function HomeCategorySlider({ categories, language, className = "", ariaL
               key={category.slug}
               href={localizePath(`/products/${category.slug}`, language)}
               data-category-slide="true"
-              className="product-card group block shrink-0 basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)] transition"
+              className="product-card group block shrink-0 basis-[calc((100%-0.75rem)/2)] sm:basis-[calc((100%-1.5rem)/3)] lg:basis-[210px] lg:w-[210px] overflow-hidden border border-[var(--line)] bg-[var(--bg-soft)] text-[var(--text)] transition"
             >
               <Image
                 src={category.heroImage.startsWith("/images/imported/") ? category.heroImage : FALLBACK_IMAGE}
@@ -194,10 +194,10 @@ export function HomeCategorySlider({ categories, language, className = "", ariaL
                 loading="lazy"
                 draggable={false}
               />
-              <div className="p-3">
-                <p className="text-[0.62rem] uppercase tracking-[0.14em] text-[var(--charcoal-muted)]">Category</p>
-                <p className="mt-1 text-sm font-semibold text-[var(--charcoal-text)]">{category.name}</p>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--charcoal-muted)]">{category.description}</p>
+              <div className="product-card-content border-t p-3">
+                <p className="text-[0.62rem] uppercase tracking-[0.14em] text-[var(--muted)]">Category</p>
+                <p className="mt-1 text-sm font-semibold text-[var(--text)]">{category.name}</p>
+                <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">{category.description}</p>
               </div>
             </Link>
           ))}

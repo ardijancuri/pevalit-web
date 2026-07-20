@@ -78,7 +78,7 @@ export function ProductsDirectory({ language, groups, labels }: ProductsDirector
                   className="aspect-square w-full object-cover"
                   loading="lazy"
                 />
-                <div className="flex flex-1 flex-col p-5">
+                <div className="product-card-content flex flex-1 flex-col border-t p-5">
                   <h2 className="text-xl font-semibold">{category.name}</h2>
                   <p className="mt-2 text-sm text-[var(--muted)]">{category.description}</p>
                   <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand)]">

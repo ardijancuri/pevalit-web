@@ -70,7 +70,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      <section className="section-block section-muted">
+      <section className="section-block bg-white">
         <div className="site-container">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -96,7 +96,7 @@ export default async function HomePage({ params }: Props) {
               <TrackedLink
                 key={category.slug}
                 href={localizePath(`/products/${category.slug}`, language)}
-                className="product-card solutions-card group relative block overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)] lg:overflow-visible"
+                className="product-card solutions-card group flex h-full flex-col overflow-hidden border border-[var(--line)] bg-[var(--bg-soft)] text-[var(--text)]"
                 trackingLabel={`${ui.productsPage.viewCategory} - ${category.name}`}
                 trackingLocation="home_categories"
               >
@@ -108,9 +108,9 @@ export default async function HomePage({ params }: Props) {
                   className="solutions-card-media aspect-square w-full object-cover"
                   loading="lazy"
                 />
-                <div className="solutions-card-content p-3 lg:absolute lg:top-full lg:left-0 lg:z-10 lg:min-h-[132px] lg:w-full lg:bg-[var(--charcoal)] lg:p-4">
-                  <h3 className="text-sm font-semibold text-white md:text-base">{category.name}</h3>
-                  <p className="mt-1 text-xs text-[var(--charcoal-muted)] md:mt-2 md:text-sm">{category.description}</p>
+                <div className="product-card-content solutions-card-content flex flex-1 flex-col border-t bg-[var(--bg-soft)] p-3 lg:min-h-[132px] lg:p-4">
+                  <h3 className="text-sm font-semibold text-[var(--text)] md:text-base">{category.name}</h3>
+                  <p className="mt-1 text-xs text-[var(--muted)] md:mt-2 md:text-sm">{category.description}</p>
                 </div>
               </TrackedLink>
             ))}
@@ -118,7 +118,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      <section className="section-block bg-white lg:mt-28 lg:pt-20">
+      <section className="section-block bg-white">
         <div className="site-container">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>

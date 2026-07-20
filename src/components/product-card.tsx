@@ -35,7 +35,7 @@ export function ProductCard({ language, product, categoryName, viewProductLabel,
         className="aspect-square w-full object-cover"
         loading="lazy"
       />
-      <div className="flex flex-1 flex-col p-5 md:p-6">
+      <div className="product-card-content flex flex-1 flex-col border-t p-5 md:p-6">
         <p className="text-xs uppercase tracking-[0.16em] text-[var(--brand)]">{categoryName}</p>
         <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
         <p className="mt-3 text-sm text-[var(--muted)]">{getProductCardSummary(language, product, categoryName)}</p>
