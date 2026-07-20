@@ -93,7 +93,13 @@ export default async function HomePage({ params }: Props) {
           </div>
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-x-3 lg:gap-y-0">
             {categories.slice(0, 4).map((category) => (
-              <article key={category.slug} className="product-card solutions-card relative overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)] lg:overflow-visible">
+              <TrackedLink
+                key={category.slug}
+                href={localizePath(`/products/${category.slug}`, language)}
+                className="product-card solutions-card group relative block overflow-hidden bg-[var(--charcoal)] text-[var(--charcoal-text)] lg:overflow-visible"
+                trackingLabel={`${ui.productsPage.viewCategory} - ${category.name}`}
+                trackingLocation="home_categories"
+              >
                 <Image
                   src={category.heroImage}
                   alt={category.name}
@@ -103,10 +109,10 @@ export default async function HomePage({ params }: Props) {
                   loading="lazy"
                 />
                 <div className="solutions-card-content p-3 lg:absolute lg:top-full lg:left-0 lg:z-10 lg:min-h-[132px] lg:w-full lg:bg-[var(--charcoal)] lg:p-4">
-                  <h3 className="text-sm font-semibold md:text-base">{category.name}</h3>
+                  <h3 className="text-sm font-semibold text-white md:text-base">{category.name}</h3>
                   <p className="mt-1 text-xs text-[var(--charcoal-muted)] md:mt-2 md:text-sm">{category.description}</p>
                 </div>
-              </article>
+              </TrackedLink>
             ))}
           </div>
         </div>

@@ -81,6 +81,10 @@ type LocaleCopy = {
     productSingular: string;
     productPlural: string;
     viewCategory: string;
+    searchByName: string;
+    searchPlaceholder: string;
+    viewProduct: string;
+    noSearchResults: string;
   };
   catalogsPage: {
     eyebrow: string;
@@ -205,7 +209,11 @@ const UI_COPY = {
       description: "Clean category navigation with direct access to full product lists and technical details.",
       productSingular: "product",
       productPlural: "products",
-      viewCategory: "View Category"
+      viewCategory: "View Category",
+      searchByName: "Search by product name",
+      searchPlaceholder: "Enter a product name",
+      viewProduct: "View Product",
+      noSearchResults: "No products match that name."
     },
     catalogsPage: {
       eyebrow: "Catalogs",
@@ -333,7 +341,11 @@ const UI_COPY = {
       description: "Navigim i qartë sipas kategorive me qasje direkte në listat e plota të produkteve dhe detajet teknike.",
       productSingular: "produkt",
       productPlural: "produkte",
-      viewCategory: "Shiko kategorinë"
+      viewCategory: "Shiko kategorinë",
+      searchByName: "Kërko sipas emrit të produktit",
+      searchPlaceholder: "Shkruani emrin e produktit",
+      viewProduct: "Shiko produktin",
+      noSearchResults: "Nuk u gjet asnjë produkt me këtë emër."
     },
     catalogsPage: {
       eyebrow: "Katalogë",
@@ -458,7 +470,11 @@ const UI_COPY = {
       description: "Јасна навигација по категории со директен пристап до комплетни листи на производи и технички детали.",
       productSingular: "производ",
       productPlural: "производи",
-      viewCategory: "Види категорија"
+      viewCategory: "Види категорија",
+      searchByName: "Пребарај по име на производ",
+      searchPlaceholder: "Внесете име на производ",
+      viewProduct: "Види производ",
+      noSearchResults: "Не е пронајден производ со тоа име."
     },
     catalogsPage: {
       eyebrow: "Каталози",
@@ -583,7 +599,11 @@ const UI_COPY = {
       description: "Klare Kategorienavigation mit direktem Zugang zu vollständigen Produktlisten und technischen Details.",
       productSingular: "Produkt",
       productPlural: "Produkte",
-      viewCategory: "Kategorie ansehen"
+      viewCategory: "Kategorie ansehen",
+      searchByName: "Nach Produktnamen suchen",
+      searchPlaceholder: "Produktnamen eingeben",
+      viewProduct: "Produkt ansehen",
+      noSearchResults: "Kein Produkt mit diesem Namen gefunden."
     },
     catalogsPage: {
       eyebrow: "Kataloge",
@@ -708,7 +728,11 @@ const UI_COPY = {
       description: "Navigation claire par categorie avec acces direct aux listes completes de produits et aux details techniques.",
       productSingular: "produit",
       productPlural: "produits",
-      viewCategory: "Voir la categorie"
+      viewCategory: "Voir la categorie",
+      searchByName: "Rechercher par nom de produit",
+      searchPlaceholder: "Saisissez un nom de produit",
+      viewProduct: "Voir le produit",
+      noSearchResults: "Aucun produit ne correspond a ce nom."
     },
     catalogsPage: {
       eyebrow: "Catalogues",
@@ -833,7 +857,11 @@ const UI_COPY = {
       description: "Heldere categorienavigatie met directe toegang tot volledige productlijsten en technische details.",
       productSingular: "product",
       productPlural: "producten",
-      viewCategory: "Categorie bekijken"
+      viewCategory: "Categorie bekijken",
+      searchByName: "Zoeken op productnaam",
+      searchPlaceholder: "Voer een productnaam in",
+      viewProduct: "Product bekijken",
+      noSearchResults: "Geen product met die naam gevonden."
     },
     catalogsPage: {
       eyebrow: "Catalogi",

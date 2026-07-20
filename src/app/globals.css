@@ -115,6 +115,21 @@ button {
   border-radius: var(--radius-sm) !important;
 }
 
+a.product-card {
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+a.product-card:hover {
+  border-color: color-mix(in srgb, var(--brand) 55%, var(--line));
+  box-shadow: 0 12px 28px rgb(17 24 39 / 10%);
+  transform: translateY(-2px);
+}
+
+a.product-card:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+
 .catalog-card {
   overflow: hidden;
 }
